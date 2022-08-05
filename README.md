@@ -1,6 +1,12 @@
-# Base de code du projet P6 - Parcours Front-end
 
-## Démarrer le projet
+# Projet FishEye
 
-Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
+
+## Créez un site accessible pour une plateforme de photographes dans le cadre de la formation Développeur d'Aplication JavaScript React.
+
+---------------------------------------------------------------------------------------------------------
+
+```diff	
+@@ Travail sur la programmation en JavaScript @@
+```
 
