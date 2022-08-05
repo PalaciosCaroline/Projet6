@@ -1,0 +1,20 @@
+{
+  "name": "projet6_encours",
+  "version": "1.0.0",
+  "description": "Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PalaciosCaroline/Projet6.git"
+  },
+  "author": "Caroline",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PalaciosCaroline/Projet6/issues"
+  },
+  "homepage": "https://github.com/PalaciosCaroline/Projet6#readme"
+}
