@@ -31,30 +31,6 @@ function photographerFactory(data) {
 }
 
 
-// function PageHeaderFactory(_photographerChoice) {
-//     const { name, portrait, city, country, tagline } = data;
-//     const picture = `assets/photographers/photographers_ID_Photos/${portrait}`;
-
-
-//   function getUserHeaderDOM() {
-//         const header = document.getElementById( 'photograph-header' );
-//         const imgChoisi = document.createElement( 'img' );
-//         imgChoisi.setAttribute("src", picture);
-//         imgChoisi.alt = name;
-//         const h2 = document.createElement( 'h2' );
-//         h2.textContent = name;
-//         const h3 = document.createElement( 'h3' );
-//         h3.textContent = `${city}, ${country}`;
-//         const legende = document.createElement( 'p' );
-//         legende.textContent = tagline;
-//         article.appendChild(imgChoisi);
-//         article.appendChild(h2);
-//         article.appendChild(h3);
-//         article.appendChild(legende);
-//         return (article);
-//     }
-//     return { name, picture, city, country, tagline, price, getUserHeaderDOM }
-// }
 
 
 // export {photographerFactory};
