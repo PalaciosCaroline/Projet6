@@ -20,6 +20,18 @@ async function getPhotographers() {
 return photographers;
 }
 
+
+// const getAllMedias = async () => {
+//   try {
+//     const response = await fetch(config.apiUrl)
+//     const { media } = await response.json()
+//     return media
+//   } catch (error) {
+//     return error
+//   }
+// }
+
+
 // async function getPhotographers() {
 //     const response = await fetch("./data/photographers.json");
 //        const data = await response.json();
@@ -28,27 +40,30 @@ return photographers;
 //       console.log(photographers);
 //    return photographers;
 // }
-
+// let params = new URLSearchParams(document.location.search);
+// let photographerId = params.get("id"); // 
 let params = new URLSearchParams(document.location.search);
 let urlId = params.get("id");
 
-//A faire mettre en place le try
- //  avec    console.log('Il y a eu un problème avec l\'opération fetch'));
 async function getPhotograph() {
   const response = await fetch("./data/photographers.json");
           const data = await response.json();
           let photographers = await data.photographers;
+// let result = await getPhotographers().then( photographers => {
+//     let params = new URLSearchParams(document.location.search);
+// let urlId = params.get("id");
 const photographerChoice = photographers.find((photograph) => photograph.id == urlId);
 console.log(photographerChoice);
  return photographerChoice;
 }
 
-//A faire mettre en place le try
+
  async function getMedias() {
     const response = await fetch("./data/photographers.json");
     const data = await response.json();
    const media = data.media;
   let photographerChoiceMedia = media.filter((media) => media.photographerId == urlId);
+     // .catch((error) =>
      //      console.log('Il y a eu un problème avec l\'opération fetch'));
      console.log(photographerChoiceMedia)
     return photographerChoiceMedia;
