@@ -46,10 +46,12 @@ console.log(photographerChoice);
     return photographerChoiceMedia;
 }
 
+const counterLikes = document.getElementById('counterLikes');
 
 async function displayData(photographer,media) {
+  
 
-      //header photograph
+        //header photograph
       const contactbtn = document.querySelector('button');
       const photographerModel = PageHeaderFactory(photographer);
       const getUserHeaderDOM = photographerModel.getUserHeaderDOM();
@@ -57,25 +59,49 @@ async function displayData(photographer,media) {
       const header = document.querySelector(".photograph-header");
       imgPortrait.parentNode.insertBefore(contactbtn,imgPortrait);
 
-      //modal contact
-      const h2 = document.querySelector("#contact_modal > h2");
-      const modalModel = getModal(photographer);
-      const getUserModalDOM = modalModel.getUserModalDOM();
-      const name = document.querySelector("header > .name")
+      const boxmedia = document.getElementById('boxmedia');
 
-      //box card media
-      const boxmedia = document.getElementById( 'boxmedia' );
-      media.forEach((item) => {
-      const mediaModel = PageMediaFactory(item);
-      const getMediaCardDOM = mediaModel.getMediaCardDOM()
-      boxmedia.appendChild(getMediaCardDOM);})
-
-      //Sum Likes Total
       const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
+
+      const counterLikes = document.getElementById('counterLikes');
+      //counterLikes.innerHTML = TotalLikes;
+      console.log(counterLikes);
+
       const mediaLikes = PageMediaFactory(media);
       const TotalLikeArticle = mediaLikes.getTotalLikes(TotalLikes,photographer.price);
       boxmedia.appendChild(TotalLikeArticle);
+
+      //box card media
+      media.forEach((item) => {
+        const mediaModel = PageMediaFactory(item,TotalLikes);
+        const getMediaCardDOM = mediaModel.getMediaCardDOM()
+        boxmedia.appendChild(getMediaCardDOM);
+      })
+  
+    
+      // A revoire
       
+
+      // const likestitle = document.getElementsByClassName('likestitle');
+      // console.log(likestitle)
+   
+      
+      //Sum Likes Total
+      // const newlikes = media.likes;
+     
+      // const btnLikes = document.getElementsByClassName( 'likestitle' );
+      // console.log(btnLikes)
+      // btnLikes.textContent = newlikes;
+
+      // btnLikes.forEach((item) => {item.addEventListener('click', () => {
+      //   const btnLikes = document.getElementsByClassName( 'likestitle' );
+    
+
+        //A finir modal contact 
+        const h2 = document.querySelector("#contact_modal > h2");
+        const modalModel = getModal(photographer);
+        const getUserModalDOM = modalModel.getUserModalDOM();
+        const name = document.querySelector("header > .name");
 
   }
 
@@ -118,25 +144,8 @@ function PageHeaderFactory(photograph) {
 }
 
 
-function getModal(photograph) {
-  const { id, name, portrait, city, country, tagline, price } = photograph;
 
-  function getUserModalDOM() {
-        const header = document.querySelector("#contact_modal > .modal > header");
-        // const titre = document.querySelector("#contact_modal > header > h2");
-        const h2 = document.createElement( 'h2' );
-        h2.classList.add("name");
-        h2.textContent = name;
-        // header.appendChild(div);
-        header.appendChild(h2);
-        return (h2);
-    }
-  return { name, city, country, tagline, getUserModalDOM }
-}
-
-
-
-function PageMediaFactory(data) {
+function PageMediaFactory(data,total) {
   const {  id, photographerId, title, image, video, likes, price,date} = data;
   const imgHeart = `../assets/icons/heart`;
   const pictureVideo = `../assets/${photographerId}/${video}`;
@@ -174,8 +183,11 @@ function PageMediaFactory(data) {
       const titlemedia = document.createElement( 'h2' );
       titlemedia.textContent = title;
       const btnLikes = document.createElement( 'button' );
+      btnLikes.classList.add('btnLikes');
       const btnLiketitle = document.createElement( 'span' );
+      btnLiketitle.classList.add('likestitle');
       btnLiketitle.textContent = likes;
+
       const heart = document.createElement( 'img' );
       heart.setAttribute("src", `../assets/icons/heart.png`);
       heart.classList.add('heart');
@@ -186,16 +198,27 @@ function PageMediaFactory(data) {
       divtext.appendChild(btnLikes);
       btnLikes.appendChild(btnLiketitle);
       btnLikes.appendChild(heart);
+
+      //increment partielLikes
+      
+      btnLikes.addEventListener('click', () => {                 
+                  btnLiketitle.innerHTML = likes + 1;
+                  const likestitle = document.getElementsByClassName('likestitle');
+                  likestitle.innerHTML = likestitle.innerHTML + 1 ;
+                })
+      
+      
       return (article);
     }
 
-  function getTotalLikes(total,price) {
+    function getTotalLikes(total,price) {
 
       const TotalLikessum = document.createElement( 'article' );
       const divlike = document.createElement( 'div' );
       TotalLikessum.classList.add('cardLikes');
       const TotalLiketitle = document.createElement( 'span' );
-      TotalLiketitle.textContent = total
+      TotalLiketitle.classList.add('totalLikesTitle');
+      TotalLiketitle.textContent = total;
       const heart2 = document.createElement( 'img' );
       heart2.setAttribute("src", `../assets/icons/heartblack.png`);
       heart2.alt = "likes";
@@ -208,12 +231,40 @@ function PageMediaFactory(data) {
       TotalLikessum.appendChild(pricejour);
 
       return (TotalLikessum);
+    }
+
+
+    function getsorting() {
+      
+    }
+
+  return { date, id, image,video, likes, photographerId, price, title , getMediaCardDOM, getTotalLikes 
   }
-  return { date, id, image,video, likes, photographerId, price, title , getMediaCardDOM, getTotalLikes }
 }
 
 
 
+function getModal(photograph) {
+  const { id, name, portrait, city, country, tagline, price } = photograph;
 
+  function getUserModalDOM() {
+        const header = document.querySelector("#contact_modal > .modal > header");
+        // const titre = document.querySelector("#contact_modal > header > h2");
+        const h2 = document.createElement( 'h2' );
+        h2.classList.add("name");
+        h2.textContent = name;
+        // header.appendChild(div);
+        header.appendChild(h2);
+        return (h2);
+    }
+  return { name, city, country, tagline, getUserModalDOM }
+}
 
-       
+// function ecoute(){
+// const btnLikes = document.getElementsByClassName('btnLikes');
+// btnLikes.forEach((item) => item.addEventListener('click', () => {
+//           const likestitle = document.getElementsByClassName('likestitle');
+//           likestitle.innerHTML = likes + 1;
+//           const TotalLiketitle = document.getElementsByClassName('totalLikesTitle');
+//            TotalLiketitle.innerHTML = total +1;
+// }))}
