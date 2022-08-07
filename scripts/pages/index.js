@@ -2,25 +2,16 @@
 // import {photographerFactory} from "../factories/photographer.js";
 
  async function getPhotographers() {
-
     const response = await fetch("./data/photographers.json");
+    if (!response.ok) {
+        const message = `An error has occured with fetch: ${response.status}`;
+        throw new Error(message);
+      }
        const data = await response.json();
-      const photographers = data.photographers;
-        // .catch((error) =>
-        //      console.log('Il y a eu un problème avec l\'opération fetch'));
+        const photographers = data.photographers;
         console.log(photographers);
    return photographers;
 }
-
-//  async function getMedias() {
-//     const response = await fetch("./data/photographers.json");
-//     const data = await response.json();
-//    const media = data.media;
-//      // .catch((error) =>
-//      //      console.log('Il y a eu un problème avec l\'opération fetch'));
-//     return media;
-// }
-
 
 async function displayData(photographers) {
         const photographersSection = document.querySelector(".photographer_section");
@@ -40,7 +31,6 @@ async function init() {
 }
 
 init();
-
 
 
 // export { getPhotographers };

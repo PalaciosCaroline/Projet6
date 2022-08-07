@@ -6,9 +6,6 @@
 // let params = new URLSearchParams(document.location.search);
 // let photographerId = params.get("id"); // 
 
-// photographerChoice est undefined (n'arrive pas à utiliser photographers)
-// const photographerChoice = photographers.find((photographer) => photographer.id === photographerId);
-
 
 async function getPhotographers() {
   let photographers = await fetch("./data/photographers.json")
@@ -20,51 +17,31 @@ async function getPhotographers() {
 return photographers;
 }
 
-
-// const getAllMedias = async () => {
-//   try {
-//     const response = await fetch(config.apiUrl)
-//     const { media } = await response.json()
-//     return media
-//   } catch (error) {
-//     return error
-//   }
-// }
-
-
-// async function getPhotographers() {
-//     const response = await fetch("./data/photographers.json");
-//        const data = await response.json();
-//       const photographers = data.photographers;
-// 
-//       console.log(photographers);
-//    return photographers;
-// }
-// let params = new URLSearchParams(document.location.search);
-// let photographerId = params.get("id"); // 
 let params = new URLSearchParams(document.location.search);
 let urlId = params.get("id");
 
 async function getPhotograph() {
   const response = await fetch("./data/photographers.json");
+  if (!response.ok) {
+    const message = `An error has occured with fetch: ${response.status}`;
+    throw new Error(message);
+  }
           const data = await response.json();
           let photographers = await data.photographers;
-// let result = await getPhotographers().then( photographers => {
-//     let params = new URLSearchParams(document.location.search);
-// let urlId = params.get("id");
 const photographerChoice = photographers.find((photograph) => photograph.id == urlId);
 console.log(photographerChoice);
  return photographerChoice;
 }
 
-
  async function getMedias() {
     const response = await fetch("./data/photographers.json");
+    if (!response.ok) {
+      const message = `An error has occured with fetch: ${response.status}`;
+      throw new Error(message);
+    }
     const data = await response.json();
    const media = data.media;
   let photographerChoiceMedia = media.filter((media) => media.photographerId == urlId);
-     // .catch((error) =>
-     //      console.log('Il y a eu un problème avec l\'opération fetch'));
      console.log(photographerChoiceMedia)
     return photographerChoiceMedia;
 }
@@ -93,6 +70,13 @@ async function displayData(photographer,media) {
       const getMediaCardDOM = mediaModel.getMediaCardDOM()
       boxmedia.appendChild(getMediaCardDOM);})
 
+      //Sum Likes Total
+      const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
+      const mediaLikes = PageMediaFactory(media);
+      const TotalLikeArticle = mediaLikes.getTotalLikes(TotalLikes,photographer.price);
+      boxmedia.appendChild(TotalLikeArticle);
+      
+
   }
 
 
@@ -100,7 +84,6 @@ async function initPage() {
     const photographer = await getPhotograph();
     const media = await getMedias();
     displayData(photographer,media);
-  // console.log(photographerChoice)
 }
 
 initPage();
@@ -162,6 +145,7 @@ function PageMediaFactory(data) {
   function getMediaCardDOM() {
      
       const article = document.createElement( 'article' );
+      article.classList.add('card');
       const a = document.createElement('a');  
       a.href = `#`;
       article.appendChild(a);
@@ -170,6 +154,7 @@ function PageMediaFactory(data) {
       a.appendChild(divmedia);
         if (image) {
           const imgphoto = document.createElement( 'img' );
+          imgphoto.classList.add('cardImg');
           imgphoto.setAttribute("src", pictureImg);
           imgphoto.alt = title;
           divmedia.appendChild(imgphoto);
@@ -193,6 +178,7 @@ function PageMediaFactory(data) {
       btnLiketitle.textContent = likes;
       const heart = document.createElement( 'img' );
       heart.setAttribute("src", `../assets/icons/heart.png`);
+      heart.classList.add('heart');
       heart.alt = "likes";
 
       article.appendChild(divtext);
@@ -201,9 +187,32 @@ function PageMediaFactory(data) {
       btnLikes.appendChild(btnLiketitle);
       btnLikes.appendChild(heart);
       return (article);
+    }
+
+  function getTotalLikes(total,price) {
+
+      const TotalLikessum = document.createElement( 'article' );
+      const divlike = document.createElement( 'div' );
+      TotalLikessum.classList.add('cardLikes');
+      const TotalLiketitle = document.createElement( 'span' );
+      TotalLiketitle.textContent = total
+      const heart2 = document.createElement( 'img' );
+      heart2.setAttribute("src", `../assets/icons/heartblack.png`);
+      heart2.alt = "likes";
+      const pricejour = document.createElement( 'span' );
+      pricejour.textContent = `${price}€ / jour`;
+
+      TotalLikessum.appendChild(divlike);
+      divlike.appendChild(TotalLiketitle);
+      divlike.appendChild(heart2);
+      TotalLikessum.appendChild(pricejour);
+
+      return (TotalLikessum);
   }
-  return { date, id, image,video, likes, photographerId, price, title , getMediaCardDOM }
+  return { date, id, image,video, likes, photographerId, price, title , getMediaCardDOM, getTotalLikes }
 }
+
+
 
 
 
