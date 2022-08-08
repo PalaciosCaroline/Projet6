@@ -26,18 +26,39 @@
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
+				<form id="form_contact" aria-label="formulaire de contact">
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="prenom">Prénom</label>
+						<input class="form_input" type="text" id="prenom" name="prenom" title="prenom"/>
+						<label for="nom">Nom</label>
+						<input class="form_input" type="text" id="nom" name="nom" title="nom"/>
+						<label for="email">Email</label>
+						<input class="form_input" type="email" id="email" name="email" title="email"/>
+            <label for="message">Message</label>
+            <textarea class="form_textarea" rows="5" id="message" name="message" title="message"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" type="submit">Envoyer</button>
 				</form>
 			</div>
 		</div>
+
+    <div id="ligthbox" aria-label="modal de lecture de media" tabindex="0">
+      <div class="modal">
+        <img src="assets/icons/close.svg" onclick="closeligthbox()" />
+        <nav>
+          <div class="previous" aria-label="média précédent"><i class="fas fa-chevron-left"></i></div>
+          <div class="box_screen">
+            <img/>    
+          </div>
+          <div class="next" aria-label="média suivant"><i class="fas fa-chevron-right"></i></div>
+        </nav>
+      </div>
+    </div>
+ 
      <!-- <script  src="scripts/factories/photographer.js"></script>  -->
     <!-- <script type="module" src="scripts/pages/index.js"></script>   -->
     <script  src="scripts/pages/photographer.js"></script>
     <script  src="scripts/utils/contactForm.js"></script>
+    <script  src="scripts/utils/ligthbox.js"></script>
   </body>
 </html>

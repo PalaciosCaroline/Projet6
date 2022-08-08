@@ -3,20 +3,6 @@
 // import { getMedias } from "./index.js";
 // import {PageHeaderFactory} from "../factories/photographer.js";
 
-// let params = new URLSearchParams(document.location.search);
-// let photographerId = params.get("id"); // 
-
-
-async function getPhotographers() {
-  let photographers = await fetch("./data/photographers.json")
-  .then((response) => response.json())
-  .then((data) => {
-    return data.photographers;
-  });
-// console.log(photographers)
-return photographers;
-}
-
 let params = new URLSearchParams(document.location.search);
 let urlId = params.get("id");
 
