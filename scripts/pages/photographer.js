@@ -63,13 +63,9 @@ async function displayData(photographer,media) {
 
       const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
 
-      const counterLikes = document.getElementById('counterLikes');
-      //counterLikes.innerHTML = TotalLikes;
-      console.log(counterLikes);
+    
 
-      const mediaLikes = PageMediaFactory(media);
-      const TotalLikeArticle = mediaLikes.getTotalLikes(TotalLikes,photographer.price);
-      boxmedia.appendChild(TotalLikeArticle);
+     
 
       //box card media
       media.forEach((item) => {
@@ -77,9 +73,21 @@ async function displayData(photographer,media) {
         const getMediaCardDOM = mediaModel.getMediaCardDOM()
         boxmedia.appendChild(getMediaCardDOM);
       })
+
+      const mediaLikes = PageMediaFactory(media,TotalLikes);
+      const TotalLikeArticle = mediaLikes.getTotalLikes(photographer.price);
+      boxmedia.appendChild(TotalLikeArticle);
   
+
+      const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
     
+      totalLikesTitle.textContent = TotalLikes;
       // A revoire
+      // btnLikes.addEventListener('click', () => {                 
+      //   btnLiketitle.innerHTML = likes + 1;
+      //   const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
+      //   totalLikesTitle.textContent = parseInt(totalLikesTitle.textContent) + 1 ;
+      // })
       
 
       // const likestitle = document.getElementsByClassName('likestitle');
@@ -110,6 +118,9 @@ async function initPage() {
     const photographer = await getPhotograph();
     const media = await getMedias();
     displayData(photographer,media);
+
+   
+    
 }
 
 initPage();
@@ -201,24 +212,36 @@ function PageMediaFactory(data,total) {
 
       //increment partielLikes
       
-      btnLikes.addEventListener('click', () => {                 
-                  btnLiketitle.innerHTML = likes + 1;
-                  const likestitle = document.getElementsByClassName('likestitle');
-                  likestitle.innerHTML = likestitle.innerHTML + 1 ;
-                })
+      // btnLikes.addEventListener('click', () => {                 
+      //             btnLiketitle.innerHTML = likes + 1;
+      //             const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
+      //             totalLikesTitle.textContent = parseInt(totalLikesTitle.textContent) + 1 ;
+      //           })
       
-      
+      const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
+    
+      totalLikesTitle.textContent = total;
+      btnLikes.addEventListener('click', () => { 
+        console.log(totalLikesTitle);
+        btnLiketitle.textContent = parseInt( btnLiketitle.textContent) + 1;
+        const toto = totalLikesTitle.textContent ;
+          totalLikesTitle.textContent = parseInt( totalLikesTitle.textContent) + 1;
+
+    })
+
+
+
       return (article);
     }
 
-    function getTotalLikes(total,price) {
+    function getTotalLikes(price) {
 
       const TotalLikessum = document.createElement( 'article' );
       const divlike = document.createElement( 'div' );
       TotalLikessum.classList.add('cardLikes');
-      const TotalLiketitle = document.createElement( 'span' );
-      TotalLiketitle.classList.add('totalLikesTitle');
-      TotalLiketitle.textContent = total;
+      const totalLiketitle = document.createElement( 'span' );
+      totalLiketitle.classList.add('totalLikesTitle');
+      totalLiketitle.textContent = total;
       const heart2 = document.createElement( 'img' );
       heart2.setAttribute("src", `../assets/icons/heartblack.png`);
       heart2.alt = "likes";
@@ -226,7 +249,7 @@ function PageMediaFactory(data,total) {
       pricejour.textContent = `${price}€ / jour`;
 
       TotalLikessum.appendChild(divlike);
-      divlike.appendChild(TotalLiketitle);
+      divlike.appendChild(totalLiketitle);
       divlike.appendChild(heart2);
       TotalLikessum.appendChild(pricejour);
 
@@ -268,3 +291,14 @@ function getModal(photograph) {
 //           const TotalLiketitle = document.getElementsByClassName('totalLikesTitle');
 //            TotalLiketitle.innerHTML = total +1;
 // }))}
+
+function incrementeLikes(){
+const btnLikes = document.querySelectorAll("btnLikes");
+const likestitle = document.querySelectorAll("likestitle");
+      console.log(btnLikes);
+      const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
+      for (let i = 0; i < btnLikes.length; i++) {
+        btnLikes[i].addEventListener("click", () => {
+          likestitle[i].textContent = parseInt(likestitle[i].textContent) + 1;
+          totalLikesTitle.textContent = parseInt( totalLikesTitle.textContent) + 1;
+})}};
