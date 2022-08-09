@@ -81,6 +81,7 @@ async function initPage() {
     displayData(photographer,media);
 }
 
+getSelectMedia();
 initPage();
 
 
@@ -118,12 +119,10 @@ function PageMediaFactory(photograph,data) {
      
       const article = document.createElement( 'article' );
       article.classList.add('card');
-      const a = document.createElement('a');  
-      a.href = `#`;
-      article.appendChild(a);
+      
       const divmedia = document.createElement('div'); 
       divmedia.classList.add('card_media');
-      a.appendChild(divmedia);
+      article.appendChild(divmedia);
         if (data.image) {
           const imgphoto = document.createElement( 'img' );
           imgphoto.classList.add('cardImg');
@@ -133,12 +132,13 @@ function PageMediaFactory(photograph,data) {
           // return imgphoto;
           
       } else if (data.video) {
-          const videophoto = document.createElement( 'video' );
-          videophoto.setAttribute("src", pictureVideo);
-          videophoto.setAttribute("controls", true);
-          videophoto.controls = true;
-          videophoto.alt = data.title;
-          divmedia.appendChild(videophoto);
+          const imgphoto = document.createElement( 'video' );
+          imgphoto.classList.add('cardImg');
+          imgphoto.setAttribute("src", pictureVideo);
+          imgphoto.setAttribute("controls", true);
+          imgphoto.controls = true;
+          imgphoto.alt = data.title;
+          divmedia.appendChild(imgphoto);
         // return videophoto;
       }
       const divtext = document.createElement('div'); 
@@ -241,3 +241,39 @@ function PageMediaFactory(photograph,data) {
 //           likestitle[i].textContent = parseInt(likestitle[i].textContent) + 1;
 //           totalLikesTitle.textContent = parseInt( totalLikesTitle.textContent) + 1;
 // })}};
+
+
+
+function getSelectMedia() {
+
+  const filterMedia = document.createElement( 'div' );
+  document.body.appendChild(filterMedia);
+  
+  filterMedia.parentNode.insertBefore(boxmedia,filterMedia.nextSibling);
+  
+  filterMedia.innerHTML =  `
+  <div class="sorting" aria-label="sélecteur de tri des medias">
+        <h3>Trier par</h3>
+        <div class="sorting_select">
+          <form class="form_sorting">    
+              <ul tabindex="0"  aria-label="Trier les photos">
+                <li tabindex="0"  aria-label="popularité">
+                  <i class="fas fa-chevron-up"></i>
+                  <i class="fas fa-chevron-down"></i>
+                  <input type="radio" id="popularite" value="popularity" name="sorting_option" title="popularite" checked>
+                  <label for="popularite">Popularité</label>
+                </li>
+                <li tabindex="0" aria-label="date">
+                  <input type="radio" id="date" value="date" name="sorting_option" title="date">
+                  <label for="option2">Date</label>
+                </li>
+                <li tabindex="0" aria-label="titre">
+                  <input type="radio" id="titre" value="titre" name="sorting_option" title="titre">
+                  <label for="titre">Titre</label>
+                </li>
+              </ul>
+          </form>
+        </div>
+      </div>`;
+  
+  }
