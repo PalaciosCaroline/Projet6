@@ -41,12 +41,14 @@ h1 {
 
 .photographer_section {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;  
-    /* grid-template-columns: repeat(auto-fit, minmax(320px, 30%)); */
-    gap: 70px 30px; 
-    margin-top: 100px;     
-}
+    /* grid-template-columns: 1fr 1fr 1fr;   */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 30%)); 
+    gap: 60px 30px; 
+    margin-top: 100px;  
+    justify-content: space-between;
 
+}
+/* 
 @media screen and (max-width: 992px){
     .photographer_section {
         grid-template-columns: 1fr 1fr;
@@ -58,7 +60,7 @@ h1 {
     .photographer_section {
         grid-template-columns: 1fr;
     }
-}  
+}   */
 
 .photographer_section article {
     justify-self: center;
