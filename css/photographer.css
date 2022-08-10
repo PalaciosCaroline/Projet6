@@ -308,19 +308,20 @@ margin: 40px 7% 20px 7%;
     background-color: #fff;
     border : none;
     align-items: center;
-    font-size: 1.2rem;
     color :#901C1C;
 }
 
+#boxmedia button span{
+    font-size: 1.4rem;
+}
 #boxmedia .card .heart{
-    /* width: 28px;
-    height: 28px; */
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     display: block;
     padding-left: 8px;
 }
 
-#boxmedia .card .heart:active {
+#boxmedia .card button:active .heart,
+#boxmedia .card button:focus .heart{
     animation : big 0.2s ease-in-out;
 }
 

@@ -2,51 +2,50 @@
 // import { getPhotographers } from "./index.js";
 // import { getMedias } from "./index.js";
 // import {PageHeaderFactory} from "../factories/photographer.js";
-import {photographerUrlId, getPhotographer, getMedias, updateTotalLikes} from "../data/data.js";
+import {photographerUrlId, getData,getPhotographer, getMedias ,updateTotalLikes} from "../data/data.js";
 
 const counterLikes = document.getElementById('counterLikes');
 
 async function displayData(photographer,media) {
   
-        //header photograph
-        // const photographerModel = PageMediaFactory(photographer,media);
-        const mediaModel = PageMediaFactory(photographer,media);
-        const getUserHeaderDOM = mediaModel.getUserHeaderDOM();
+  //header photograph
+  // const photographerModel = PageMediaFactory(photographer,media);
+  const mediaModel = PageMediaFactory(photographer,media);
+  const getUserHeaderDOM = mediaModel.getUserHeaderDOM();
 
-      const boxmedia = document.getElementById('boxmedia');
+  const boxmedia = document.getElementById('boxmedia');
 
-      const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
+  const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
 
-      //box card media
-      media.forEach((item) => {
-        const mediaModelCard = PageMediaFactory(photographer,item);
-        const getMediaCardDOM = mediaModelCard.getMediaCardDOM()
-        boxmedia.appendChild(getMediaCardDOM);
-      })
+  //box card media
+  media.forEach((item) => {
+  const mediaModelCard = PageMediaFactory(photographer,item);
+  const getMediaCardDOM = mediaModelCard.getMediaCardDOM()
+  boxmedia.appendChild(getMediaCardDOM);
+  })
 
-      //étiquette du bas de page avec le Total des likes et du tarif/jour du photograph
-      const TotalLikeArticle = mediaModel.getTotalLikes();
-      boxmedia.appendChild(TotalLikeArticle);
-
-      const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
-
-      //Nécessaire pour le Compteur console.log du total likes
-      totalLikesTitle.textContent = TotalLikes;
-
-      //A finir modal contact
-      const h2 = document.querySelector("#contact_modal > h2");
-      const getUserModalDOM = mediaModel.getUserModalDOM();
-      const formContact = document.getElementById('form_contact');
-      formContact.addEventListener("submit", (event) => {
-        event.preventDefault();
-        logUserInformations();
-      }) 
+  //étiquette du bas de page avec le Total des likes et du tarif/jour du photograph
+  const TotalLikeArticle = mediaModel.getTotalLikes();
+  boxmedia.appendChild(TotalLikeArticle);
+  
+  //A finir modal contact
+  const h2 = document.querySelector("#contact_modal > h2");
+  const getUserModalDOM = mediaModel.getUserModalDOM();
+  const formContact = document.getElementById('form_contact');
+  formContact.addEventListener("submit", (event) => {
+    event.preventDefault();
+    logUserInformations();
+  }) 
 }
 
 async function initPage() {
-    const photographer = await getPhotographer(photographerUrlId);
-    const media = await getMedias(photographerUrlId);
-    displayData(photographer,media);   
+  // const photographer = await getPhotographer(photographerUrlId);
+  // const media = await getMedias(photographerUrlId);
+  const data = await getData();
+  let photographer = getPhotographer(data,photographerUrlId);
+  let media = await getMedias(data,photographerUrlId);
+
+  displayData(photographer,media);   
 }
 
 getSelectMedia();
@@ -90,23 +89,23 @@ function PageMediaFactory(photograph,data) {
     const divmedia = document.createElement('div'); 
     divmedia.classList.add('card_media');
     article.appendChild(divmedia);
-      if (data.image) {
-        const imgphoto = document.createElement( 'img' );
-        imgphoto.classList.add('cardImg');
-        imgphoto.setAttribute("src", pictureImg);
-        imgphoto.alt = data.title;
-        divmedia.appendChild(imgphoto);
-        // return imgphoto;
+    if (data.image) {
+      const imgphoto = document.createElement( 'img' );
+      imgphoto.classList.add('cardImg');
+      imgphoto.setAttribute("src", pictureImg);
+      imgphoto.alt = data.title;
+      divmedia.appendChild(imgphoto);
+      // return imgphoto;
         
     } else if (data.video) {
-        const imgphoto = document.createElement( 'video' );
-        imgphoto.classList.add('cardImg');
-        imgphoto.setAttribute("src", pictureVideo);
-        imgphoto.setAttribute("controls", true);
-        imgphoto.controls = true;
-        imgphoto.alt = data.title;
-        divmedia.appendChild(imgphoto);
-      // return videophoto;
+      const imgphoto = document.createElement( 'video' );
+      imgphoto.classList.add('cardImg');
+      imgphoto.setAttribute("src", pictureVideo);
+      imgphoto.setAttribute("controls", true);
+      imgphoto.controls = true;
+      imgphoto.alt = data.title;
+      divmedia.appendChild(imgphoto);
+    // return videophoto;
     }
     const divtext = document.createElement('div'); 
     divtext.classList.add('card_text');
@@ -128,9 +127,6 @@ function PageMediaFactory(photograph,data) {
     btnLikes.appendChild(btnLiketitle);
     btnLikes.appendChild(heart);
     
-
-    //A refaire increment partielLikes
-    
     btnLikes.addEventListener('click', () => { 
       if(btnLikes.dataset.liked !== 'true') {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent) + 1;
@@ -145,53 +141,44 @@ function PageMediaFactory(photograph,data) {
         updateTotalLikes(-1);
       }
     })
-
       return (article);
     }
 
     
-    function getTotalLikes() {
+  function getTotalLikes() {
+    const totallikes = data.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
 
-      const totallikes = data.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
+    const TotalLikessum = document.createElement( 'article' );
+    const divlike = document.createElement( 'div' );
+    TotalLikessum.classList.add('cardLikes');
+    const totalLiketitle = document.createElement( 'span' );
+    totalLiketitle.classList.add('totalLikesTitle');
+    totalLiketitle.textContent = totallikes;
+    const heart2 = document.createElement( 'img' );
+    heart2.setAttribute("src", `../assets/icons/heartblack.png`);
+    heart2.alt = "likes";
+    const pricejour = document.createElement( 'span' );
+    pricejour.textContent = `${photograph.price}€ / jour`;
 
-      const TotalLikessum = document.createElement( 'article' );
-      const divlike = document.createElement( 'div' );
-      TotalLikessum.classList.add('cardLikes');
-      const totalLiketitle = document.createElement( 'span' );
-      totalLiketitle.classList.add('totalLikesTitle');
-      totalLiketitle.textContent = totallikes;
-      const heart2 = document.createElement( 'img' );
-      heart2.setAttribute("src", `../assets/icons/heartblack.png`);
-      heart2.alt = "likes";
-      const pricejour = document.createElement( 'span' );
-      pricejour.textContent = `${photograph.price}€ / jour`;
+    TotalLikessum.appendChild(divlike);
+    divlike.appendChild(totalLiketitle);
+    divlike.appendChild(heart2);
+    TotalLikessum.appendChild(pricejour);
 
-      TotalLikessum.appendChild(divlike);
-      divlike.appendChild(totalLiketitle);
-      divlike.appendChild(heart2);
-      TotalLikessum.appendChild(pricejour);
+    return (TotalLikessum);
+  }
 
-      return (TotalLikessum);
-    }
-
-    function getUserModalDOM() {
-      const header = document.querySelector("#contact_modal > .modal > header");
-      const h2 = document.createElement( 'h2' );
-      h2.classList.add("name");
-      h2.textContent = photograph.name;
-      header.appendChild(h2);
-      return (h2);
-    }
+  function getUserModalDOM() {
+    const header = document.querySelector("#contact_modal > .modal > header");
+    const h2 = document.createElement( 'h2' );
+    h2.classList.add("name");
+    h2.textContent = photograph.name;
+    header.appendChild(h2);
+    return (h2);
+  }
 
   return {getUserHeaderDOM, getMediaCardDOM, getTotalLikes, getUserModalDOM }
 }
-
-// export function upDataTotalLikes(numberToAdd) {
-//   let totalDOM = document.querySelector('totalLikesTitle');
-//   let newTotal = parseInt(totalDOM.textContent) + numberToAdd;
-//   totalDOM.textContent = newTotal;
-// }
-
 
 
 //   function getModal(photograph) {
@@ -242,6 +229,5 @@ function getSelectMedia() {
           </form>
         </div>
       </div>`;
-  
-  }
+}
 
