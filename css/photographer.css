@@ -224,11 +224,8 @@ form input {
 
 
 #boxmedia{
-/* display: flex; */
 flex-wrap: wrap;
 display: grid;
-/* grid-template-columns: repeat(3, 1fr);   */
-/* row-gap: 30px;  */
 gap: 40px 30px; 
 grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));  
 justify-content: space-between;
@@ -316,18 +313,34 @@ margin: 40px 7% 20px 7%;
 }
 
 #boxmedia .card .heart{
-    width: 24px;
-    height: 24px;
+    /* width: 28px;
+    height: 28px; */
+    font-size: 1.7rem;
+    display: block;
     padding-left: 8px;
+}
+
+#boxmedia .card .heart:active {
+    animation : big 0.2s ease-in-out;
+}
+
+@keyframes big {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.8);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .cardLikes{
     position : fixed;
-    /* position : sticky;  */
     bottom:0;
     right : 3%;
     background-color: #DB8876;
-    /* width: 27vw; */
     width: 320px;
     height: 60px;
     font-size: 1.8rem;
@@ -360,6 +373,5 @@ margin: 40px 7% 20px 7%;
     display : flex;
     align-items: center;
     justify-content: center;
-
 }
 

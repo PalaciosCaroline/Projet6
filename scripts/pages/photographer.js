@@ -2,35 +2,7 @@
 // import { getPhotographers } from "./index.js";
 // import { getMedias } from "./index.js";
 // import {PageHeaderFactory} from "../factories/photographer.js";
-
-let params = new URLSearchParams(document.location.search);
-let urlId = params.get("id");
-
-async function getPhotograph() {
-  const response = await fetch("./data/photographers.json");
-  if (!response.ok) {
-    const message = `An error has occured with fetch: ${response.status}`;
-    throw new Error(message);
-  }
-          const data = await response.json();
-          let photographers = await data.photographers;
-const photographerChoice = photographers.find((photograph) => photograph.id == urlId);
-console.log(photographerChoice);
- return photographerChoice;
-}
-
- async function getMedias() {
-    const response = await fetch("./data/photographers.json");
-    if (!response.ok) {
-      const message = `An error has occured with fetch: ${response.status}`;
-      throw new Error(message);
-    }
-    const data = await response.json();
-   const media = data.media;
-  let photographerChoiceMedia = media.filter((media) => media.photographerId == urlId);
-     console.log(photographerChoiceMedia)
-    return photographerChoiceMedia;
-}
+import {photographerUrlId, getPhotographer, getMedias, updateTotalLikes} from "../data/data.js";
 
 const counterLikes = document.getElementById('counterLikes');
 
@@ -60,30 +32,25 @@ async function displayData(photographer,media) {
 
       //Nécessaire pour le Compteur console.log du total likes
       totalLikesTitle.textContent = TotalLikes;
-      
-      // A revoire
-      // btnLikes.addEventListener('click', () => {                 
-      //   btnLiketitle.innerHTML = likes + 1;
-      //   const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
-      //   totalLikesTitle.textContent = parseInt(totalLikesTitle.textContent) + 1 ;
-      // })
 
-      //A finir modal contact 
+      //A finir modal contact
       const h2 = document.querySelector("#contact_modal > h2");
       const getUserModalDOM = mediaModel.getUserModalDOM();
-      // const name = document.querySelector("header > .name");
+      const formContact = document.getElementById('form_contact');
+      formContact.addEventListener("submit", (event) => {
+        event.preventDefault();
+        logUserInformations();
+      }) 
 }
 
-
 async function initPage() {
-    const photographer = await getPhotograph();
-    const media = await getMedias();
-    displayData(photographer,media);
+    const photographer = await getPhotographer(photographerUrlId);
+    const media = await getMedias(photographerUrlId);
+    displayData(photographer,media);   
 }
 
 getSelectMedia();
 initPage();
-
 
 function PageMediaFactory(photograph,data) {
   const imgHeart = `../assets/icons/heart`;
@@ -92,84 +59,92 @@ function PageMediaFactory(photograph,data) {
   const picture = `assets/photographers/photographers_ID_Photos/${photograph.portrait}`;
 
   function getUserHeaderDOM() {
-      const header = document.querySelector(".photograph-header");
-      const contactbtn = document.querySelector('button');
-      const article = document.createElement( 'article' );
-      const h2 = document.createElement( 'h2' );
-      h2.textContent = photograph.name;
-      const h3 = document.createElement( 'h3' );
-      h3.textContent = `${photograph.city}, ${photograph.country}`;
-      const legende = document.createElement( 'p' );
-      legende.textContent = photograph.tagline;
-      const imgChoisi = document.createElement( 'img' );
-      imgChoisi.setAttribute("src", picture);
-      imgChoisi.alt = photograph.name;
-      header.appendChild(article);
-      article.appendChild(imgChoisi);
-      article.appendChild(h2);
-      article.appendChild(h3);
-      article.appendChild(legende);
-      header.appendChild(imgChoisi);
-      imgChoisi.parentNode.insertBefore(contactbtn,imgChoisi);
+    const header = document.querySelector(".photograph-header");
+    const contactbtn = document.querySelector('button');
+    const article = document.createElement( 'article' );
+    const h2 = document.createElement( 'h2' );
+    h2.textContent = photograph.name;
+    const h3 = document.createElement( 'h3' );
+    h3.textContent = `${photograph.city}, ${photograph.country}`;
+    const legende = document.createElement( 'p' );
+    legende.textContent = photograph.tagline;
+    const imgChoisi = document.createElement( 'img' );
+    imgChoisi.setAttribute("src", picture);
+    imgChoisi.alt = photograph.name;
+    header.appendChild(article);
+    article.appendChild(imgChoisi);
+    article.appendChild(h2);
+    article.appendChild(h3);
+    article.appendChild(legende);
+    header.appendChild(imgChoisi);
+    imgChoisi.parentNode.insertBefore(contactbtn,imgChoisi);
 
-      return (article);
-    }
+    return (article);
+  }
 
   function getMediaCardDOM() {
      
-      const article = document.createElement( 'article' );
-      article.classList.add('card');
-      
-      const divmedia = document.createElement('div'); 
-      divmedia.classList.add('card_media');
-      article.appendChild(divmedia);
-        if (data.image) {
-          const imgphoto = document.createElement( 'img' );
-          imgphoto.classList.add('cardImg');
-          imgphoto.setAttribute("src", pictureImg);
-          imgphoto.alt = data.title;
-          divmedia.appendChild(imgphoto);
-          // return imgphoto;
-          
-      } else if (data.video) {
-          const imgphoto = document.createElement( 'video' );
-          imgphoto.classList.add('cardImg');
-          imgphoto.setAttribute("src", pictureVideo);
-          imgphoto.setAttribute("controls", true);
-          imgphoto.controls = true;
-          imgphoto.alt = data.title;
-          divmedia.appendChild(imgphoto);
-        // return videophoto;
+    const article = document.createElement( 'article' );
+    article.classList.add('card');
+    
+    const divmedia = document.createElement('div'); 
+    divmedia.classList.add('card_media');
+    article.appendChild(divmedia);
+      if (data.image) {
+        const imgphoto = document.createElement( 'img' );
+        imgphoto.classList.add('cardImg');
+        imgphoto.setAttribute("src", pictureImg);
+        imgphoto.alt = data.title;
+        divmedia.appendChild(imgphoto);
+        // return imgphoto;
+        
+    } else if (data.video) {
+        const imgphoto = document.createElement( 'video' );
+        imgphoto.classList.add('cardImg');
+        imgphoto.setAttribute("src", pictureVideo);
+        imgphoto.setAttribute("controls", true);
+        imgphoto.controls = true;
+        imgphoto.alt = data.title;
+        divmedia.appendChild(imgphoto);
+      // return videophoto;
+    }
+    const divtext = document.createElement('div'); 
+    divtext.classList.add('card_text');
+    const titlemedia = document.createElement('h2');
+    titlemedia.textContent = data.title;
+    const btnLikes = document.createElement('button');
+    btnLikes.classList.add('btnLikes');
+    btnLikes.setAttribute("aria-description", "bouton pour liker la photo");
+    const btnLiketitle = document.createElement('span');
+    btnLiketitle.classList.add('likestitle');
+    btnLiketitle.textContent = data.likes;
+    const heart = document.createElement( 'i' );
+    heart.className = ('far fa-heart heart');
+    heart.ariaHidden = true;
+
+    article.appendChild(divtext);
+    divtext.appendChild(titlemedia);
+    divtext.appendChild(btnLikes);
+    btnLikes.appendChild(btnLiketitle);
+    btnLikes.appendChild(heart);
+    
+
+    //A refaire increment partielLikes
+    
+    btnLikes.addEventListener('click', () => { 
+      if(btnLikes.dataset.liked !== 'true') {
+        btnLiketitle.textContent = parseInt(btnLiketitle.textContent) + 1;
+        btnLikes.dataset.liked = true;
+        heart.className = ('fas fa-heart heart');
+        updateTotalLikes(+1);
+
+      } else {
+        btnLiketitle.textContent = parseInt(btnLiketitle.textContent) - 1;
+        heart.className = ('far fa-heart heart');
+        btnLikes.dataset.liked = false;  
+        updateTotalLikes(-1);
       }
-      const divtext = document.createElement('div'); 
-      divtext.classList.add('card_text');
-      const titlemedia = document.createElement( 'h2' );
-      titlemedia.textContent = data.title;
-      const btnLikes = document.createElement( 'button' );
-      btnLikes.classList.add('btnLikes');
-      const btnLiketitle = document.createElement( 'span' );
-      btnLiketitle.classList.add('likestitle');
-      btnLiketitle.textContent = data.likes;
-
-      const heart = document.createElement( 'img' );
-      heart.setAttribute("src", `../assets/icons/heart.png`);
-      heart.classList.add('heart');
-      heart.alt = "likes";
-
-      article.appendChild(divtext);
-      divtext.appendChild(titlemedia);
-      divtext.appendChild(btnLikes);
-      btnLikes.appendChild(btnLiketitle);
-      btnLikes.appendChild(heart);
-      
-
-      //A refaire increment partielLikes
-      const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
-      btnLikes.addEventListener('click', () => { 
-        console.log(totalLikesTitle);
-        btnLiketitle.textContent = parseInt( btnLiketitle.textContent) + 1;
-        totalLikesTitle.textContent = parseInt( totalLikesTitle.textContent) + 1;
-      })
+    })
 
       return (article);
     }
@@ -201,17 +176,21 @@ function PageMediaFactory(photograph,data) {
 
     function getUserModalDOM() {
       const header = document.querySelector("#contact_modal > .modal > header");
-      // const titre = document.querySelector("#contact_modal > header > h2");
       const h2 = document.createElement( 'h2' );
       h2.classList.add("name");
       h2.textContent = photograph.name;
-      // header.appendChild(div);
       header.appendChild(h2);
       return (h2);
     }
 
   return {getUserHeaderDOM, getMediaCardDOM, getTotalLikes, getUserModalDOM }
 }
+
+// export function upDataTotalLikes(numberToAdd) {
+//   let totalDOM = document.querySelector('totalLikesTitle');
+//   let newTotal = parseInt(totalDOM.textContent) + numberToAdd;
+//   totalDOM.textContent = newTotal;
+// }
 
 
 
@@ -231,22 +210,10 @@ function PageMediaFactory(photograph,data) {
 //   return { getUserModalDOM }
 // }
 
-// function incrementeLikes(){
-// const btnLikes = document.querySelectorAll("btnLikes");
-// const likestitle = document.querySelectorAll("likestitle");
-//       console.log(btnLikes);
-//       const totalLikesTitle = document.getElementsByClassName('totalLikesTitle');
-//       for (let i = 0; i < btnLikes.length; i++) {
-//         btnLikes[i].addEventListener("click", () => {
-//           likestitle[i].textContent = parseInt(likestitle[i].textContent) + 1;
-//           totalLikesTitle.textContent = parseInt( totalLikesTitle.textContent) + 1;
-// })}};
-
-
 
 function getSelectMedia() {
 
-  const filterMedia = document.createElement( 'div' );
+  const filterMedia = document.createElement('div');
   document.body.appendChild(filterMedia);
   
   filterMedia.parentNode.insertBefore(boxmedia,filterMedia.nextSibling);
@@ -277,3 +244,4 @@ function getSelectMedia() {
       </div>`;
   
   }
+
