@@ -1,20 +1,28 @@
-//Mettre le code JavaScript lié à la page photographer
-// import { getPhotographers } from "./index.js";
-// import { getMedias } from "./index.js";
-// import {PageHeaderFactory} from "../factories/photographer.js";
 import {photographerUrlId, getData,getPhotographer, getMedias ,updateTotalLikes} from "../data/data.js";
+import {getSelectMedia, sortingMedia} from "../utils/tagFiltrage.js";
+import {Lightbox} from "../utils/lightbox.js";
+import {getUserModalDOM, displayModal} from "../utils/contactForm.js";
 
 const counterLikes = document.getElementById('counterLikes');
 
-async function displayData(photographer,media) {
-  
-  //header photograph
+ //header photograph
+export async function displayDataPageHeader(photographer, data) {
   // const photographerModel = PageMediaFactory(photographer,media);
-  const mediaModel = PageMediaFactory(photographer,media);
+  const mediaModel = PageMediaFactory(photographer, data);
   const getUserHeaderDOM = mediaModel.getUserHeaderDOM();
+  //A finir modal contact
+  const h2 = document.querySelector("#contact_modal > h2");
+  getUserModalDOM(photographer);
+  const formContact = document.getElementById('form_contact');
+  formContact.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+  }) 
+}
 
+export async function displayDataPageMedia(photographer,media) {
   const boxmedia = document.getElementById('boxmedia');
-
+  const mediaModel = PageMediaFactory(photographer, media);
   const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
 
   //box card media
@@ -27,15 +35,6 @@ async function displayData(photographer,media) {
   //étiquette du bas de page avec le Total des likes et du tarif/jour du photograph
   const TotalLikeArticle = mediaModel.getTotalLikes();
   boxmedia.appendChild(TotalLikeArticle);
-  
-  //A finir modal contact
-  const h2 = document.querySelector("#contact_modal > h2");
-  const getUserModalDOM = mediaModel.getUserModalDOM();
-  const formContact = document.getElementById('form_contact');
-  formContact.addEventListener("submit", (event) => {
-    event.preventDefault();
-    logUserInformations();
-  }) 
 }
 
 async function initPage() {
@@ -43,12 +42,21 @@ async function initPage() {
   // const media = await getMedias(photographerUrlId);
   const data = await getData();
   let photographer = getPhotographer(data,photographerUrlId);
-  let media = await getMedias(data,photographerUrlId);
+  let media = getMedias(data,photographerUrlId);
+ 
+  displayDataPageHeader(photographer,media);  
+  getSelectMedia(photographer, media);
 
-  displayData(photographer,media);   
+  //boxmedia with popularity default choice
+  sortingMedia(photographer, media);
+  //boxmedia if choice another selection
+  const formSorting = document.querySelector('.form_sorting');
+  formSorting.addEventListener('change', () => sortingMedia(photographer, media));
+
+  Lightbox.initLightbox();
+  
 }
 
-getSelectMedia();
 initPage();
 
 function PageMediaFactory(photograph,data) {
@@ -78,33 +86,47 @@ function PageMediaFactory(photograph,data) {
     header.appendChild(imgChoisi);
     imgChoisi.parentNode.insertBefore(contactbtn,imgChoisi);
 
+    contactbtn.addEventListener("click", displayModal);
+
     return (article);
   }
 
   function getMediaCardDOM() {
      
-    const article = document.createElement( 'article' );
+    const article = document.createElement('article');
     article.classList.add('card');
     
     const divmedia = document.createElement('div'); 
     divmedia.classList.add('card_media');
     article.appendChild(divmedia);
+
     if (data.image) {
-      const imgphoto = document.createElement( 'img' );
+      const a = document.createElement('a'); 
+      divmedia.appendChild(a);
+      a.rel="lightbox";
+      a.id = data.id;
+      a.title = data.title;
+      a.setAttribute("href", `../assets/${data.photographerId}/${data.image}`);
+      const imgphoto = document.createElement('img');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute("src", pictureImg);
-      imgphoto.alt = data.title;
-      divmedia.appendChild(imgphoto);
+      a.dataLabel = data.id;
+      a.appendChild(imgphoto);
       // return imgphoto;
         
     } else if (data.video) {
-      const imgphoto = document.createElement( 'video' );
+      const a = document.createElement('a'); 
+      a.setAttribute("href", `../assets/${data.photographerId}/${data.video}`);
+      divmedia.appendChild(a);
+      a.title = data.title;
+      a.id = data.id;
+      // a.dataLabel = data.id;
+      const imgphoto = document.createElement('video');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute("src", pictureVideo);
       imgphoto.setAttribute("controls", true);
       imgphoto.controls = true;
-      imgphoto.alt = data.title;
-      divmedia.appendChild(imgphoto);
+      a.appendChild(imgphoto);
     // return videophoto;
     }
     const divtext = document.createElement('div'); 
@@ -168,66 +190,7 @@ function PageMediaFactory(photograph,data) {
     return (TotalLikessum);
   }
 
-  function getUserModalDOM() {
-    const header = document.querySelector("#contact_modal > .modal > header");
-    const h2 = document.createElement( 'h2' );
-    h2.classList.add("name");
-    h2.textContent = photograph.name;
-    header.appendChild(h2);
-    return (h2);
-  }
-
-  return {getUserHeaderDOM, getMediaCardDOM, getTotalLikes, getUserModalDOM }
-}
-
-
-//   function getModal(photograph) {
- 
-
-//   function getUserModalDOM() {
-//         const header = document.querySelector("#contact_modal > .modal > header");
-//         // const titre = document.querySelector("#contact_modal > header > h2");
-//         const h2 = document.createElement( 'h2' );
-//         h2.classList.add("name");
-//         h2.textContent = photograph.name;
-//         // header.appendChild(div);
-//         header.appendChild(h2);
-//         return (h2);
-//     }
-//   return { getUserModalDOM }
-// }
-
-
-function getSelectMedia() {
-
-  const filterMedia = document.createElement('div');
-  document.body.appendChild(filterMedia);
   
-  filterMedia.parentNode.insertBefore(boxmedia,filterMedia.nextSibling);
-  
-  filterMedia.innerHTML =  `
-  <div class="sorting" aria-label="sélecteur de tri des medias">
-        <h3>Trier par</h3>
-        <div class="sorting_select">
-          <form class="form_sorting">    
-              <ul tabindex="0"  aria-label="Trier les photos">
-                <li tabindex="0"  aria-label="popularité">
-                  <i class="fas fa-chevron-up"></i>
-                  <i class="fas fa-chevron-down"></i>
-                  <input type="radio" id="popularite" value="popularity" name="sorting_option" title="popularite" checked>
-                  <label for="popularite">Popularité</label>
-                </li>
-                <li tabindex="0" aria-label="date">
-                  <input type="radio" id="date" value="date" name="sorting_option" title="date">
-                  <label for="option2">Date</label>
-                </li>
-                <li tabindex="0" aria-label="titre">
-                  <input type="radio" id="titre" value="titre" name="sorting_option" title="titre">
-                  <label for="titre">Titre</label>
-                </li>
-              </ul>
-          </form>
-        </div>
-      </div>`;
+  return {getUserHeaderDOM, getMediaCardDOM, getTotalLikes }
 }
 

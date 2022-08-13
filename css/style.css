@@ -42,7 +42,7 @@ h1 {
 .photographer_section {
     display: grid;
     /* grid-template-columns: 1fr 1fr 1fr;   */
-    grid-template-columns: repeat(auto-fit, minmax(320px, 30%)); 
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); 
     gap: 60px 30px; 
     margin-top: 100px;  
     justify-content: space-between;
@@ -68,7 +68,7 @@ h1 {
     /* justify-content: center;  */
     align-items: center;
     flex-direction: column;
-    /* min-width: 320px; */
+    min-width: 320px; 
 }
 
 .photographer_section article h2 {
