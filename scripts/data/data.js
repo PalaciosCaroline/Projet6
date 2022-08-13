@@ -12,22 +12,22 @@ export async function getData() {
 }
 
 export function getPhotographers(data) {
-  let photographers = data.photographers;
+  const photographers = data.photographers;
   return photographers;
 }
 
 export function getPhotographer(data,id) {
-  let photographers = data.photographers;
-  const photographerChoice = photographers.find((photograph) => photograph.id == id);
-  console.log(photographerChoice);
-  return photographerChoice;
+  const photographers = data.photographers;
+  let photographer = photographers.find((photographer) => photographer.id == id);
+  console.log(photographer);
+  return photographer;
 }
 
 export function getMedias(data,photographerId) {
-  const media = data.media;
-  let photographerChoiceMedia = media.filter((media) => media.photographerId == photographerId);
-  console.log(photographerChoiceMedia)
-  return photographerChoiceMedia;
+  const medias = data.media;
+  let media = medias.filter((media) => media.photographerId == photographerId);
+  console.log(media)
+  return media;
 }
 
 export function updateTotalLikes(numberToAdd) {
