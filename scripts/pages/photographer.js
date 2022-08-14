@@ -43,7 +43,10 @@ async function initPage() {
   const data = await getData();
   let photographer = getPhotographer(data,photographerUrlId);
   let media = getMedias(data,photographerUrlId);
- 
+
+//header page title
+document.title = `Fisheye - ${photographer.name}`
+
   displayDataPageHeader(photographer,media);  
   getSelectMedia(photographer, media);
 

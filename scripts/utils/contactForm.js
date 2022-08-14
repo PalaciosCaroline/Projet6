@@ -1,7 +1,6 @@
 //dom elements
 const modal = document.getElementById("contact_modal");
 const formContact = document.getElementById('form_contact');
-
 const entries = document.querySelectorAll('.entry');
 const header = document.querySelector("#contact_modal > .modal > header");
 const h2 = modal.querySelectorAll('h2');
