@@ -24,7 +24,7 @@ export async function displayDataPageMedia(photographer,media) {
   const boxmedia = document.getElementById('boxmedia');
   const mediaModel = PageMediaFactory(photographer, media);
   const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0);
-
+ 
   //box card media
   media.forEach((item) => {
   const mediaModelCard = PageMediaFactory(photographer,item);
@@ -44,9 +44,9 @@ async function initPage() {
   let photographer = getPhotographer(data,photographerUrlId);
   let media = getMedias(data,photographerUrlId);
 
-//header page title
-document.title = `Fisheye - ${photographer.name}`
-
+  //header page title
+  document.title = `Fisheye - ${photographer.name}`
+  //creation page
   displayDataPageHeader(photographer,media);  
   getSelectMedia(photographer, media);
 
@@ -95,42 +95,31 @@ function PageMediaFactory(photograph,data) {
   }
 
   function getMediaCardDOM() {
-     
     const article = document.createElement('article');
     article.classList.add('card');
-    
     const divmedia = document.createElement('div'); 
     divmedia.classList.add('card_media');
     article.appendChild(divmedia);
-
+    const a = document.createElement('a'); 
+    divmedia.appendChild(a);
+    a.rel="lightbox";
+    a.id = data.id;
+    a.title = data.title;
     if (data.image) {
-      const a = document.createElement('a'); 
-      divmedia.appendChild(a);
-      a.rel="lightbox";
-      a.id = data.id;
-      a.title = data.title;
       a.setAttribute("href", `../assets/${data.photographerId}/${data.image}`);
       const imgphoto = document.createElement('img');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute("src", pictureImg);
-      a.dataLabel = data.id;
       a.appendChild(imgphoto);
-      // return imgphoto;
-        
+      // a.dataLabel = ;
     } else if (data.video) {
-      const a = document.createElement('a'); 
       a.setAttribute("href", `../assets/${data.photographerId}/${data.video}`);
-      divmedia.appendChild(a);
-      a.title = data.title;
-      a.id = data.id;
-      // a.dataLabel = data.id;
+      // a.dataLabel = ;
       const imgphoto = document.createElement('video');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute("src", pictureVideo);
       imgphoto.setAttribute("controls", true);
-      imgphoto.controls = true;
       a.appendChild(imgphoto);
-    // return videophoto;
     }
     const divtext = document.createElement('div'); 
     divtext.classList.add('card_text');
@@ -167,7 +156,7 @@ function PageMediaFactory(photograph,data) {
       }
     })
       return (article);
-    }
+  }
 
     
   function getTotalLikes() {

@@ -261,35 +261,35 @@
 
 #boxmedia{
     display: flex;
-flex-wrap: wrap;
+    flex-wrap: wrap;
 /* display: grid;  */
-gap: 40px 30px; 
+    /* gap: 40px 30px;  */
 /* grid-template-columns: repeat(auto-fit, minmax(320, 1fr));   */
 justify-content: space-between;
 margin: 40px 7% 20px 7%; 
 }
 
 #boxmedia .card{
-    width :360px; 
+    /* width :360px;  */
     /* width :25vw; */
     /* height: calc(25vw + 60px);  */
+    width: 30%;
     height: 420px; 
-    /* margin-bottom:30px; */
+    margin-bottom:30px; 
     box-sizing: border-box;
 }
  
 @media screen and (max-width: 992px){
     #boxmedia .card{
-        width :45%; 
-        height: calc(320 + 60);
-         width :40vw;
-        height: calc(40vw + 60px);  
+        width :47%; 
+        height: calc(320 + 60); 
+        /* width :40vw; */
+        /* height: calc(40vw + 60px);   */
     }
     #boxmedia .card_media{
-    
         width :100%; 
-        height: 40vw;
-       
+        height: 320px;
+        /* height: 40vw; */
         overflow: hidden;
     }
 
@@ -302,20 +302,19 @@ margin: 40px 7% 20px 7%;
     }
     #boxmedia .card{
         width :80%;
-        /* height: calc(80vw + 60px);  */
     }
     #boxmedia .card_media{
         width :100%; 
-        /* height: 25vw; */
         height: 360px;
+    }
+    #boxmedia .card_text{
+        font-size: 0.8rem;
     }
 } 
 
 
 #boxmedia .card_media{
-  
     width :100%; 
-    /* height: 25vw; */
     height: 360px;
     overflow: hidden;
     border-radius: 10px;
@@ -337,14 +336,17 @@ margin: 40px 7% 20px 7%;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     color :#901C1C;
     font-size: 1rem;
     font-weight: 500;
     height: 60px;
+   
 }
 
 #boxmedia .card_text h2{
-    margin-right: 5px;
+    margin-top: 10px;
+    margin-right: 3px;
 }
 
 #boxmedia button{
@@ -365,8 +367,8 @@ margin: 40px 7% 20px 7%;
     padding-left: 8px;
 }
 
-#boxmedia .card button:active .heart,
-#boxmedia .card button:focus .heart{
+#boxmedia .card button:focus .heart,
+#boxmedia .card button:active .heart{
     animation : big 0.3s ease-in-out;
 }
 
@@ -398,24 +400,7 @@ margin: 40px 7% 20px 7%;
     padding-left : 5px;   
 }
 
-/* début de la ligthbox */
-/* #ligthbox{
-    position :fixed;
-    z-index :99;
-    top :0 ; 
-    height: 100%;
-    width: 100%;
-    background-color: aqua;
-    display: none; 
-}
-
-#ligthbox-active{
-    display : flex;
-    align-items: center;
-    justify-content: center;
-}
- */
-
+/*lightbox*/
  #lightbox{
     position :fixed;
     display : flex;
@@ -429,30 +414,22 @@ margin: 40px 7% 20px 7%;
     background-color: 	#fff; 
     z-index: 102;
     transition: opacity 0.2s;
- }
- /* .lightbox_next{
-    color : #901C1C;
-    font-size: 3rem;
-    background-color: #fff;
-    border : none;
-} */
+}
 
 #lightbox.hidden{
 opacity : 0;
 }
 
 .lightbox_next{
-    /* right:80px; */
     right:4%;
 }
 
 .lightbox_previous {
-    /* left: 80px; */
     left: 4%;
 }
 
 .lightbox_next,
- .lightbox_previous {
+.lightbox_previous {
     display : flex;
     justify-content: center;
     align-items: center;
@@ -470,14 +447,9 @@ opacity : 0;
 }
 
 .lightbox_next i,
- .lightbox_previous i{
+.lightbox_previous i{
     transition : 0.1s;
- } 
-/* 
-.lightbox_next:hover i,
-.lightbox_previous:hover i{
-    transform : scale(1.3);
-} */
+} 
 
 .lightbox_close{
     color : #901C1C;
@@ -511,8 +483,7 @@ transform : scale(1.2);
     overflow: hidden;
 }
 
-.lightbox_container .box_img {
-  
+.lightbox_container .box_media {
     margin-top :60px;
     height: 90%; 
     width: 100%;
@@ -526,6 +497,23 @@ transform : scale(1.2);
     object-position: 50% 40%;
     object-fit: cover; 
 }
+/* .lightbox_container .media.hidden{
+    animation : hiddeno 0.6s;
+} */
+/* 
+@keyframes hiddeno {
+    50% {transform: scale(0.2);
+        opacity :0.5}
+100% {transform: scale(1);
+    opacity :1}
+} */
+
+.lightbox_container .videomedia{
+    width :100%;
+    height: 100%; 
+    object-fit: cover;  
+}
+
 
 #lightbox .box_text{
    width: 100%;

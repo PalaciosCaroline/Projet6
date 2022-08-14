@@ -3,69 +3,63 @@
 *@property {string[]} gallery path to media of ligthbox
 *@property {string} url  URL of the media display
 */
-
-
 export class Lightbox {
-   static initLightbox(){
+    static initLightbox(){
     const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
-    const li = document.querySelectorAll('.cardImg');
-    const la = document.querySelectorAll('a[title]');
-    // const h3 = Array.querySelectorAll('h3');
-    // const la = document.querySelectorAll('a[title]');
-    // const la = Array.from(li);
-    console.log(la);
-    // const titles = Array.from(document.querySelectorAll('a[dataId]'));
-// console.log(titles);
-    // const title = Array.from(document.querySelectorAll('index'));
-    // console.log(title)
     const gallery = links.map(link => link.getAttribute('href'));
-    const lar = links.map(link => link.getAttribute('title'));
-    console.log(lar);
-    
-    
+    const titles = links.map(link => link.getAttribute('title'));
 
-    links.forEach(link => link.addEventListener('click', e =>
-    {
+    links.forEach(link => link.addEventListener('click', e => {
     e.preventDefault();
-    const la = document.activeElement;
-    new Lightbox(e.currentTarget.getAttribute('href'),e.currentTarget.getAttribute('title'), gallery);
+    new Lightbox(e.currentTarget.getAttribute('href'),e.currentTarget.getAttribute('title'), gallery, titles);
     }))
     }
-    
 
 /*
 *@param {string} url  URL de l'image
 *@return {string[]} gallery path to media of ligthbox
 */
-
-    constructor (url,title, gallery) {
-        this.element = this.buildDOM(url,title);
+    constructor (url,title, gallery, titles) {
+        this.element = this.buildDOM(title);
         this.loadImage(url,title);
         this.gallery = gallery;
+        this.titles = titles;
         this.onKeyup = this.onKeyup.bind(this);
         document.body.appendChild(this.element);
         document.addEventListener('keyup', this.onKeyup);
     }
 
     loadImage (url, title) {
-        this.url = null;
-        this.title = null;
-        const image = new Image();
-        const container = this.element.querySelector('.lightbox__container');
+        const container = this.element.querySelector('.lightbox_container');
+        this.url = url;
+        this.title = title;
+        const boxMedia = this.element.querySelector('.box_media');
         const h3 = this.element.querySelector('h3');
-        image.onload = () => {
-          this.url = url;
-            this.title = title;
-        }
-        image.src = url;
-        h3.innerContent = title;
-      }
+        boxMedia.innerHTML = "";
+        h3.innerHTML = "";
+        if (url.includes("jpg")) {
+            const image = new Image();
+            boxMedia.appendChild(image);
+            image.classList.add('media')
+            image.alt = this.title;
+            image.src = url;
+            image.ariaLabel = title;
+        } else if (url.includes("mp4")) {
+            const video = document.createElement("video");
+            boxMedia.appendChild(video);
+            video.ariaLabel = title;
+            video.setAttribute("controls", true);
+            video.classList.add('videomedia')
+            video.src = url;
+        }    
+        h3.textContent = title;
+    }
 
 
 /* close the lightbox
 *@param {Mouseevent|keyBoardEvent} e
 */
-      //voir pour enlever le focus
+    //voir pour enlever le focus
     close(e){
         e.preventDefault();
         this.element.classList.add('hidden');
@@ -77,42 +71,46 @@ export class Lightbox {
 /* go to the next
 *@param {Mouseevent|keyBoardEvent} e
 */
-//ne marche pas
     next(e){
         e.preventDefault();
         let i = this.gallery.findIndex(image => image === this.url)
-        let t = this.gallery.findIndex(title => title === this.title)
         if (i === this.gallery.length - 1) {
           i = -1
         }
-        // this.loadImage(this.gallery[i + 1])
-        this.buildDOM (this.gallery[i+1]);
+        this.loadImage(this.gallery[i + 1], this.titles[i + 1]);
     }
 
 /* go to the previous
 *@param {Mouseevent|keyBoardEvent} e
 */
     previous(e){
-        e.preventDefault();
+    e.preventDefault();
+    let i = this.gallery.findIndex(image => image === this.url);
+    if (i === 0) {
+      i = this.gallery.length;
+    }
+    this.loadImage(this.gallery[i - 1], this.titles[i - 1]);
     }
 
 /*
 *
 *@param {KeyBoardEvent} e
 */
-
     onKeyup(e) {
         if(e.key === 'Escape'){
-        this.close(e)
+            this.close(e)
+        } else if (e.key === "ArrowLeft") {
+            this.prev(e);
+        } else if (e.key === "ArrowRight") {
+            this.next(e);
         }
     }
-
 
 /*
 *@param {string} url  URL de l'image
 *@return {HTMLElement}
 */
-    buildDOM (url,title) {
+    buildDOM (title) {
     const dom = document.createElement('div');
     dom.setAttribute("id", 'lightbox');
     dom.innerHTML = `
@@ -129,8 +127,7 @@ export class Lightbox {
             </button>
         </nav>
         <div class="lightbox_container">
-            <div class="box_img">
-            <img class="media" src="${url}" alt=${title}>
+            <div class="box_media">
             </div>
             <div class="box_text">  
                 <h3>${title}</h3>
@@ -144,4 +141,4 @@ export class Lightbox {
 
     return dom;
     }
-};
+}
