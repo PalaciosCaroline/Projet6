@@ -3,7 +3,7 @@ export default function photographerFactory(data) {
   const picture = `assets/photographers/photo_choisi/${portrait}`;
   function getUserCardDOM() {
     const article = document.createElement( 'article' );
-    const a = document.createElement('a');  
+    const a = document.createElement('a');
     a.href = `./photographer.html?id=${id}`;
     const imgChoisi = document.createElement('img');
     a.title = data.title;
@@ -26,6 +26,6 @@ export default function photographerFactory(data) {
     return (article);
   }
   return {
-    name, picture, city, country, tagline, price, getUserCardDOM 
+    name, picture, city, country, tagline, price, getUserCardDOM
   }
 }

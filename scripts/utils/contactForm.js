@@ -6,6 +6,7 @@ const header = document.querySelector('#contact_modal > .modal > header');
 const messageSend = document.getElementById('message_send');
 const btnclose = header.querySelector('img');
 const main = document.getElementById('main');
+
 export function getUserModalDOM(photographer) {
   const h2 = document.createElement('h2');
   h2.classList.add('name');
@@ -20,6 +21,7 @@ export function getUserModalDOM(photographer) {
   btnclose.addEventListener('click', closeModal);
   return formContact;
 }
+
 export function displayModal() {
   const h2s = modal.querySelectorAll('h2')
   h2s.forEach((title) => title.classList.remove('hidden'));
