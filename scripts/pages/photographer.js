@@ -2,7 +2,7 @@ import {
   photographerUrlId,
   getData,
   getPhotographer,
-  getMedias
+  getMedias,
 } from '../data/data.js';
 import PageMediaFactory from '../factories/pagemedia.js';
 import { getSelectMedia, sortingMedia } from '../utils/tagFiltrage.js';
@@ -43,9 +43,7 @@ async function initPage() {
   sortingMedia(photographer, media);
   // boxmedia if choice another selection
   const formSorting = document.querySelector('.form_sorting');
-  formSorting.addEventListener('change', () =>
-    sortingMedia(photographer, media)
-  );
+  formSorting.addEventListener('change', () => sortingMedia(photographer, media));
   Lightbox.initLightbox();
 }
 

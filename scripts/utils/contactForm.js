@@ -16,14 +16,16 @@ export function getUserModalDOM(photographer) {
     </div>`
   formContact.addEventListener('submit', (event) => {
     event.preventDefault();
+    // eslint-disable-next-line no-use-before-define
     logUserInformations();
-  }) 
+  });
+  // eslint-disable-next-line no-use-before-define
   btnclose.addEventListener('click', closeModal);
   return formContact;
 }
 
 export function displayModal() {
-  const h2s = modal.querySelectorAll('h2')
+  const h2s = modal.querySelectorAll('h2');
   h2s.forEach((title) => title.classList.remove('hidden'));
   modal.style.display = 'block';
   formContact.style.display = 'block';
@@ -36,15 +38,15 @@ function closeModal() {
   modal.style.display = 'none';
 }
 function logUserInformations() {
-  console.log('Données fournies par l\'utilisateur: ')
+  console.log('Données fournies par l\'utilisateur: ');
   for (let i = 0; i < entries.length; i++) {
-    console.log(`${formContact[i].title}: ${formContact[i].value}`)
+    console.log(`${formContact[i].title}: ${formContact[i].value}`);
   }
   for (let i = 0; i < entries.length; i++) {
     formContact[i].value = '';
   }
   formContact.style.display = 'none';
-  const h2s = modal.querySelectorAll('h2')
+  const h2s = modal.querySelectorAll('h2');
   h2s.forEach((title) => title.classList.add('hidden'));
   messageSend.classList.remove('hidden');
 }

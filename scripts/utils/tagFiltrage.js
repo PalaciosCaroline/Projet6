@@ -59,7 +59,8 @@ export function sortingMedia(photographer, media) {
       media = media.sort((a, b) => (a.title > b.title ? 1 : -1));
       displayDataPageMedia(photographer, media);
       break;
-    default :
+    default:
+      displayDataPageMedia(photographer, media);
       break;
   }
 }

@@ -8,7 +8,7 @@ async function displayData(photographers) {
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
   });
-};
+}
 async function init() {
   const data = await getData();
   const photographers = getPhotographers(data);

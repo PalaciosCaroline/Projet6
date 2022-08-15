@@ -5,18 +5,15 @@
  */
 export default class Lightbox {
   static initLightbox() {
-    const links = Array.from(
-      document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]')
-    );
+    const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
     const gallery = links.map((link) => link.getAttribute('href'));
     const titles = links.map((link) => link.getAttribute('title'));
 
     links.forEach((link) => link.addEventListener('click', (e) => {
       e.preventDefault();
       // eslint-disable-next-line no-new
-      new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), gallery, titles)
-    })
-    )
+      new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), gallery, titles);
+    }));
   }
 
   /*
@@ -65,9 +62,6 @@ export default class Lightbox {
   close(e) {
     e.preventDefault();
     this.element.classList.add('hidden');
-    window.setTimeout(() => {
-      this.element.parentElement.removeChild(this.element);
-    }, 500);
     document.removeEventListener('keyup', this.onkeyup);
   }
 
@@ -99,11 +93,12 @@ export default class Lightbox {
    *
    *@param {KeyBoardEvent} e
    */
+
   onKeyup(e) {
     if (e.key === 'Escape') {
       this.close(e);
     } else if (e.key === 'ArrowLeft') {
-      this.prev(e);
+      this.previous(e);
     } else if (e.key === 'ArrowRight') {
       this.next(e);
     }
