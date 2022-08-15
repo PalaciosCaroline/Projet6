@@ -3,8 +3,9 @@ import {displayDataPageMedia} from "../pages/photographer.js";
 export function getSelectMedia(photographer, media) {
   const filterMedia = document.createElement('div');
   document.body.appendChild(filterMedia);
-  filterMedia.parentNode.insertBefore(boxmedia,filterMedia.nextSibling);
-  filterMedia.innerHTML =  `
+  // const boxmedia = document.getElementById('box_media');
+  filterMedia.parentNode.insertBefore(boxmedia, filterMedia.nextSibling);
+  filterMedia.innerHTML = `
     <div class="sorting" aria-label="sélecteur de tri des medias">
       <h3>Trier par</h3>
       <div class="sorting_select">
@@ -30,46 +31,39 @@ export function getSelectMedia(photographer, media) {
       </div>
     </div>`;    
 }
-
 function inputChoice() {
   const formSorting = document.querySelector('.form_sorting');
- const ListLi = formSorting.querySelectorAll('li');
-//  const ul = formSorting.querySelector('ul')
-//   ul.addEventListener('mousedown', () => { 
-//     ListLi[0].display.border= "1px solid white";
-//     ListLi[1].display.border= "1px solid white"; 
-//   })
-
+  const ListLi = formSorting.querySelectorAll('li');
   ListLi.forEach(li => {
-  li.classList.remove('selected');
-  const input = li.querySelector('input');
-  console.log(ListLi);
-  console.log(input)
-  if (input.checked == true) {
-    li.classList.add('selected');
-    formSorting.target = input.title;
-    console.log(input.value)
-  }
+    li.classList.remove('selected');
+    const input = li.querySelector('input');
+    console.log(ListLi);
+    console.log(input)
+    if (input.checked == true) {
+      li.classList.add('selected');
+      formSorting.target = input.title;
+      console.log(input.value)
+    }
 })}
-   
-export function sortingMedia(photographer,media){
+export function sortingMedia(photographer,media) {
   const formSorting = document.querySelector('.form_sorting');
   const boxmedia = document.getElementById('boxmedia');
   inputChoice();
   boxmedia.innerHTML = '';
-
   switch (formSorting.target) {
     case 'popularity':
       media = media.sort((a, b) => b.likes - a.likes);
       displayDataPageMedia(photographer, media);
       break;
     case 'date':
-      media = media.sort((a, b) => b.date > a.date ? 1 : -1);
+      media = media.sort((a, b) => (b.date > a.date ? 1 : -1));
       displayDataPageMedia(photographer, media);
       break;
     case 'titre':
-      media = media.sort((a, b) => a.title > b.title ? 1 : -1);
+      media = media.sort((a, b) => (a.title > b.title ? 1 : -1));
       displayDataPageMedia(photographer, media);
       break;
-  }     
+    default :
+      break;
+  }
 }
