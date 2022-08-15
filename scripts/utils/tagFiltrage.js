@@ -1,9 +1,9 @@
-import {displayDataPageMedia} from "../pages/photographer.js";
+import { displayDataPageMedia } from '../pages/photographer.js';
 
-export function getSelectMedia(photographer, media) {
+export function getSelectMedia() {
   const filterMedia = document.createElement('div');
   document.body.appendChild(filterMedia);
-  // const boxmedia = document.getElementById('box_media');
+  const boxmedia = document.getElementById('boxmedia');
   filterMedia.parentNode.insertBefore(boxmedia, filterMedia.nextSibling);
   filterMedia.innerHTML = `
     <div class="sorting" aria-label="sélecteur de tri des medias">
@@ -14,7 +14,6 @@ export function getSelectMedia(photographer, media) {
                 <i id="icon_up" class="fas fa-chevron-up"></i>
                 <i id="icon_down" class="fas fa-chevron-down"></i>
               <li class='selected inactive menu' tabindex="0"  aria-label="popularité">
-                
                 <input type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" >
                 <label for="popularity">Popularité</label>
               </li>
@@ -29,23 +28,20 @@ export function getSelectMedia(photographer, media) {
             </ul>
         </form>
       </div>
-    </div>`;    
+    </div>`;
 }
 function inputChoice() {
   const formSorting = document.querySelector('.form_sorting');
   const ListLi = formSorting.querySelectorAll('li');
-  ListLi.forEach(li => {
+  ListLi.forEach((li) => {
     li.classList.remove('selected');
     const input = li.querySelector('input');
-    console.log(ListLi);
-    console.log(input)
-    if (input.checked == true) {
+    if (input.checked === true) {
       li.classList.add('selected');
       formSorting.target = input.title;
-      console.log(input.value)
     }
 })}
-export function sortingMedia(photographer,media) {
+export function sortingMedia(photographer, media) {
   const formSorting = document.querySelector('.form_sorting');
   const boxmedia = document.getElementById('boxmedia');
   inputChoice();

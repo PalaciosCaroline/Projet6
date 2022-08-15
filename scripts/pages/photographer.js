@@ -1,58 +1,54 @@
-import { photographerUrlId, getData, getPhotographer, getMedias, updateTotalLikes } from '../data/data.js';
-import { getSelectMedia, sortingMedia } from "../utils/tagFiltrage.js";
-import { Lightbox } from '../utils/lightbox.js';
-import { getUserModalDOM, displayModal } from "../utils/contactForm.js";
-const counterLikes = document.getElementById('counterLikes');
- //header photograph
+import {
+  photographerUrlId,
+  getData,
+  getPhotographer,
+  getMedias,
+  updateTotalLikes,
+} from '../data/data.js';
+import { getSelectMedia, sortingMedia } from '../utils/tagFiltrage.js';
+import Lightbox from '../utils/lightbox.js';
+import { getUserModalDOM, displayModal } from '../utils/contactForm.js';
+// header photograph
 export async function displayDataPageHeader(photographer, data) {
-  const mediaModel = PageMediaFactory(photographer, data)
-  const getUserHeaderDOM = mediaModel.getUserHeaderDOM()
-  //A finir modal contact
-  const h2 = document.querySelector('#contact_modal > h2')
-  getUserModalDOM(photographer)
-  const formContact = document.getElementById('form_contact')
-  formContact.addEventListener('submit', (event) => {
-    event.preventDefault()
-  }) 
+  const mediaModel = PageMediaFactory(photographer, data);
+  const getUserHeaderDOM = mediaModel.getUserHeaderDOM();
+  // modal contact
+  getUserModalDOM(photographer);
 }
 export async function displayDataPageMedia(photographer, media) {
-  const boxmedia = document.getElementById('boxmedia');
+  const boxmedia = document.getElementById("boxmedia");
   const mediaModel = PageMediaFactory(photographer, media);
-  // const TotalLikes = media.map(item => item.likes).reduce((prev, curr) => prev + curr, 0)
   // box card media
   media.forEach((item) => {
     const mediaModelCard = PageMediaFactory(photographer, item);
-    const getMediaCardDOM = mediaModelCard.getMediaCardDOM()
+    const getMediaCardDOM = mediaModelCard.getMediaCardDOM();
     boxmedia.appendChild(getMediaCardDOM);
-  })
-  // étiquette du bas de page avec le Total des likes et du tarif/jour du photograph
+  });
+  // footer label with Total likes and photographer's rate/day
   const TotalLikeArticle = mediaModel.getTotalLikes();
-  boxmedia.appendChild(TotalLikeArticle)
+  boxmedia.appendChild(TotalLikeArticle);
 }
 
 async function initPage() {
-  // const photographer = await getPhotographer(photographerUrlId);
-  // const media = await getMedias(photographerUrlId);
   const data = await getData();
   const photographer = getPhotographer(data, photographerUrlId);
   const media = getMedias(data, photographerUrlId);
-
   // header page title
-  document.title = `Fisheye - ${photographer.name}`
+  document.title = `Fisheye - ${photographer.name}`;
   // creation page
-  displayDataPageHeader(photographer, media);  
-  getSelectMedia(photographer, media);
-
+  displayDataPageHeader(photographer, media);
+  getSelectMedia();
   // boxmedia with popularity default choice
   sortingMedia(photographer, media);
   // boxmedia if choice another selection
   const formSorting = document.querySelector('.form_sorting');
-  formSorting.addEventListener('change', () => sortingMedia(photographer, media));
+  formSorting.addEventListener('change', () =>
+    sortingMedia(photographer, media)
+  );
   Lightbox.initLightbox();
 }
 initPage();
 function PageMediaFactory(photograph, data) {
-  // const imgHeart = `../assets/icons/heart`;
   const pictureVideo = `../assets/${data.photographerId}/${data.video}`;
   const pictureImg = `../assets/${data.photographerId}/${data.image}`;
   const picture = `assets/photographers/photographers_ID_Photos/${photograph.portrait}`;
@@ -75,17 +71,17 @@ function PageMediaFactory(photograph, data) {
     article.appendChild(h3);
     article.appendChild(legende);
     header.appendChild(imgChoisi);
-    imgChoisi.parentNode.insertBefore(contactbtn,imgChoisi);
+    imgChoisi.parentNode.insertBefore(contactbtn, imgChoisi);
     contactbtn.addEventListener('click', displayModal);
-    return (article);
+    return article;
   }
   function getMediaCardDOM() {
     const article = document.createElement('article');
     article.classList.add('card');
-    const divmedia = document.createElement('div'); 
+    const divmedia = document.createElement('div');
     divmedia.classList.add('card_media');
     article.appendChild(divmedia);
-    const a = document.createElement('a'); 
+    const a = document.createElement('a');
     divmedia.appendChild(a);
     a.rel = 'lightbox';
     a.id = data.id;
@@ -106,7 +102,7 @@ function PageMediaFactory(photograph, data) {
       imgphoto.setAttribute('controls', true);
       a.appendChild(imgphoto);
     }
-    const divtext = document.createElement('div'); 
+    const divtext = document.createElement('div');
     divtext.classList.add('card_text');
     const titlemedia = document.createElement('h2');
     titlemedia.textContent = data.title;
@@ -117,7 +113,7 @@ function PageMediaFactory(photograph, data) {
     btnLiketitle.classList.add('likestitle');
     btnLiketitle.textContent = data.likes;
     const heart = document.createElement('i');
-    heart.className = ('far fa-heart heart');
+    heart.className = 'far fa-heart heart';
     heart.ariaHidden = true;
 
     article.appendChild(divtext);
@@ -125,23 +121,25 @@ function PageMediaFactory(photograph, data) {
     divtext.appendChild(btnLikes);
     btnLikes.appendChild(btnLiketitle);
     btnLikes.appendChild(heart);
-    btnLikes.addEventListener('click', () => { 
+    btnLikes.addEventListener('click', () => {
       if (btnLikes.dataset.liked !== 'true') {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) + 1;
         btnLikes.dataset.liked = true;
-        heart.className = ('fas fa-heart heart');
+        heart.className = 'fas fa-heart heart';
         updateTotalLikes(+1);
       } else {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) - 1;
-        heart.className = ('far fa-heart heart');
-        btnLikes.dataset.liked = false;  
+        heart.className = 'far fa-heart heart';
+        btnLikes.dataset.liked = false;
         updateTotalLikes(-1);
       }
-    })
-    return (article);
+    });
+    return article;
   }
   function getTotalLikes() {
-    const totallikes = data.map((item) => item.likes).reduce((prev, curr) => prev + curr, 0);
+    const totallikes = data
+      .map((item) => item.likes)
+      .reduce((prev, curr) => prev + curr, 0);
 
     const TotalLikessum = document.createElement('article');
     const divlike = document.createElement('div');
@@ -149,7 +147,7 @@ function PageMediaFactory(photograph, data) {
     const totalLiketitle = document.createElement('span');
     totalLiketitle.classList.add('totalLikesTitle');
     totalLiketitle.textContent = totallikes;
-    const heart2 = document.createElement( 'img' );
+    const heart2 = document.createElement('img');
     heart2.setAttribute('src', '../assets/icons/heartblack.png');
     heart2.alt = 'likes';
     const pricejour = document.createElement('span');
@@ -158,8 +156,7 @@ function PageMediaFactory(photograph, data) {
     divlike.appendChild(totalLiketitle);
     divlike.appendChild(heart2);
     TotalLikessum.appendChild(pricejour);
-    return (TotalLikessum);
+    return TotalLikessum;
   }
-  return { getUserHeaderDOM, getMediaCardDOM, getTotalLikes }
+  return { getUserHeaderDOM, getMediaCardDOM, getTotalLikes };
 }
-
