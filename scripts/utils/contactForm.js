@@ -13,7 +13,7 @@ export function getUserModalDOM(photographer) {
   h2.textContent = photographer.name;
   header.appendChild(h2);
   messageSend.innerHTML = `<div id="message_send" class="block">Merci<br>Votre message a bien été envoyé à <br>${photographer.name}.         
-    </div>`
+    </div>`;
   formContact.addEventListener('submit', (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-use-before-define

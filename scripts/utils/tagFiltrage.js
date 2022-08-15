@@ -40,24 +40,26 @@ function inputChoice() {
       li.classList.add('selected');
       formSorting.target = input.title;
     }
-})}
+  });
+}
 export function sortingMedia(photographer, media) {
   const formSorting = document.querySelector('.form_sorting');
   const boxmedia = document.getElementById('boxmedia');
   inputChoice();
   boxmedia.innerHTML = '';
+  let newMedia;
   switch (formSorting.target) {
     case 'popularity':
-      media = media.sort((a, b) => b.likes - a.likes);
-      displayDataPageMedia(photographer, media);
+      newMedia = media.sort((a, b) => b.likes - a.likes);
+      displayDataPageMedia(photographer, newMedia);
       break;
     case 'date':
-      media = media.sort((a, b) => (b.date > a.date ? 1 : -1));
-      displayDataPageMedia(photographer, media);
+      newMedia = media.sort((a, b) => (b.date > a.date ? 1 : -1));
+      displayDataPageMedia(photographer, newMedia);
       break;
     case 'titre':
-      media = media.sort((a, b) => (a.title > b.title ? 1 : -1));
-      displayDataPageMedia(photographer, media);
+      newMedia = media.sort((a, b) => (a.title > b.title ? 1 : -1));
+      displayDataPageMedia(photographer, newMedia);
       break;
     default:
       displayDataPageMedia(photographer, media);
