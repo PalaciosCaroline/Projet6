@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/PalaciosCaroline/Projet6/issues"
   },
-  "homepage": "https://github.com/PalaciosCaroline/Projet6#readme"
+  "homepage": "https://github.com/PalaciosCaroline/Projet6#readme",
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
 }
