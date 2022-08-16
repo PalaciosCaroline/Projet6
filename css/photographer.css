@@ -52,9 +52,9 @@
     cursor: pointer;
 }
 
-.contact_button:hover,
-.contact_button:focus,
-.contact_button:active{
+.photograph-header .contact_button:hover,
+.photograph-header .contact_button:focus,
+.photograph-header .contact_button:active{
     background-color: #DB8876;
     color:#000000;
 }
@@ -469,6 +469,7 @@
 #lightbox button:hover{
 cursor : pointer;
 }
+
 #lightbox button:hover i{
 transform : scale(1.2);
 }
