@@ -38,7 +38,7 @@ function closeModal() {
   modal.style.display = 'none';
 }
 function logUserInformations() {
-  // eslint-disable-next-line no-plusplus
+  // eslint-disable-next-line no-plusplus, no-console
   console.log('Données fournies par l\'utilisateur: ');
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < entries.length; i++) {
