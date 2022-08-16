@@ -372,14 +372,41 @@
     padding-left: 8px;
 }
 
-#boxmedia .card button:focus .heart,
-#boxmedia .card button:active .heart{
+#boxmedia .card .heart.effectBig{
     animation : big 0.3s ease-in-out;
 }
 
+#boxmedia .card .heart.effectSmall{
+    animation : small 0.4s ease-in-out;
+}
+
 @keyframes big {
-    50% {
+    0% {
+        transform: scale(1);
+    }
+    25% {
         transform: scale(1.8);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    75% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes small {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.6);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 

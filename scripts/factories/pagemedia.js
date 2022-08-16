@@ -78,11 +78,15 @@ export default function PageMediaFactory(photograph, data) {
       if (btnLikes.dataset.liked !== 'true') {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) + 1;
         btnLikes.dataset.liked = true;
+        heart.classList.remove('effectSmall');
         heart.className = 'fas fa-heart heart';
+        heart.classList.add('effectBig');
         updateTotalLikes(+1);
       } else {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) - 1;
+        heart.classList.remove('effectBig');
         heart.className = 'far fa-heart heart';
+        heart.classList.add('effectSmall');
         btnLikes.dataset.liked = false;
         updateTotalLikes(-1);
       }
