@@ -43,7 +43,6 @@ export default class Lightbox {
       image.classList.add('media');
       image.alt = this.title;
       image.src = url;
-      image.ariaLabel = title;
     } else if (url.includes('mp4')) {
       const video = document.createElement('video');
       boxMedia.appendChild(video);

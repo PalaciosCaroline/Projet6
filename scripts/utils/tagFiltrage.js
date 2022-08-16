@@ -10,7 +10,7 @@ export function getSelectMedia() {
     <div class="sorting" aria-label="sélecteur de tri des medias">
       <h3>Trier par</h3>
       <div class="sorting_select">
-        <form class="form_sorting">    
+        <form class="form_sorting" aria-label="Order by">    
             <ul tabindex="0"  aria-label="Trier les photos">
                 <i id="icon_up" class="fas fa-chevron-up"></i>
                 <i id="icon_down" class="fas fa-chevron-down"></i>

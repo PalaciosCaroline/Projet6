@@ -9,9 +9,9 @@ export default function PageMediaFactory(photograph, data) {
     const header = document.querySelector('.photograph-header');
     const contactbtn = document.querySelector('button');
     const article = document.createElement('article');
-    const h2 = document.createElement('h2');
+    const h2 = document.createElement('h1');
     h2.textContent = photograph.name;
-    const h3 = document.createElement('h3');
+    const h3 = document.createElement('h2');
     h3.textContent = `${photograph.city}, ${photograph.country}`;
     const legende = document.createElement('p');
     legende.textContent = photograph.tagline;
@@ -37,7 +37,7 @@ export default function PageMediaFactory(photograph, data) {
     const a = document.createElement('a');
     divmedia.appendChild(a);
     a.rel = 'lightbox';
-    a.id = data.id;
+    a.ariaLabel = `${data.title}, closeup view`;
     a.title = data.title;
     if (data.image) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.image}`);
@@ -63,9 +63,10 @@ export default function PageMediaFactory(photograph, data) {
     const btnLiketitle = document.createElement('span');
     btnLiketitle.classList.add('likestitle');
     btnLiketitle.textContent = data.likes;
+    btnLiketitle.ariaLabel = 'nombre de likes';
     const heart = document.createElement('i');
     heart.className = 'far fa-heart heart';
-    heart.ariaHidden = true;
+    heart.ariaLabel = 'likes';
 
     article.appendChild(divtext);
     divtext.appendChild(titlemedia);
