@@ -49,6 +49,7 @@ export default class Lightbox {
       boxMedia.appendChild(video);
       video.ariaLabel = title;
       video.setAttribute('controls', true);
+      video.setAttribute('autoplay', true);
       video.classList.add('videomedia');
       video.src = url;
     }

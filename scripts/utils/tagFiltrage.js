@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { displayDataPageMedia } from '../pages/photographer.js';
 
 export function getSelectMedia() {
@@ -14,11 +15,11 @@ export function getSelectMedia() {
                 <i id="icon_up" class="fas fa-chevron-up"></i>
                 <i id="icon_down" class="fas fa-chevron-down"></i>
               <li class='selected inactive menu' tabindex="0"  aria-label="popularité">
-                <input type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" >
+                <input type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>
                 <label for="popularity">Popularité</label>
               </li>
               <li class='inactive menu' tabindex="0" aria-label="date">
-                <input type="radio" id="date" value="date" name="sorting_option" title="date" checked>
+                <input type="radio" id="date" value="date" name="sorting_option" title="date">
                 <label for="date">Date</label>
               </li>
               <li class='inactive menu' tabindex="0" aria-label="titre">

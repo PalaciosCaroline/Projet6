@@ -413,15 +413,12 @@
     z-index :99;
     top :0 ; 
     height: 100%;
-    width: 100%;
-    background-color: 	rgba(255,105,180, 0.5); 
-    background-color: 	#fff; 
+    width: 100%; 
+    background-color:#fff; 
     z-index: 102;
-    transition: opacity 0.2s;
 }
 
 #lightbox.hidden{
-    opacity : 0;
     display:none;
 }
 
@@ -442,12 +439,12 @@
     color : #901C1C;
     background-color: #fff;
     border : none;
-    top : 18%;
+    top : 23%;
     width: 9%;
     position:fixed;
     z-index:11;
     cursor : pointer;
-    height: 70%;
+    height: 60%;
 
 }
 
@@ -460,14 +457,13 @@
     color : #901C1C;
     background-color: #fff;
     position:fixed;
-    right: 4%;
+    right: 4.5%;
     height: 60px;
     top: 10%;
     width: 8vw;
     border : none;
     font-size: 3rem;
     cursor : pointer;
-   animation : lightboxInOpacity 0.5s ;
 }
 
 #lightbox button:hover{

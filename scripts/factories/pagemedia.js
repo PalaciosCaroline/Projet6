@@ -87,7 +87,7 @@ export default function PageMediaFactory(photograph, data) {
       }
     });
     return article;
-}
+  }
 
   function getTotalLikes() {
     const totallikes = data

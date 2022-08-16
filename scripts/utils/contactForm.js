@@ -38,10 +38,14 @@ function closeModal() {
   modal.style.display = 'none';
 }
 function logUserInformations() {
+  // eslint-disable-next-line no-plusplus
   console.log('Données fournies par l\'utilisateur: ');
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < entries.length; i++) {
+    // eslint-disable-next-line no-console
     console.log(`${formContact[i].title}: ${formContact[i].value}`);
   }
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < entries.length; i++) {
     formContact[i].value = '';
   }

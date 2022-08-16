@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import {
   photographerUrlId,
   getData,
   getPhotographer,
   getMedias,
 } from '../data/data.js';
-import PageMediaFactory from '../factories/pagemedia.js';
 import { getSelectMedia, sortingMedia } from '../utils/tagFiltrage.js';
+import PageMediaFactory from '../factories/pagemedia.js';
 import Lightbox from '../utils/lightbox.js';
 import { getUserModalDOM } from '../utils/contactForm.js';
 
