@@ -25,5 +25,5 @@ export default function photographerFactory(data) {
     article.appendChild(prices);
     return (article);
   }
-  return (name, picture, city, country, tagline, price, getUserCardDOM);
+  return {name, picture, city, country, tagline, price, getUserCardDOM};
 }
