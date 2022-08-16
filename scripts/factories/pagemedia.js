@@ -9,10 +9,10 @@ export default function PageMediaFactory(photograph, data) {
     const header = document.querySelector('.photograph-header');
     const contactbtn = document.querySelector('button');
     const article = document.createElement('article');
-    const h2 = document.createElement('h1');
-    h2.textContent = photograph.name;
-    const h3 = document.createElement('h2');
-    h3.textContent = `${photograph.city}, ${photograph.country}`;
+    const h1 = document.createElement('h1');
+    h1.textContent = photograph.name;
+    const h2 = document.createElement('h2');
+    h2.textContent = `${photograph.city}, ${photograph.country}`;
     const legende = document.createElement('p');
     legende.textContent = photograph.tagline;
     const imgChoisi = document.createElement('img');
@@ -20,8 +20,8 @@ export default function PageMediaFactory(photograph, data) {
     imgChoisi.alt = photograph.name;
     header.appendChild(article);
     article.appendChild(imgChoisi);
+    article.appendChild(h1);
     article.appendChild(h2);
-    article.appendChild(h3);
     article.appendChild(legende);
     header.appendChild(imgChoisi);
     imgChoisi.parentNode.insertBefore(contactbtn, imgChoisi);
@@ -44,6 +44,7 @@ export default function PageMediaFactory(photograph, data) {
       const imgphoto = document.createElement('img');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute('src', pictureImg);
+      imgphoto.alt = data.title;
       a.appendChild(imgphoto);
     } else if (data.video) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.video}`);
@@ -55,15 +56,14 @@ export default function PageMediaFactory(photograph, data) {
     }
     const divtext = document.createElement('div');
     divtext.classList.add('card_text');
-    const titlemedia = document.createElement('h2');
+    const titlemedia = document.createElement('h3');
     titlemedia.textContent = data.title;
     const btnLikes = document.createElement('button');
     btnLikes.classList.add('btnLikes');
-    btnLikes.setAttribute('aria-description', 'bouton pour liker la photo');
+    btnLikes.ariaLabel = 'bouton pour liker la photo';
     const btnLiketitle = document.createElement('span');
     btnLiketitle.classList.add('likestitle');
     btnLiketitle.textContent = data.likes;
-    btnLiketitle.ariaLabel = 'nombre de likes';
     const heart = document.createElement('i');
     heart.className = 'far fa-heart heart';
     heart.ariaLabel = 'likes';
