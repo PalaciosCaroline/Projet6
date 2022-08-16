@@ -78,7 +78,14 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    animation : slideForm 0.6s ease-out;
 }
+
+@keyframes slideForm {
+    0%{transform: translatey(-100%)}
+    100% {transform:  translatey(0)}
+} 
+
 
 .modal header {
     height: auto;
@@ -490,7 +497,7 @@ transform : scale(1.2);
     width: 100%;
     object-fit: cover; 
     object-position: center 35%; 
-    animation : slideEffect 0.4s ease-in-out;
+    animation : slideEffect 0.5s ease-in-out;
 }
 
 @keyframes slideEffect {
@@ -502,13 +509,13 @@ transform : scale(1.2);
     width :100%;
     height: 100%; 
     object-fit: cover;  
-    animation : slideEffect 0.4s ease-in-out;;
+    animation : slideEffect 0.5s ease-in-out;;
 }
 
 #lightbox .box_text{
    width: 100%;
    height: 10%;
-   animation : showText 0.5s ease-in-out; 
+   animation : showText 0.6s ease-in-out; 
 }
 
 @keyframes showText {
