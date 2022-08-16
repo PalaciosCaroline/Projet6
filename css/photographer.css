@@ -301,7 +301,7 @@
 } 
 
 @media screen and (max-width: 500px){
-    section #boxmedia{
+    #boxmedia{
         flex-direction: column;
         margin: auto;
     }
