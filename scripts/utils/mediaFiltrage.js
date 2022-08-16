@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
-import { displayDataPageMedia } from '../pages/photographer.js';
+// import { displayDataPageMedia } from '../pages/photographer.js';
+import PageMediaFactory from '../factories/pagemedia.js';
 
 export function getSelectMedia() {
   const filterMedia = document.createElement('div');
@@ -43,6 +44,21 @@ function inputChoice() {
     }
   });
 }
+
+export async function displayDataPageMedia(photographer, media) {
+  const boxmedia = document.getElementById('boxmedia');
+  const mediaModel = PageMediaFactory(photographer, media);
+  // box card media
+  media.forEach((item) => {
+    const mediaModelCard = PageMediaFactory(photographer, item);
+    const getMediaCardDOM = mediaModelCard.getMediaCardDOM();
+    boxmedia.appendChild(getMediaCardDOM);
+  });
+  // footer label with Total likes and photographer's rate/day
+  const TotalLikeArticle = mediaModel.getTotalLikes();
+  boxmedia.appendChild(TotalLikeArticle);
+}
+
 export function sortingMedia(photographer, media) {
   const formSorting = document.querySelector('.form_sorting');
   const boxmedia = document.getElementById('boxmedia');

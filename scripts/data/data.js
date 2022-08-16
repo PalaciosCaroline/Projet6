@@ -12,12 +12,12 @@ export async function getData() {
 }
 
 export function getPhotographers(data) {
-  const photographers = data.photographers;
+  const { photographers } = data;
   return photographers;
 }
 
 export function getPhotographer(data, id) {
-  const photographers = data.photographers;
+  const { photographers } = data;
   const photographer = photographers.find((item) => item.id == id);
   console.log(photographer);
   return photographer;
