@@ -373,11 +373,11 @@
 }
 
 #boxmedia .card .heart.effectBig{
-    animation : big 0.3s ease-in-out;
+    animation : big 0.4s ease-in-out;
 }
 
 #boxmedia .card .heart.effectSmall{
-    animation : small 0.4s ease-in-out;
+    animation : small 0.2s ease-in-out;
 }
 
 @keyframes big {
@@ -385,7 +385,7 @@
         transform: scale(1);
     }
     25% {
-        transform: scale(1.8);
+        transform: scale(1.6);
     }
     50% {
         transform: scale(0.8);
