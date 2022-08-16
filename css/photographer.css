@@ -263,10 +263,7 @@
 .sorting ul:hover .fa-chevron-up{
     display: block;
 } 
-
 /**/
-
-
 #boxmedia{
     display: flex;
     flex-wrap: wrap;
@@ -287,8 +284,6 @@
     #boxmedia .card{
         width :47%; 
         height: calc(320 + 60); 
-        /* width :40vw; */
-        /* height: calc(40vw + 60px);   */
     }
     #boxmedia .card_media{
         width :100%; 
@@ -296,7 +291,6 @@
         /* height: 40vw; */
         overflow: hidden;
     }
-
 } 
 
 @media screen and (max-width: 500px){
@@ -316,7 +310,6 @@
     }
 } 
 
-
 #boxmedia .card_media{
     width :100%; 
     height: 300px;
@@ -328,6 +321,7 @@
     width :100%;
     height: 100%; 
     object-fit: cover;  
+    object-position: center 35%; 
 }
 
 #boxmedia .card video{
@@ -445,7 +439,6 @@
     z-index:11;
     cursor : pointer;
     height: 60%;
-
 }
 
 .lightbox_next i,
@@ -490,37 +483,39 @@ transform : scale(1.2);
     height: 90%; 
     width: 100%;
     overflow: hidden;
-     animation : lightboxInOpacity 0.3s ;
 }
 
 .lightbox_container .media{
     height: 100%;
     width: 100%;
-    object-position: 50% 40%;
     object-fit: cover; 
+    object-position: center 35%; 
+    animation : slideEffect 0.4s ease-in-out;
 }
-/* .lightbox_container .media.hidden{
-    animation : hiddeno 0.6s;
-} */
-/* 
-@keyframes hiddeno {
-    50% {transform: scale(0.2);
-        opacity :0.5}
-100% {transform: scale(1);
-    opacity :1}
-} */
+
+@keyframes slideEffect {
+    0%{transform: translate(100%, -100%)}
+100% {transform:  translate(0, 0)}
+} 
 
 .lightbox_container .videomedia{
     width :100%;
     height: 100%; 
     object-fit: cover;  
+    animation : slideEffect 0.4s ease-in-out;;
 }
-
 
 #lightbox .box_text{
    width: 100%;
    height: 10%;
+   animation : showText 0.5s ease-in-out; 
 }
+
+@keyframes showText {
+    0%{opacity: 0}
+100% {opacity: 1}
+} 
+
 #lightbox h3{
     color : #901C1C;
     font-size: 2rem;

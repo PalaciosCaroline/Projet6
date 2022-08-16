@@ -5,7 +5,6 @@ import {
   getPhotographer,
   getMedias,
 } from '../data/data.js';
-// eslint-disable-next-line import/no-cycle
 import { getSelectMedia, sortingMedia } from '../utils/mediaFiltrage.js';
 import PageMediaFactory from '../factories/pagemedia.js';
 import Lightbox from '../utils/lightbox.js';

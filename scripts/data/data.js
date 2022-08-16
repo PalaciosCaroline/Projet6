@@ -19,14 +19,18 @@ export function getPhotographers(data) {
 export function getPhotographer(data, id) {
   const { photographers } = data;
   const photographer = photographers.find((item) => item.id == id);
-  console.log(photographer);
+  // log(test)
+  // eslint-disable-next-line no-console
+  console.log('photographe choisi :', photographer);
   return photographer;
 }
 
-export function getMedias(data,photographerId) {
+export function getMedias(data, photographerId) {
   const medias = data.media;
   const media = medias.filter((item) => item.photographerId == photographerId);
-  console.log(media);
+  // log(test)
+  // eslint-disable-next-line no-console
+  console.log('médias du photographe', media);
   return media;
 }
 
