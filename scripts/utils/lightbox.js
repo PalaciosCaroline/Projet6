@@ -114,13 +114,13 @@ export default class Lightbox {
     dom.innerHTML = `
     <div id="lightbox" role=”dialog" aria-label=”image closeup view”>
         <nav>
-            <button class="lightbox_close" aria-label="fermeture de la lightbox">
+            <button class="lightbox_close" aria-label="close dialog">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <button class="lightbox_next" aria-label="média suivant">
+            <button class="lightbox_next" aria-label="next image">
                 <i class="fas fa-chevron-right"></i>
             </button>
-            <button class="lightbox_previous" aria-label="média précédent">
+            <button class="lightbox_previous" aria-label="prvious image">
                 <i class="fas fa-chevron-left"></i>
             </button>
         </nav>

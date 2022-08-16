@@ -10,79 +10,43 @@
   </head>
   <body>
     <header>
-      <a href="index.html" alt="Fisheye Home page"><img src="assets/images/logo.png" class="logo" /></a>
+      <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
     </header>
+  
     <main id="main">
-      <div class="photograph-header">
+      <header class="photograph-header">
         <button class="contact_button">Contactez-moi</button>
-      </div>
-    </main>
-
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg"/>
-        </header>
-        <div id="message_send" class="block">Merci<br>Votre message a bien été envoyé à 
-          
-        </div> 
-				<form id="form_contact" aria-label="formulaire de contact avec le photographe">
-					<div>
-						<label for="prenom">Prénom</label>
-						<input class="form_input entry" type="text" id="prenom" name="prenom" title="prenom" required/>
-						<label for="nom">Nom</label>
-						<input class="form_input entry" type="text" id="nom" name="nom" title="nom" required/>
-						<label for="email">Email</label>
-						<input class="form_input entry" type="email" id="email" name="email" title="email" required/>
-            <label for="message">Message</label>
-            <textarea class="form_textarea entry" rows="5" id="message" name="message" title="message" required></textarea>
-					</div>
-          <button class="contact_button" type="submit">Envoyer</button>
-				</form>
-			</div>
-		</div>
-
-    <section id="boxmedia">
-      <!-- <div id="counterLikes"></div> -->
-    </section>
-
-  <!-- <div id="lightbox">
-    <nav>
-      <button class="lightbox_close" aria-label="fermeture de la lightbox" onclick="closelightbox()"> 
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <button class="lightbox_next" aria-label="média suivant">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-      <button class="lightbox_previous" aria-label="média précédent">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-    </nav>
-    <div class="lightbox_container">
-      <img class="media" src="" alt="">
-    </div>
-  </div>  -->
-
-
-<!--  
-     <div id="lightbox" aria-label="modal de lecture de media" tabindex="0">
-      <div class="modal">
-        <img src="assets/icons/close.svg" onclick="closelightbox()" />
-        <nav>
-          <div class="previous" aria-label="média précédent"><i class="fas fa-chevron-left"></i></div>
-          <div class="box_screen">
-            <img class="media"/>    
-          </div>
-          <div class="next" aria-label="média suivant"><i class="fas fa-chevron-right"></i></div>
-        </nav>
-      </div>
-    </div> 
-  -->
-    <!-- <script  src="scripts/utils/lightbox.js"></script>   -->
-    <script  src="scripts/pages/photographer.js" type="module"></script>
-    <!-- <script  src="scripts/utils/contactForm.js"></script> -->
+      </header>
    
+
+      <div id="contact_modal">
+        <div class="modal">
+          <header>
+            <h2>Contactez-moi</h2>
+            <img src="assets/icons/close.svg" role='button' aria-label='close contact form'/>
+          </header>
+          <div id="message_send" class="block">Merci<br>Votre message a bien été envoyé à 
+          </div> 
+          <form id="form_contact" aria-label="formulaire de contact avec le photographe">
+            <div>
+              <label for="Firstname" id="Firstname">Prénom</label>
+              <input class="form_input entry" type="text" id="Firstname" name="prenom" title="prenom" aria-labelledby="Firstname" required/>
+              <label for="nom" id="Lastname">Nom</label>
+              <input class="form_input entry" type="text" id="Lastname" name="nom" title="nom" aria-labelledby="Lastname" required/>
+              <label for="email" id="email">Email</label>
+              <input class="form_input entry" type="email" id="email" name="email" title="email" aria-labelledby="email" required/>
+              <label for="message" id="your_message">Message</label>
+              <textarea class="form_textarea entry" rows="5" id="message" name="message" title="message" aria-labelledby="your_message" required></textarea>
+            </div>
+            <button class="contact_button" type="submit" role="button" aria-labelledby="send">Envoyer</button>
+          </form>
+        </div>
+      </div>
+
+      <section id="boxmedia">
+      </section>
+    </main>
+    <script  src="scripts/pages/photographer.js" type="module"></script>
   </body>
 </html>
 
