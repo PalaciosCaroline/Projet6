@@ -48,10 +48,13 @@ export default function PageMediaFactory(photograph, data) {
       a.appendChild(imgphoto);
     } else if (data.video) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.video}`);
+      const iconVideo = document.createElement('icon');
+      divmedia.appendChild(iconVideo);
+      iconVideo.className = 'fa-regular fa-circle-play iconVideo';
       const imgphoto = document.createElement('video');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute('src', pictureVideo);
-      imgphoto.setAttribute('controls', true);
+      // imgphoto.setAttribute('controls', 'false');
       a.appendChild(imgphoto);
     }
     const divtext = document.createElement('div');

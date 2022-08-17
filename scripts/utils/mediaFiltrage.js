@@ -11,23 +11,25 @@ export function getSelectMedia() {
     <div class="sorting" aria-label="sélecteur de tri des medias">
       <h3>Trier par</h3>
       <div class="sorting_select">
-        <form class="form_sorting" aria-label="Order by">    
-            <ul tabindex="0"  aria-label="Trier les photos">
+        <form class="form_sorting" aria-label="trier par"> 
+          <fieldset class="c-group" aria-label="Trier les photos">
+            <ul tabindex="0">
                 <i id="icon_up" class="fas fa-chevron-up"></i>
                 <i id="icon_down" class="fas fa-chevron-down"></i>
-              <li class='selected inactive menu' tabindex="0"  aria-label="popularité">
-                <input type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>
+              <li class='selected formLi menu' c-group__item aria-label="popularité">
+                <input tabindex="0" type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>
                 <label for="popularity">Popularité</label>
               </li>
-              <li class='inactive menu' tabindex="0" aria-label="date">
-                <input type="radio" id="date" value="date" name="sorting_option" title="date">
+              <li class='formLi menu c-group__item' aria-label="date">
+                <input tabindex="0" type="radio" id="date"  value="date" name="sorting_option" title="date">
                 <label for="date">Date</label>
               </li>
-              <li class='inactive menu' tabindex="0" aria-label="titre">
-                <input type="radio" id="titre" value="titre" name="sorting_option" title="titre" >
+              <li class='formLi menu c-group__item' aria-label="titre">
+                <input tabindex="0" type="radio" id="titre" value="titre" name="sorting_option" title="titre" >
                 <label for="titre">Titre</label>
               </li>
             </ul>
+          </fieldset>
         </form>
       </div>
     </div>`;

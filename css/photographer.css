@@ -6,23 +6,27 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 7%;
-}
-
-.photograph-header {
     display : flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 20px 4% 20px 4%;
 }
 
 .photograph-header h1{
     color: #D3573C;
     font-size: 2.7rem;
+    margin-top: 0;
 }
 .photograph-header h2{
     color : #901c1c;
     font-weight: 500;
     font-size : 1.2rem;
 }
-
+/* .photograph-header .divPortrait{
+    height: 200px;
+    width: 200px;
+} */
 .photograph-header img{
     height: 200px;
     width: 200px;
@@ -30,13 +34,46 @@
     object-fit: cover;
 }
 
-.photograph-header{
-    display : flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left : 4%;
-    padding-right : 4%;
+header{
+box-sizing: border-box;
 }
+
+@media screen and (max-width: 980px){
+    .photograph-header {
+        padding-bottom : 20px;
+        margin-bottom : 30px;
+        padding-top: 30px;
+        height: 350px;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+    .photograph-header .divPortrait{
+        width: 50%;
+    }
+    .contact_button {
+        align-self: flex-start;
+        margin-left : 0;
+    }
+    .photograph-header h1{
+        margin-top : 0;
+    }
+
+}
+
+@media screen and (max-width: 500px){
+    .photograph-header {
+        height: auto;
+        align-content: center;
+    }
+    .contact_button {
+        align-self: center;
+    }
+    .photograph-header h1{
+        margin-right: 0;
+    }
+
+}
+
 
 .contact_button {
     font-size: 20px;
@@ -65,14 +102,13 @@
     z-index :99;
     top :100px ; 
     width: 100%;
+    box-sizing: border-box;
 }
 
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    max-width: 600px;
-    width: 50%; 
-    min-width: 300px;
+    max-width: 550px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,6 +122,18 @@
     0%{transform: translatey(-100%)}
     100% {transform:  translatey(0)}
 } 
+
+
+@media screen and (max-width: 500px) {
+    .modal {
+        width: 90%;
+        padding : 20px 15px 20px 10px;
+    }
+    #contact_modal{
+        width: 95%;
+        margin : 20px 10px 20px 10px;
+    }
+}
 
 
 .modal header {
@@ -211,10 +259,10 @@
     top : 26px;
 }
 
-    /*à mettre en -9999? */
+  
 .sorting ul li input {
     position: absolute;
-    left: -1000px;
+    left: -9999px; 
 }
 
 .sorting ul li label {
@@ -243,16 +291,25 @@
     display: block;
 }
   
-.sorting ul li.inactive {
+.sorting ul li.formLi {
     display: none;
-  }
+}
+fieldset{
+    border : none;
+}
+
+.sorting label {
+    user-select: none;
+}
   
-.sorting ul li.inactive.selected {
+.sorting ul li.formLi.selected {
     display: block;
  }
 
    
- .sorting ul:hover li.menu {
+ .sorting ul:hover li.menu,
+ .sorting ul:focus li.menu, 
+ .sorting ul:active li.menu {
     display: block;
 } 
    
@@ -281,16 +338,17 @@
 
 #boxmedia .card {
     width: 30%;
-    min-width: 330px;
+    min-width: 300px;
     max-width: 360px;
     height: 360px; 
     margin-bottom:30px; 
     box-sizing: border-box;
 }
  
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1080px) {
     #boxmedia .card{
-        width :47%; 
+        width :48%; 
+        max-width: 450px;
         height: calc(320 + 60); 
     }
     #boxmedia .card_media {
@@ -303,10 +361,12 @@
 @media screen and (max-width: 500px) {
     #boxmedia{
         flex-direction: column;
-        margin: auto;
+        align-items: center;
+        margin-left: 10%;
+        margin-right: 10%;
     }
     #boxmedia .card {
-        width :80%;
+        width :100%;
     }
     #boxmedia .card_media {
         width :100%; 
@@ -322,6 +382,7 @@
     height: 300px;
     overflow: hidden;
     border-radius: 10px;
+    position: relative;
 }
 
 #boxmedia .card .cardImg {
@@ -335,6 +396,14 @@
     width :100%;
     height: 100%;
     object-fit: cover;
+}
+
+.iconVideo{
+    position: absolute;
+    top:20px;
+    right: 20px;
+    font-size: 3.5rem;
+    color : rgba(255, 255, 255,0.8)
 }
 
 #boxmedia .card_text {
