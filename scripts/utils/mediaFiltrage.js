@@ -11,23 +11,26 @@ export function getSelectMedia() {
     <div class="sorting" aria-label="sélecteur de tri des medias">
       <h3>Trier par</h3>
       <div class="sorting_select">
-        <form class="form_sorting" aria-label="trier par"> 
+        <form  class="form_sorting" aria-label="trier par"> 
           <fieldset class="c-group" aria-label="Trier les photos">
             <ul tabindex="0" class='sorting_ul'>
-                <i id="icon_sort" class="fas fa-chevron-up"></i>
-                <i id="icon_sort" class="fas fa-chevron-down"></i>
-              <li class='selected hidden formLi menu c-group__item' role='checkbox' tabindex="0"  aria-label="popularité">
-                
-                <label  for="popularity"><input  type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>Popularité</label>
+              <i id="icon_sort_down" class="visible fas fa-chevron-down"></i>
+              <li class='selected hidden formLi c-group__item' role='checkbox' tabindex="0"  aria-label="popularité">
+                <i id="icon_sort_up" class="hidden fas fa-chevron-up"></i>
+                <label  for="popularity">
+                <input  type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>Popularité
+                </label>
+              </li>
+              <li role='checkbox' class='hidden formLi c-group__item' tabindex="0" aria-label="date">
+                <label for="date">
+                  <input  type="radio" id="date"  value="date" name="sorting_option" title="date">Date
+                  </label>
               </li>
 
-              <li role='checkbox' class='hidden formLi menu c-group__item' tabindex="0" aria-label="date">
-                <label for="date"><input  type="radio" id="date"  value="date" name="sorting_option" title="date">Date</label>
-              </li>
-
-              <li role='checkbox' class='hidden formLi menu c-group__item' tabindex="0" aria-label="titre">
-                
-                <label for="titre"><input type="radio" id="titre" value="titre" name="sorting_option" title="titre" >Titre</label>
+              <li role='checkbox' class='hidden formLi c-group__item' tabindex="0" aria-label="titre">
+                <label for="titre">
+                  <input type="radio" id="titre" value="titre" name="sorting_option" title="titre" >Titre
+                  </label>
               </li>
             </ul>
           </fieldset>
@@ -40,6 +43,10 @@ export function getSelectMedia() {
   const sortingUl = document.querySelector('.sorting_ul');
 
   function VisibleSortMenu() {
+    const iconSortDown = document.getElementById('icon_sort_down');
+    const iconSortUp = document.getElementById('icon_sort_up');
+    iconSortDown.classList.toggle('hidden');
+    iconSortUp.classList.toggle('hidden');
     listLi.forEach((li) => {
       li.classList.add('visible');
       li.classList.remove('hidden');
@@ -47,12 +54,14 @@ export function getSelectMedia() {
   }
 
   function hiddenSortMenu() {
-    if (!sortingUl.matches(':hover')) {
-      listLi.forEach((li) => {
-        li.classList.remove('visible');
-        li.classList.add('hidden');
-      });
-    }
+    const iconSortDown = document.getElementById('icon_sort_down');
+    const iconSortUp = document.getElementById('icon_sort_up');
+    iconSortUp.classList.toggle('hidden');
+    iconSortDown.classList.toggle('hidden');
+    listLi.forEach((li) => {
+      li.classList.remove('visible');
+      li.classList.add('hidden');
+    });
   }
 
   sortingUl.addEventListener('mouseover', VisibleSortMenu);

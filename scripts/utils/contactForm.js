@@ -19,6 +19,11 @@ export function getUserModalDOM(photographer) {
     // eslint-disable-next-line no-use-before-define
     logUserInformations();
   });
+  formContact.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
   // eslint-disable-next-line no-use-before-define
   btnclose.addEventListener('click', closeModal);
   return formContact;
