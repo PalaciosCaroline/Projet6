@@ -13,27 +13,54 @@ export function getSelectMedia() {
       <div class="sorting_select">
         <form class="form_sorting" aria-label="trier par"> 
           <fieldset class="c-group" aria-label="Trier les photos">
-            <ul tabindex="0">
-                <i id="icon_up" class="fas fa-chevron-up"></i>
-                <i id="icon_down" class="fas fa-chevron-down"></i>
-              <li class='selected formLi menu' c-group__item aria-label="popularité">
-                <input tabindex="0" type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>
-                <label for="popularity">Popularité</label>
+            <ul tabindex="0" class='sorting_ul'>
+                <i id="icon_sort" class="fas fa-chevron-up"></i>
+                <i id="icon_sort" class="fas fa-chevron-down"></i>
+              <li class='selected hidden formLi menu c-group__item' role='checkbox' tabindex="0"  aria-label="popularité">
+                
+                <label  for="popularity"><input  type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>Popularité</label>
               </li>
-              <li class='formLi menu c-group__item' aria-label="date">
-                <input tabindex="0" type="radio" id="date"  value="date" name="sorting_option" title="date">
-                <label for="date">Date</label>
+
+              <li role='checkbox' class='hidden formLi menu c-group__item' tabindex="0" aria-label="date">
+                <label for="date"><input  type="radio" id="date"  value="date" name="sorting_option" title="date">Date</label>
               </li>
-              <li class='formLi menu c-group__item' aria-label="titre">
-                <input tabindex="0" type="radio" id="titre" value="titre" name="sorting_option" title="titre" >
-                <label for="titre">Titre</label>
+
+              <li role='checkbox' class='hidden formLi menu c-group__item' tabindex="0" aria-label="titre">
+                
+                <label for="titre"><input type="radio" id="titre" value="titre" name="sorting_option" title="titre" >Titre</label>
               </li>
             </ul>
           </fieldset>
         </form>
       </div>
     </div>`;
+
+  const formSorting = document.querySelector('.form_sorting');
+  const listLi = formSorting.querySelectorAll('li');
+  const sortingUl = document.querySelector('.sorting_ul');
+
+  function VisibleSortMenu() {
+    listLi.forEach((li) => {
+      li.classList.add('visible');
+      li.classList.remove('hidden');
+    });
+  }
+
+  function hiddenSortMenu() {
+    if (!sortingUl.matches(':hover')) {
+      listLi.forEach((li) => {
+        li.classList.remove('visible');
+        li.classList.add('hidden');
+      });
+    }
+  }
+
+  sortingUl.addEventListener('mouseover', VisibleSortMenu);
+  sortingUl.addEventListener('mouseout', hiddenSortMenu);
+  sortingUl.addEventListener('focus', VisibleSortMenu);
+  listLi[2].addEventListener('focusout', hiddenSortMenu);
 }
+
 function inputChoice() {
   const formSorting = document.querySelector('.form_sorting');
   const ListLi = formSorting.querySelectorAll('li');
@@ -42,7 +69,7 @@ function inputChoice() {
     const input = li.querySelector('input');
     if (input.checked === true) {
       li.classList.add('selected');
-      formSorting.target = input.title;
+      formSorting.target = input.value;
     }
   });
 }
@@ -71,6 +98,7 @@ export function sortingMedia(photographer, media) {
     case 'popularity':
       newMedia = media.sort((a, b) => b.likes - a.likes);
       displayDataPageMedia(photographer, newMedia);
+
       break;
     case 'date':
       newMedia = media.sort((a, b) => (b.date > a.date ? 1 : -1));

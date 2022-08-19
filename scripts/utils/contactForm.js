@@ -29,7 +29,7 @@ export function displayModal() {
   h2s.forEach((title) => title.classList.remove('hidden'));
   modal.style.display = 'block';
   formContact.style.display = 'block';
-  formContact.focus();
+  header.focus();
   messageSend.classList.add('hidden');
 }
 function closeModal() {

@@ -33,6 +33,23 @@ async function initPage() {
   // boxmedia if choice another selection of sorting
   const formSorting = document.querySelector('.form_sorting');
   formSorting.addEventListener('change', () => sortingMedia(photographer, media));
+
+  const listLi = formSorting.querySelectorAll('li');
+  const sortingUl = document.querySelector('.sorting_ul');
+  const inputs = formSorting.querySelector('input');
+
+  listLi.forEach((li) => li.addEventListener('keyup', (e) => {
+    if (e.key === '' || e.key === 'Enter') {
+      const activeLi = document.activeElement;
+      activeLi.querySelector('input').checked = true;
+      listLi.forEach((item) => {
+        item.classList.remove('visible');
+        item.classList.add('hidden');
+      });
+      sortingMedia(photographer, media);
+    }
+  }));
+
   Lightbox.initLightbox();
 }
 

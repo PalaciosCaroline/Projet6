@@ -15,16 +15,19 @@ export default function PageMediaFactory(photograph, data) {
     h2.textContent = `${photograph.city}, ${photograph.country}`;
     const legende = document.createElement('p');
     legende.textContent = photograph.tagline;
+    const divPortrait = document.createElement('div');
+    divPortrait.classList.add('divPortrait');
     const imgChoisi = document.createElement('img');
+    divPortrait.appendChild(imgChoisi);
     imgChoisi.setAttribute('src', picture);
     imgChoisi.alt = photograph.name;
     header.appendChild(article);
-    article.appendChild(imgChoisi);
+    // article.appendChild(divPortrait);
     article.appendChild(h1);
     article.appendChild(h2);
     article.appendChild(legende);
-    header.appendChild(imgChoisi);
-    imgChoisi.parentNode.insertBefore(contactbtn, imgChoisi);
+    header.appendChild(divPortrait);
+    divPortrait.parentNode.insertBefore(contactbtn, divPortrait);
     contactbtn.addEventListener('click', displayModal);
     return article;
   }
