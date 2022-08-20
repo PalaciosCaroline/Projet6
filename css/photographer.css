@@ -292,6 +292,12 @@ box-sizing: border-box;
     display:none;
 }
 
+
+.sorting li:not(:hover) .fa-chevron-down,
+.sorting li:not(:focus) .fa-chevron-down{
+    display: block;
+}
+
 .sorting ul .fa-chevron-up{
     display:block;
 }
@@ -317,7 +323,7 @@ box-sizing: border-box;
     user-select: none;
 }
 
-.sorting ul li.visible {
+.sorting ul li.formLi {
     display: block;
     position: relative;
 }
@@ -325,6 +331,7 @@ box-sizing: border-box;
 .sorting ul li.hidden {
     display: none;
 }
+
 fieldset{
     border : none;
 }
