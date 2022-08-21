@@ -7,7 +7,7 @@ export default function PageMediaFactory(photograph, data) {
   const picture = `assets/photographers/photographers_ID_Photos/${photograph.portrait}`;
   function getUserHeaderDOM() {
     const header = document.querySelector('.photograph-header');
-    const contactbtn = document.querySelector('button');
+    const contactbtn = document.querySelector('.contact_button');
     const article = document.createElement('article');
     const h1 = document.createElement('h1');
     h1.textContent = photograph.name;
@@ -64,15 +64,18 @@ export default function PageMediaFactory(photograph, data) {
     divtext.classList.add('card_text');
     const titlemedia = document.createElement('h3');
     titlemedia.textContent = data.title;
+    titlemedia.ariaHidden = true;
     const btnLikes = document.createElement('button');
     btnLikes.classList.add('btnLikes');
-    btnLikes.ariaLabel = 'bouton pour liker la photo';
+    btnLikes.ariaLabel = `${data.likes}likes`;
+    btnLikes.ariaDescription = 'donner un like à la photo';
     const btnLiketitle = document.createElement('span');
     btnLiketitle.classList.add('likestitle');
     btnLiketitle.textContent = data.likes;
+    btnLiketitle.ariaHidden = 'likes';
     const heart = document.createElement('i');
     heart.className = 'far fa-heart heart';
-    heart.ariaLabel = 'likes';
+    heart.ariaLabel = '';
 
     article.appendChild(divtext);
     divtext.appendChild(titlemedia);
@@ -105,7 +108,7 @@ export default function PageMediaFactory(photograph, data) {
       .map((item) => item.likes)
       .reduce((prev, curr) => prev + curr, 0);
     const TotalLikessum = document.createElement('article');
-    const divlike = document.createElement('div');
+    const divlike = document.createElement('div')
     TotalLikessum.classList.add('cardLikes');
     const totalLiketitle = document.createElement('span');
     totalLiketitle.classList.add('totalLikesTitle');
@@ -113,6 +116,8 @@ export default function PageMediaFactory(photograph, data) {
     const heart2 = document.createElement('img');
     heart2.setAttribute('src', '../assets/icons/heartblack.png');
     heart2.alt = 'likes';
+    heart2.tabIndex = 0;
+    heart2.ariaDescription = `${totallikes}likes, tarif du photographe${photograph.price}€ par jour`;
     const pricejour = document.createElement('span');
     pricejour.textContent = `${photograph.price}€ / jour`;
     TotalLikessum.appendChild(divlike);

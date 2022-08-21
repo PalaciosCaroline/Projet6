@@ -39,7 +39,7 @@ async function initPage() {
   const inputs = formSorting.querySelector('input');
 
   listLi.forEach((li) => li.addEventListener('keyup', (e) => {
-    if (e.key === '' || e.key === 'Enter') {
+    if (e.key === ' ' || e.key === 'Enter') {
       iconUpDown();
       const activeLi = document.activeElement;
       activeLi.querySelector('input').checked = true;

@@ -4,9 +4,10 @@ import PageMediaFactory from '../factories/pagemedia.js';
 
 export function getSelectMedia() {
   const filterMedia = document.createElement('div');
-  document.body.appendChild(filterMedia);
   const boxmedia = document.getElementById('boxmedia');
-  filterMedia.parentNode.insertBefore(boxmedia, filterMedia.nextSibling);
+  const sectionMedia = document.getElementById('section_media');
+  sectionMedia.appendChild(filterMedia);
+  filterMedia.parentNode.insertBefore(filterMedia, boxmedia);
   filterMedia.innerHTML = `
     <div class="sorting" aria-label="sélecteur de tri des medias">
       <h3>Trier par</h3>
@@ -26,7 +27,6 @@ export function getSelectMedia() {
                   <input  type="radio" id="date"  value="date" name="sorting_option" title="date">Date
                   </label>
               </li>
-
               <li role='checkbox' class='hidden formLi c-group__item' tabindex="0" aria-label="titre">
                 <label for="titre">
                   <input type="radio" id="titre" value="titre" name="sorting_option" title="titre" >Titre
@@ -43,7 +43,7 @@ export function getSelectMedia() {
   const sortingUl = document.querySelector('.sorting_ul');
 
   function VisibleSortMenu() {
-    iconUpDown();
+    iconUpUp();
     listLi.forEach((li) => {
       li.classList.add('visible');
       li.classList.remove('hidden');
@@ -62,6 +62,14 @@ export function getSelectMedia() {
   sortingUl.addEventListener('mouseout', hiddenSortMenu);
   sortingUl.addEventListener('focus', VisibleSortMenu);
   listLi[2].addEventListener('focusout', hiddenSortMenu);
+
+  sortingUl.addEventListener('focusout', (e) => onKeyup(e));
+
+  function onKeyup(e) {
+    if (listLi[0] === document.activeElement && (e.shiftKey && e.keyCode === 9)) {
+      hiddenSortMenu();
+    }
+  }
 }
 
 function inputChoice() {
@@ -116,9 +124,36 @@ export function sortingMedia(photographer, media) {
   }
 }
 
+export function iconUpUp() {
+  const iconSortDown = document.getElementById('icon_sort_down');
+  const iconSortUp = document.getElementById('icon_sort_up');
+  iconSortUp.classList.remove('hidden');
+  iconSortDown.classList.add('hidden');
+}
+
 export function iconUpDown() {
   const iconSortDown = document.getElementById('icon_sort_down');
   const iconSortUp = document.getElementById('icon_sort_up');
-  iconSortUp.classList.toggle('hidden');
-  iconSortDown.classList.toggle('hidden');
+  iconSortUp.classList.add('hidden');
+  iconSortDown.classList.remove('hidden');
 }
+
+//accessibilité
+const dropdownMenu = document.querySelector('.dropdown');
+const dropdownLink = document.querySelector('.header-dropdown-link');
+
+
+// function toggleNavbar() {
+//     if (!dropdownMenu.getAttribute('style') || dropdownMenu.getAttribute('style') === 'display: none;') {
+//         dropdownMenu.style.display = 'block';
+//         dropdownLink.setAttribute('aria-expanded', 'true');
+//     } else {
+//         dropdownMenu.style.display = 'none';
+//         dropdownLink.setAttribute('aria-expanded', 'false');
+//     }
+// }
+
+// dropdownLink.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     toggleNavbar();
+// })

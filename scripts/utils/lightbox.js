@@ -14,6 +14,14 @@ export default class Lightbox {
       // eslint-disable-next-line no-new
       new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), gallery, titles);
     }));
+
+    links.forEach((link) => link.addEventListener('keyup', (e) => {
+      e.preventDefault();
+      if (e.key === 'Enter' || e.key === ' ') {
+        // eslint-disable-next-line no-new
+        new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), gallery, titles);
+      }
+    }));
   }
 
   /*
@@ -57,7 +65,6 @@ export default class Lightbox {
   /* close the lightbox
    *@param {Mouseevent|keyBoardEvent} e
    */
-  // voir pour enlever le focus
 
   close(e) {
     e.preventDefault();
@@ -97,9 +104,9 @@ export default class Lightbox {
   onKeyup(e) {
     if (e.key === 'Escape') {
       this.close(e);
-    } else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowLeft' || e.keyCode === 9) {
       this.previous(e);
-    } else if (e.key === 'ArrowRight') {
+    } else if (e.key === 'ArrowRight' || (e.shiftKey && e.keyCode === 9)) {
       this.next(e);
     }
   }

@@ -19,14 +19,12 @@
       </header>
    
 
-      <div id="contact_modal">
+      <div id="contact_modal" role="dialog">
 
-          
-
-        <div class="modal">
+        <div class="modal"  aria-labelledby="modalContactTitle">
           <header>
-            <h2>Contactez-moi</h2>
-            <img src="assets/icons/close.svg" role='button' tabindex="0" alt='fermeture du formulaire de contact'/>
+            <!-- <h2 tabindex="0" id="modalContactTitle">Contactez-moi</h2> -->
+            <img tabindex="1" src="assets/icons/close.svg" role='button' alt='fermeture du formulaire de contact'/>
           </header>
           
           <div id="message_send" tabindex="0" class="block">Merci<br>Votre message a bien été envoyé à 
@@ -35,21 +33,23 @@
           <form id="form_contact" tabindex="0" aria-label="formulaire de contact avec le photographe">
             <div>
               <label for="Firstname">Prénom</label>
-              <input class="form_input entry" type="text" id="Firstname" name="prenom" title="prenom" aria-labelledby="Firstname" required/>
-              <label for="Lastname">Nom</label>
-              <input class="form_input entry" type="text" id="Lastname" name="nom" title="nom" aria-labelledby="Lastname" required/>
+              <input tabindex="0" class="form_input entry" type="text" id="Firstname" name="prenom" title="prenom" aria-labelledby="Firstname" required/>
+              <label  for="Lastname">Nom</label>
+              <input tabindex="0" class="form_input entry" type="text" id="Lastname" name="nom" title="nom" aria-labelledby="Lastname" required/>
               <label for="email">Email</label>
-              <input class="form_input entry" type="email" id="email" name="email" title="email" aria-labelledby="email" required/>
+              <input tabindex="0" class="form_input entry" type="email" id="email" name="email" title="email" aria-labelledby="email" required/>
               <label for="your_message">Message</label>
-              <textarea class="form_textarea entry" rows="5" id="your_message" name="message" title="message" aria-labelledby="your_message" required></textarea>
+              <textarea tabindex="0" class="form_textarea entry" rows="5" id="your_message" name="message" title="message" aria-labelledby="your_message" required></textarea>
             </div>
-            <button class="contact_button" type="submit" aria-label="send">Envoyer</button>
+            <button tabindex="0" id="btnContactSubmit" class="contact_button" type="submit" aria-label="send">Envoyer</button>
           </form>
         </div>
       </div>
 
-      <div id="boxmedia">
-      </div>
+      <section id="section_media">
+        <div id="boxmedia">
+        </div>
+      </section>
     </main>
     <script  src="scripts/pages/photographer.js" type="module"></script>
   </body>
