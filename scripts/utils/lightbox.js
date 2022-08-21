@@ -61,6 +61,7 @@ export default class Lightbox {
       video.src = url;
     }
     h3.textContent = title;
+    h3.ariaHidden = true;
   }
   /* close the lightbox
    *@param {Mouseevent|keyBoardEvent} e

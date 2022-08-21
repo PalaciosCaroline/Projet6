@@ -11,6 +11,7 @@ const btnclose = header.querySelector('img');
 const btnSubmit = document.getElementById('btnContactSubmit');
 const sectionMedia = document.getElementById('section_media');
 
+
 function logUserInformations() {
   console.log('Données fournies par l\'utilisateur: ');
   // eslint-disable-next-line no-plusplus
@@ -29,9 +30,14 @@ function logUserInformations() {
   btnclose.focus();
 }
 
+function closeModal() {
+  messageSend.classList.add('hidden');
+  contactbtn.focus();
+  modal.style.display = 'none';
+}
+
 export function getUserModalDOM(photographer) {
   const h2 = document.createElement('h2');
-  h2.classList.add('modalContactTitle');
   h2.innerHTML = `<h2 tabindex="0" id="modalContactTitle">Contactez-moi<br>${photographer.name}</h2>`;
   header.appendChild(h2);
   h2.parentNode.insertBefore(h2, btnclose);
@@ -63,8 +69,6 @@ export function getUserModalDOM(photographer) {
     }
   });
 
-
-  // eslint-disable-next-line no-use-before-define
   btnclose.addEventListener('click', closeModal);
 
   btnclose.addEventListener('keyup', (e) => {
@@ -85,11 +89,3 @@ export function displayModal() {
   h2.focus();
   messageSend.classList.add('hidden');
 }
-
-function closeModal() {
-  messageSend.classList.add('hidden');
-  contactbtn.focus();
-  modal.style.display = 'none';
-}
-
-

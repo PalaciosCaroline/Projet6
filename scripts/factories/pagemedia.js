@@ -108,7 +108,7 @@ export default function PageMediaFactory(photograph, data) {
       .map((item) => item.likes)
       .reduce((prev, curr) => prev + curr, 0);
     const TotalLikessum = document.createElement('article');
-    const divlike = document.createElement('div')
+    const divlike = document.createElement('div');
     TotalLikessum.classList.add('cardLikes');
     const totalLiketitle = document.createElement('span');
     totalLiketitle.classList.add('totalLikesTitle');

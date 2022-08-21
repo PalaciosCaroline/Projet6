@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 // import { displayDataPageMedia } from '../pages/photographer.js';
 import PageMediaFactory from '../factories/pagemedia.js';
 
@@ -63,13 +62,8 @@ export function getSelectMedia() {
   sortingUl.addEventListener('focus', VisibleSortMenu);
   listLi[2].addEventListener('focusout', hiddenSortMenu);
 
-  sortingUl.addEventListener('focusout', (e) => onKeyup(e));
-
-  function onKeyup(e) {
-    if (listLi[0] === document.activeElement && (e.shiftKey && e.keyCode === 9)) {
-      hiddenSortMenu();
-    }
-  }
+  // sortingUl.addEventListener('focusout', () => { if (listLi.forEach(li => !li.matches(':focus'))) { hiddenSortMenu }
+  // });
 }
 
 function inputChoice() {
@@ -137,23 +131,3 @@ export function iconUpDown() {
   iconSortUp.classList.add('hidden');
   iconSortDown.classList.remove('hidden');
 }
-
-//accessibilité
-const dropdownMenu = document.querySelector('.dropdown');
-const dropdownLink = document.querySelector('.header-dropdown-link');
-
-
-// function toggleNavbar() {
-//     if (!dropdownMenu.getAttribute('style') || dropdownMenu.getAttribute('style') === 'display: none;') {
-//         dropdownMenu.style.display = 'block';
-//         dropdownLink.setAttribute('aria-expanded', 'true');
-//     } else {
-//         dropdownMenu.style.display = 'none';
-//         dropdownLink.setAttribute('aria-expanded', 'false');
-//     }
-// }
-
-// dropdownLink.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     toggleNavbar();
-// })

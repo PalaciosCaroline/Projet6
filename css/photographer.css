@@ -269,7 +269,6 @@ box-sizing: border-box;
     position: absolute; 
     top: 0;
     margin: 0 20px; 
-    /* padding :7px 10px 2px 10px;   */
     padding :0;  
     border-radius: 8px;
     list-style: none;
@@ -279,11 +278,7 @@ box-sizing: border-box;
     height: auto;
     outline: none;
 }
-/* 
-.sorting ul:not(:focus) li.hidden {
-    display: none;
-}
-   */
+
 .sorting ul li:nth-child(1n+0){
     cursor: pointer;
     height: 55px;
@@ -531,7 +526,7 @@ fieldset{
     align-items: center;
     color :#901C1C;
 }
-#boxmedia button:focus {
+#boxmedia button:focus-visible {
     border: 3px solid #DB8876;
     outline:none;
 }
