@@ -18,18 +18,18 @@ export function getSelectMedia() {
               <li class='selected hidden formLi c-group__item' role='checkbox' tabindex="0"  aria-label="popularité">
                 <i id="icon_sort_up" class="hidden fas fa-chevron-up"></i>
                 <label  for="popularity">
-                <input  type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>Popularité
+                  <input  type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>Popularité
                 </label>
               </li>
               <li role='checkbox' class='hidden formLi c-group__item' tabindex="0" aria-label="date">
                 <label for="date">
                   <input  type="radio" id="date"  value="date" name="sorting_option" title="date">Date
-                  </label>
+                </label>
               </li>
               <li role='checkbox' class='hidden formLi c-group__item' tabindex="0" aria-label="titre">
                 <label for="titre">
                   <input type="radio" id="titre" value="titre" name="sorting_option" title="titre" >Titre
-                  </label>
+                </label>
               </li>
             </ul>
           </fieldset>
@@ -62,8 +62,8 @@ export function getSelectMedia() {
   sortingUl.addEventListener('focus', VisibleSortMenu);
   listLi[2].addEventListener('focusout', hiddenSortMenu);
 
-  // sortingUl.addEventListener('focusout', () => { if (listLi.forEach(li => !li.matches(':focus'))) { hiddenSortMenu }
-  // });
+  // sortingUl.addEventListener('focusout', () => { if (!listLi[0].matches(':focus')) { hiddenSortMenu }
+  //  });
 }
 
 function inputChoice() {
