@@ -84,7 +84,6 @@ export function displayModal() {
   const h2 = document.getElementById('modalContactTitle');
   h2.classList.remove('hidden');
   modal.style.display = 'block';
-  sectionMedia.style.overflow = 'hidden';
   formContact.style.display = 'block';
   h2.focus();
   messageSend.classList.add('hidden');
