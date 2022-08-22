@@ -9,8 +9,6 @@ const messageSend = document.getElementById('message_send');
 const btnclose = header.querySelector('img');
 // const main = document.getElementById('main');
 const btnSubmit = document.getElementById('btnContactSubmit');
-const sectionMedia = document.getElementById('section_media');
-
 
 function logUserInformations() {
   console.log('Données fournies par l\'utilisateur: ');
