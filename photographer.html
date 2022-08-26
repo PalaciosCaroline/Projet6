@@ -21,13 +21,13 @@
 
       <div id="contact_modal" role="dialog">
 
-        <div class="modal"  aria-labelledby="modalContactTitle">
+        <div class="modal" id="modalForm" aria-labelledby="modalContactTitle">
           <header>
             <!-- <h2 tabindex="0" id="modalContactTitle">Contactez-moi</h2> -->
-            <img tabindex="1" src="assets/icons/close.svg" role='button' alt='fermeture du formulaire de contact'/>
+            <img tabindex="2" src="assets/icons/close.svg" role='button' alt='fermeture du formulaire de contact'/>
           </header>
           
-          <div id="message_send" tabindex="0" class="block">Merci<br>Votre message a bien été envoyé à 
+          <div id="message_send" tabindex="1" class="block">Merci<br>Votre message a bien été envoyé à 
           </div> 
           
           <form id="form_contact" tabindex="0" aria-label="formulaire de contact avec le photographe" action="" method="post" >
@@ -39,7 +39,7 @@
               <label for="email">Email</label>
               <input tabindex="0" class="form_input entry" type="email" id="email" name="email" title="email" aria-labelledby="email" required/>
               <label for="your_message">Message</label>
-              <textarea tabindex="0" class="form_textarea entry" rows="5" id="your_message" name="message" title="message" aria-labelledby="your_message" required></textarea>
+              <textarea tabindex="0" class="form_textarea entry" rows="4" id="your_message" name="message" title="message" aria-labelledby="your_message" required></textarea>
             </div>
             <button tabindex="0" id="btnContactSubmit" class="contact_button" type="submit" aria-label="send">Envoyer</button>
           </form>

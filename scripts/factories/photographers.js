@@ -15,9 +15,10 @@ export default function photographerFactory(data) {
     a.href = `./photographer.html?id=${id}`;
     const imgChoisi = document.createElement('img');
     a.ariaLabel = name;
+    a.ariaDescription = 'vers la page personnel du photographe';
     a.title = data.title;
     imgChoisi.setAttribute('src', picture);
-    imgChoisi.alt = name;
+    imgChoisi.alt = '';
     const h2 = document.createElement('h2');
     h2.textContent = name;
     const h3 = document.createElement('h3');
