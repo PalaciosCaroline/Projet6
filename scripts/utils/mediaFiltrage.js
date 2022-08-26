@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import PageMediaFactory from '../factories/pagemedia.js';
 
 export function getSelectMedia() {
@@ -10,16 +11,15 @@ export function getSelectMedia() {
     <form  class="form_sorting"> 
       <div class="div_select">
           <label class="custom-select">Trier par
-            <select name="tri" aria-Description="utiliser les flêches du bas ou du haut pour trier automatiquement les photos par popularité, date ou titre" class="">
-              <option class="" value="popularity" aria-label="popularité" selected>Popularité</option>
-              <option class="" value="date" aria-label="date">Date</option>
-              <option class="" value="titre" aria-label="titre">Titre</option>
+            <select name="tri" aria-Description="utiliser les flêches du bas ou du haut, le tri des photos est automatiquement fait par popularité, date ou titre" class="">
+              <option class="" value="popularity" aria-label="tri fait par popularité" aria-selected="true" selected>Popularité</option>
+              <option class="" value="date" aria-label="tri fait par date">Date</option>
+              <option class="" value="titre" aria-label="tri fait par titre">Titre</option>
             </select>
             <i class="fa-solid fa-chevron-down"></i>
           </label>
       </div>
     </form> `;
-
 }
 
 export async function displayDataPageMedia(photographer, media) {
@@ -74,8 +74,8 @@ function sortMenuDrop(e) {
     dropDownOption.className = 'optionLi';
     dropDownOption.textContent = option.textContent;
 
-    dropDownOption.addEventListener('mousedown', (e) => {
-      e.stopPropagation();
+    dropDownOption.addEventListener('mousedown', (event) => {
+      event.stopPropagation();
       select.value = option.value;
       selector.value = option.value;
       select.dispatchEvent(new Event('change'));
@@ -89,13 +89,13 @@ function sortMenuDrop(e) {
   selector.appendChild(dropDown);
 
   // handle click out
-  document.addEventListener('click', (e) => {
-    if (!selector.contains(e.target)) {
+  document.addEventListener('click', (event) => {
+    if (!selector.contains(event.target)) {
       dropDown.remove();
     }
   });
 
-  document.addEventListener('keyup', (e) => {
+  document.addEventListener('keyup', () => {
     if (dropDown !== null && document.activeElement !== select) {
       dropDown.remove();
     }
@@ -149,7 +149,6 @@ export function setupSelector(selector) {
   });
 }
 
-
 // dechet
 // const dropDown = document.querySelector('ul');
 //       const select = document.querySelector('.div_select select');
@@ -158,7 +157,6 @@ export function setupSelector(selector) {
 //           dropDown.remove();
 //         }})
 //       }
-
 
 // function stop(e) {
 //   const dropDown = document.querySelector('ul');
@@ -171,7 +169,10 @@ export function setupSelector(selector) {
 //   const ulElt = document.querySelector('.selector-options');
 //   document.addEventListener('keypress', (e) => {
 //     const dropDown = document.querySelector('ul');
-//     if (e.key === 'Enter' && dropDown !== null && (dropDown[0].style.color == '#000000' || dropDown[1].style.color == '#000000' || dropDown[2].style.color == '#000000' )) {
+/*     if (e.key === 'Enter' && dropDown !== null
+* && (dropDown[0].style.color == '#000000'
+* || dropDown[1].style.color == '#000000' || dropDown[2].style.color == '#000000' )) * {
+*/
 //       dropDown.remove();
 //     }
 //   });

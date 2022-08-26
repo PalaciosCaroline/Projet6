@@ -13,23 +13,13 @@ export default class Lightbox {
       e.preventDefault();
       // eslint-disable-next-line no-new
       new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), gallery, titles);
-      // const lightbox = document.getElementById('lightbox');
-      // const button = lightbox.querySelector('lightbox_next');
-      // button.focus();
-      // const h3 = document.querySelector('lightbox > h3');
-      // h3.focus();
     }));
 
     links.forEach((link) => link.addEventListener('keypress', (e) => {
-      // e.preventDefault();
+      e.preventDefault();
       if (e.key === 'Enter' || e.key === ' ') {
         // eslint-disable-next-line no-new
         new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), gallery, titles);
-        // const h3 = document.querySelector('lightbox > h3');
-        // h3.focus();
-        // const lightbox = document.getElementById('lightbox');
-        // const button = lightbox.querySelector('lightbox_next');
-        // button.focus();
       }
     }));
   }
@@ -142,7 +132,7 @@ export default class Lightbox {
     const dom = document.createElement('div');
     dom.setAttribute('id', 'lightbox');
     dom.innerHTML = `
-    <div id="lightbox" type='modal' role=”dialog" class="dialog" aria-label=”ouvre l'image dans la boite dialog”>
+    <div id="lightbox" type='modal' role=”dialog" class="dialog" aria-Description=”affiche les images en grand, fermer avec la touche échappe”>
       <nav>
           <button class="lightbox_close" aria-label="ferme la boite dialog">
               <i class="fa-solid fa-xmark"></i>

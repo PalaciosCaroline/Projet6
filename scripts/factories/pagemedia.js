@@ -21,7 +21,7 @@ export default function PageMediaFactory(photograph, data) {
     const imgChoisi = document.createElement('img');
     divPortrait.appendChild(imgChoisi);
     imgChoisi.setAttribute('src', picture);
-    imgChoisi.alt = photograph.name;
+    imgChoisi.alt = '';
     header.appendChild(article);
     // article.appendChild(divPortrait);
     article.appendChild(h1);
@@ -41,7 +41,8 @@ export default function PageMediaFactory(photograph, data) {
     const a = document.createElement('a');
     divmedia.appendChild(a);
     a.rel = 'lightbox';
-    a.ariaLabel = `${data.title}, closeup view`;
+    a.ariaLabel = `${data.title}`;
+    a.ariaDescription = 'affichage en grand';
     a.title = data.title;
     if (data.image) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.image}`);
@@ -73,10 +74,8 @@ export default function PageMediaFactory(photograph, data) {
     const btnLiketitle = document.createElement('span');
     btnLiketitle.classList.add('likestitle');
     btnLiketitle.textContent = data.likes;
-    btnLiketitle.ariaHidden = 'likes';
     const heart = document.createElement('i');
     heart.className = 'far fa-heart heart';
-    heart.ariaLabel = '';
 
     article.appendChild(divtext);
     divtext.appendChild(titlemedia);
