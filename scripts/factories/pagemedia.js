@@ -42,8 +42,10 @@ export default function PageMediaFactory(photograph, data) {
     divmedia.appendChild(a);
     a.rel = 'lightbox';
     a.ariaLabel = `${data.title}`;
+    a.className = 'link_card';
     a.ariaDescription = 'affichage en grand';
     a.title = data.title;
+    a.setAttribute('id', `${data.title}`);
     if (data.image) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.image}`);
       const imgphoto = document.createElement('img');

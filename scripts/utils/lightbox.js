@@ -8,7 +8,6 @@ export default class Lightbox {
     const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
     const gallery = links.map((link) => link.getAttribute('href'));
     const titles = links.map((link) => link.getAttribute('title'));
-
     links.forEach((link) => link.addEventListener('click', (e) => {
       e.preventDefault();
       // eslint-disable-next-line no-new
@@ -76,7 +75,7 @@ export default class Lightbox {
    */
 
   close(e) {
-    e.preventDefault();
+    // e.preventDefault();
     this.element.classList.add('hidden');
     // pas sûre de l'utilité du remove
     this.element.remove();
@@ -166,45 +165,12 @@ export default class Lightbox {
 }
 
 
-// let nonModalNodes;
+// function returnCard(title) {
 
-// function openDialog() {    
-//   const modalNodes = Array.from( document.querySelectorAll('dialog *') );
-//   nonModalNodes = document.querySelectorAll('body *:not(dialog):not([tabindex="-1"])');
-
-//   for (let i = 0; i < nonModalNodes.length; i++) {
-//     let node = nonModalNodes[i];
-
-//     if (!modalNodes.includes(node)) {
-//       node._prevTabindex = node.getAttribute('tabindex');
-//       node.setAttribute('tabindex', -1);
-//       node.ariaHidden = true;
-//       node.style.outline = 'none';
-//     } 
-//   }
-// }
-
-// function closeDialog() {
-//   if (this.type === 'modal') {
-//     document.body.style.overflow = null;
-//     for (let i = 0; i < nonModalNodes.length; i++) {
-//       const node = nonModalNodes[i];
-//       if (node._prevTabindex) {
-//         node.setAttribute('tabindex', node._prevTabindex);
-//         node._prevTabindex = null;
-//         node.ariaHidden = false;
-//       }
-//       else {
-//         node.removeAttribute('tabindex');
-//       }
-//       node.style.outline = null;
-//     }
-//   }
-// }
-
-// function blocTab() {
-//   const boxmedia = document.getElementById('section_media');
-//   boxmedia.ariaHidden = true;
-//   const header = document.querySelector('header');
-//   header.ariaHidden = true;
+// const linkre = document.querySelector(`#${title}`);
+//     linkre.focus();
+//     // const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
+//     // const linkReturn = document.getElementById(`#${url}`);
+//     console.log(linkReturn);
+//     // linkReturn.focus();
 // }
