@@ -5,7 +5,7 @@ import {
   getPhotographer,
   getMedias,
 } from '../data/data.js';
-import { getSelectMedia, sortingMedia, setupSelector, colorHoverSort } from '../utils/mediaFiltrage.js';
+import { getSelectMedia, sortingMedia, setupSelector } from '../utils/mediaFiltrage.js';
 import PageMediaFactory from '../factories/pagemedia.js';
 import Lightbox from '../utils/lightbox.js';
 import { getUserModalDOM } from '../utils/contactForm.js';
@@ -47,7 +47,6 @@ async function initPage() {
 }
 
 initPage();
-
 
 // function stop(e) {
 //   const dropDown = document.querySelector('ul');

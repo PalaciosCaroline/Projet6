@@ -1,6 +1,7 @@
 /*
  *@property {HTMLElement} element
  *@property {string[]} gallery path to media of ligthbox
+ *@property {string[]} titles of media in ligthbox
  *@property {string} url  URL of the media display
  */
 export default class Lightbox {
@@ -67,17 +68,15 @@ export default class Lightbox {
     }
     h3.textContent = title;
     h3.tabIndex = 1;
-    // h3.ariaLabel = `vue de ${title}`;
-    // h3.focus();
   }
+
   /* close the lightbox
    *@param {Mouseevent|keyBoardEvent} e
    */
 
   close(e) {
-    // e.preventDefault();
+    e.preventDefault();
     this.element.classList.add('hidden');
-    // pas sûre de l'utilité du remove
     this.element.remove();
     document.removeEventListener('keyup', this.onkeyup);
   }
@@ -107,7 +106,6 @@ export default class Lightbox {
   }
 
   /*
-   *
    *@param {KeyBoardEvent} e
    */
 
@@ -124,14 +122,15 @@ export default class Lightbox {
   }
 
   /*
-   *@param {string} url  URL de l'image
+   *@param {string} url  URL of img
+   *@param {string} title of url
    *@return {HTMLElement}
    */
   buildDOM(title) {
     const dom = document.createElement('div');
     dom.setAttribute('id', 'lightbox');
     dom.innerHTML = `
-    <div id="lightbox" type='modal' role=”dialog" class="dialog" aria-Description=”affiche les images en grand, fermer avec la touche échappe”>
+    <div id="lightbox" type='modal' role=”dialog" class="dialog">
       <nav>
           <button class="lightbox_close" aria-label="ferme la boite dialog">
               <i class="fa-solid fa-xmark"></i>
@@ -163,14 +162,3 @@ export default class Lightbox {
     return dom;
   }
 }
-
-
-// function returnCard(title) {
-
-// const linkre = document.querySelector(`#${title}`);
-//     linkre.focus();
-//     // const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
-//     // const linkReturn = document.getElementById(`#${url}`);
-//     console.log(linkReturn);
-//     // linkReturn.focus();
-// }

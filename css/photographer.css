@@ -1,5 +1,8 @@
-#contact_modal {
-    display: none;
+
+.noscript_warning {
+display: block;
+background-color: #b64848;
+color: #fff;
 }
 
 .header_page a:focus-visible{
@@ -154,6 +157,10 @@ box-sizing: border-box;
     margin: auto;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
     animation : slideForm 0.6s ease-out;
+}
+
+#contact_modal {
+    display: none;
 }
 
 @keyframes slideForm {
@@ -478,6 +485,13 @@ color: #000000;
         font-size: 0.8rem;
     }
 } 
+
+@media screen and (min-width: 2500px) {
+    #boxmedia .card {
+        width: 720px;
+        height: 600px;
+    }
+}
 
 #boxmedia .card_media {
     width :98%; 

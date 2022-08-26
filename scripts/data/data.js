@@ -18,6 +18,7 @@ export function getPhotographers(data) {
 
 export function getPhotographer(data, id) {
   const { photographers } = data;
+  // eslint-disable-next-line eqeqeq
   const photographer = photographers.find((item) => item.id == id);
   // log(test)
   // eslint-disable-next-line no-console
@@ -27,6 +28,7 @@ export function getPhotographer(data, id) {
 
 export function getMedias(data, photographerId) {
   const medias = data.media;
+  // eslint-disable-next-line eqeqeq
   const media = medias.filter((item) => item.photographerId == photographerId);
   // log(test)
   // eslint-disable-next-line no-console
