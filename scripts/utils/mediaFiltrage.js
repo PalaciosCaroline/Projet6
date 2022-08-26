@@ -10,14 +10,16 @@ export function getSelectMedia() {
     <form  class="form_sorting"> 
       <div class="div_select">
           <label class="custom-select">Trier par
-            <select name="tri" aria-Description="utiliser les flêches du bas ou du haut pour trier automatiquement les photos par popularité, date ou titre">
+            <select name="tri" aria-Description="utiliser les flêches du bas ou du haut pour trier automatiquement les photos par popularité, date ou titre" class="">
               <option class="" value="popularity" aria-label="popularité" selected>Popularité</option>
               <option class="" value="date" aria-label="date">Date</option>
               <option class="" value="titre" aria-label="titre">Titre</option>
             </select>
+            <i class="fa-solid fa-chevron-down"></i>
           </label>
       </div>
     </form> `;
+
 }
 
 export async function displayDataPageMedia(photographer, media) {
