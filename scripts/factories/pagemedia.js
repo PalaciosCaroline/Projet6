@@ -13,6 +13,7 @@ export default function PageMediaFactory(photograph, data) {
     h1.textContent = photograph.name;
     const h2 = document.createElement('h2');
     h2.textContent = `${photograph.city}, ${photograph.country}`;
+    h2.classList.add('photograph_city');
     const legende = document.createElement('p');
     legende.textContent = photograph.tagline;
     const divPortrait = document.createElement('div');

@@ -5,7 +5,7 @@ import {
   getPhotographer,
   getMedias,
 } from '../data/data.js';
-import { getSelectMedia, sortingMedia, iconUpDown } from '../utils/mediaFiltrage.js';
+import { getSelectMedia, sortingMedia, setupSelector } from '../utils/mediaFiltrage.js';
 import PageMediaFactory from '../factories/pagemedia.js';
 import Lightbox from '../utils/lightbox.js';
 import { getUserModalDOM } from '../utils/contactForm.js';
@@ -31,27 +31,27 @@ async function initPage() {
   // boxmedia with popularity default choice
   sortingMedia(photographer, media);
   // boxmedia if choice another selection of sorting
-  const formSorting = document.querySelector('.form_sorting');
-  formSorting.addEventListener('change', () => sortingMedia(photographer, media));
+  const select = document.querySelector('select');
 
-  const listLi = formSorting.querySelectorAll('li');
-  const sortingUl = document.querySelector('.sorting_ul');
-  const inputs = formSorting.querySelector('input');
+  const selector = document.querySelector('.custom-select');
+  // const dropDown = document.querySelector('dropDown');
+  // select.addEventListener('change', () => sortingMedia(photographer, media));
 
-  listLi.forEach((li) => li.addEventListener('keyup', (e) => {
-    if (e.key === ' ' || e.key === 'Enter') {
-      iconUpDown();
-      const activeLi = document.activeElement;
-      activeLi.querySelector('input').checked = true;
-      listLi.forEach((item) => {
-        item.classList.remove('visible');
-        item.classList.add('hidden');
-      });
-      sortingMedia(photographer, media);
-    }
-  }));
+  setupSelector(selector);
+  selector.addEventListener('change', (e) => {
+    sortingMedia(photographer, media);
+    Lightbox.initLightbox();
+  });
 
   Lightbox.initLightbox();
 }
 
 initPage();
+
+
+function stop(e) {
+  const dropDown = document.querySelector('ul');
+  const select = document.querySelector('.div_select select');
+if (e.key === 'Enter' && dropDown !== null && document.activeElement === select) {
+  dropDown.remove();
+}}

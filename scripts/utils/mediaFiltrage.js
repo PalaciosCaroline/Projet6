@@ -1,82 +1,23 @@
-// import { displayDataPageMedia } from '../pages/photographer.js';
 import PageMediaFactory from '../factories/pagemedia.js';
 
 export function getSelectMedia() {
   const filterMedia = document.createElement('div');
   const boxmedia = document.getElementById('boxmedia');
-  const sectionMedia = document.getElementById('section_media');
-  sectionMedia.appendChild(filterMedia);
-  filterMedia.parentNode.insertBefore(filterMedia, boxmedia);
+  document.body.appendChild(filterMedia);
+  filterMedia.parentNode.insertBefore(boxmedia, filterMedia.nextSibling);
   filterMedia.innerHTML = `
-    <div class="sorting" aria-label="sélecteur de tri des medias">
-      <h3>Trier par</h3>
-      <div class="sorting_select">
-        <form  class="form_sorting" aria-label="trier par"> 
-          <fieldset class="c-group" aria-label="Trier les photos">
-            <ul tabindex="0" class='sorting_ul'>
-              <i id="icon_sort_down" class="fas fa-chevron-down"></i>
-              <li class='selected hidden formLi c-group__item' role='checkbox' tabindex="0"  aria-label="popularité">
-                <i id="icon_sort_up" class="hidden fas fa-chevron-up"></i>
-                <label  for="popularity">
-                  <input  type="radio" id="popularity" value="popularity" name="sorting_option" title="popularity" checked>Popularité
-                </label>
-              </li>
-              <li role='checkbox' class='hidden formLi c-group__item' tabindex="0" aria-label="date">
-                <label for="date">
-                  <input  type="radio" id="date"  value="date" name="sorting_option" title="date">Date
-                </label>
-              </li>
-              <li role='checkbox' class='hidden formLi c-group__item' tabindex="0" aria-label="titre">
-                <label for="titre">
-                  <input type="radio" id="titre" value="titre" name="sorting_option" title="titre" >Titre
-                </label>
-              </li>
-            </ul>
-          </fieldset>
-        </form>
+
+    <form  class="form_sorting"> 
+      <div class="div_select">
+          <label class="custom-select">Trier par
+            <select name="tri" aria-Description="utiliser les flêches du bas ou du haut pour trier automatiquement les photos par popularité, date ou titre">
+              <option class="" value="popularity" aria-label="popularité" selected>Popularité</option>
+              <option class="" value="date" aria-label="date">Date</option>
+              <option class="" value="titre" aria-label="titre">Titre</option>
+            </select>
+          </label>
       </div>
-    </div>`;
-
-  const formSorting = document.querySelector('.form_sorting');
-  const listLi = formSorting.querySelectorAll('li');
-  const sortingUl = document.querySelector('.sorting_ul');
-
-  function VisibleSortMenu() {
-    iconUpUp();
-    listLi.forEach((li) => {
-      li.classList.add('visible');
-      li.classList.remove('hidden');
-    });
-  }
-
-  function hiddenSortMenu() {
-    iconUpDown();
-    listLi.forEach((li) => {
-      li.classList.remove('visible');
-      li.classList.add('hidden');
-    });
-  }
-
-  sortingUl.addEventListener('mouseover', VisibleSortMenu);
-  sortingUl.addEventListener('mouseout', hiddenSortMenu);
-  sortingUl.addEventListener('focus', VisibleSortMenu);
-  listLi[2].addEventListener('focusout', hiddenSortMenu);
-
-  // sortingUl.addEventListener('focusout', () => { if (!listLi[0].matches(':focus')) { hiddenSortMenu }
-  //  });
-}
-
-function inputChoice() {
-  const formSorting = document.querySelector('.form_sorting');
-  const ListLi = formSorting.querySelectorAll('li');
-  ListLi.forEach((li) => {
-    li.classList.remove('selected');
-    const input = li.querySelector('input');
-    if (input.checked === true) {
-      li.classList.add('selected');
-      formSorting.target = input.value;
-    }
-  });
+    </form> `;
 }
 
 export async function displayDataPageMedia(photographer, media) {
@@ -94,12 +35,11 @@ export async function displayDataPageMedia(photographer, media) {
 }
 
 export function sortingMedia(photographer, media) {
-  const formSorting = document.querySelector('.form_sorting');
+  const select = document.querySelector('select');
   const boxmedia = document.getElementById('boxmedia');
-  inputChoice();
   boxmedia.innerHTML = '';
   let newMedia;
-  switch (formSorting.target) {
+  switch (select.value) {
     case 'popularity':
       newMedia = media.sort((a, b) => b.likes - a.likes);
       displayDataPageMedia(photographer, newMedia);
@@ -118,16 +58,119 @@ export function sortingMedia(photographer, media) {
   }
 }
 
-export function iconUpUp() {
-  const iconSortDown = document.getElementById('icon_sort_down');
-  const iconSortUp = document.getElementById('icon_sort_up');
-  iconSortUp.classList.remove('hidden');
-  iconSortDown.classList.add('hidden');
+// const selector = document.querySelector('.custom-select');
+
+function sortMenuDrop(e) {
+  e.preventDefault();
+  const selector = document.querySelector('.custom-select');
+  const select = selector.children[0];
+  const dropDown = document.createElement('ul');
+  dropDown.className = 'selector-options';
+
+  [...select.children].forEach((option) => {
+    const dropDownOption = document.createElement('li');
+    dropDownOption.className = 'optionLi';
+    dropDownOption.textContent = option.textContent;
+
+    dropDownOption.addEventListener('mousedown', (e) => {
+      e.stopPropagation();
+      select.value = option.value;
+      selector.value = option.value;
+      select.dispatchEvent(new Event('change'));
+      selector.dispatchEvent(new Event('change'));
+      dropDown.remove();
+    });
+
+    dropDown.appendChild(dropDownOption);
+  });
+
+  selector.appendChild(dropDown);
+
+  // handle click out
+  document.addEventListener('click', (e) => {
+    if (!selector.contains(e.target)) {
+      dropDown.remove();
+    }
+  });
+
+  document.addEventListener('keyup', (e) => {
+    if (dropDown !== null && document.activeElement !== select) {
+      dropDown.remove();
+    }
+  });
 }
 
-export function iconUpDown() {
-  const iconSortDown = document.getElementById('icon_sort_down');
-  const iconSortUp = document.getElementById('icon_sort_up');
-  iconSortUp.classList.add('hidden');
-  iconSortDown.classList.remove('hidden');
+function styleHoverSort(item) {
+  item.style.color = '#000000';
+  item.style.backgroundColor = '#DB8876';
 }
+function styleNoHoverSort(item1, item2) {
+  item1.style.color = '#fff';
+  item1.style.backgroundColor = '#901C1C';
+  item2.style.color = '#fff';
+  item2.style.backgroundColor = '#901C1C';
+}
+
+export function colorHoverSort() {
+  const dropDown = document.querySelector('ul');
+  const select = document.querySelector('.div_select select');
+  const listLi = document.querySelectorAll('li');
+  if (select.value === 'popularity' && dropDown !== null) {
+    styleHoverSort(listLi[0]);
+    styleNoHoverSort(listLi[1], listLi[2]);
+  }
+  if (select.value === 'date' && dropDown !== null) {
+    styleHoverSort(listLi[1]);
+    styleNoHoverSort(listLi[0], listLi[2]);
+  }
+  if (select.value === 'titre' && dropDown !== null) {
+    styleHoverSort(listLi[2]);
+    styleNoHoverSort(listLi[0], listLi[1]);
+  }
+}
+
+function accessSort() {
+  const selector = document.querySelector('.custom-select');
+  // const dropDown = document.querySelector('ul');
+  colorHoverSort();
+  selector.addEventListener('change', () => colorHoverSort());
+}
+
+export function setupSelector(selector) {
+  selector.addEventListener('mousedown', (e) => sortMenuDrop(e));
+
+  selector.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      sortMenuDrop(e);
+      accessSort();
+    }
+  });
+}
+
+
+// dechet
+// const dropDown = document.querySelector('ul');
+//       const select = document.querySelector('.div_select select');
+//       if (dropDown !== null && document.activeElement === select){
+//         document.addEventListener('keyup', (e) => {if (e.key === 'Enter') {
+//           dropDown.remove();
+//         }})
+//       }
+
+
+// function stop(e) {
+//   const dropDown = document.querySelector('ul');
+//   const select = document.querySelector('.div_select select');
+// if (e.key === 'Enter' && dropDown !== null && document.activeElement === select) {
+//   dropDown.remove();
+// }}
+
+// function closeSort() {
+//   const ulElt = document.querySelector('.selector-options');
+//   document.addEventListener('keypress', (e) => {
+//     const dropDown = document.querySelector('ul');
+//     if (e.key === 'Enter' && dropDown !== null && (dropDown[0].style.color == '#000000' || dropDown[1].style.color == '#000000' || dropDown[2].style.color == '#000000' )) {
+//       dropDown.remove();
+//     }
+//   });
+// }
