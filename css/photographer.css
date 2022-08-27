@@ -257,6 +257,7 @@ box-sizing: border-box;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.6);
     border : 10px solid #b64848;
     color:#fff;
+    transform: translateX(2px);
 }
 
 #message_send{
@@ -325,15 +326,17 @@ box-sizing: border-box;
     font-weight: 600;
   }
   
-  .custom-select select:hover,
+.custom-select select:hover,
+.custom-select:hover > select,
   .custom-select select:focus{
     background-color: #DB8876;
     color: #000000;
     box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
   }
 
+
 .custom-select:focus-within i{
-color: black;
+    color: black;
 }
 
 .fa-chevron-down{

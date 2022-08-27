@@ -11,10 +11,10 @@ export function getSelectMedia() {
     <form  class="form_sorting"> 
       <div class="div_select">
           <label class="custom-select">Trier par
-            <select name="tri" aria-Description="utiliser les flêches du bas ou du haut, le tri des photos est automatiquement fait par popularité, date ou titre" class="">
-              <option class="" value="popularity" aria-label="tri fait par popularité" aria-selected="true" selected>Popularité</option>
-              <option class="" value="date" aria-label="tri fait par date">Date</option>
-              <option class="" value="titre" aria-label="tri fait par titre">Titre</option>
+            <select name="tri" aria-roledescription="popularité, date ou titre. Utiliser les flêches du bas ou du haut, le tri des oeuvres est automatiquement fait.">
+              <option class="" value="popularity" aria-label="les oeuvres ont été triées par popularité" selected>Popularité</option>
+              <option class="" value="date" aria-label="les oeuvres ont été triées par date">Date</option>
+              <option class="" value="titre" aria-label="les oeuvres ont été triées par titre">Titre</option>
             </select>
             <i class="fa-solid fa-chevron-down"></i>
           </label>

@@ -10,7 +10,7 @@
   </head>
   <body>
     <header class="header_page">
-      <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" aria-Description="retour vers la page d'accueil"/></a>
+      <a href="index.html" aria-label="logo Fisheye" aria-roledescription="retour vers la page d'accueil"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
     </header>
   
     <main id="main">
@@ -30,9 +30,9 @@
           <form id="form_contact" tabindex="0" aria-label="formulaire de contact avec le photographe" action="" method="post" >
             <div>
               <label for="Firstname">Prénom</label>
-              <input tabindex="0" class="form_input entry" type="text" id="Firstname" name="prenom" title="prenom" required/>
+              <input type="text" id="Firstname" tabindex="0" class="form_input entry"  name="prenom" title="prenom" required/>
               <label  for="Lastname">Nom</label>
-              <input tabindex="0" class="form_input entry" type="text" id="Lastname" name="nom" title="nom" required/>
+              <input type="text" id="Lastname" tabindex="0" class="form_input entry" name="nom" title="nom" required/>
               <label for="email">Email</label>
               <input tabindex="0" class="form_input entry" type="email" id="email" name="email" title="email" required/>
               <label for="your_message">Message</label>
@@ -49,6 +49,7 @@
       </section>
     </main>
     <script  src="scripts/pages/photographer.js" type="module"></script>
+    <noscript><div id='noscript_warning'>Veuillez s'il vous plait activez JavaScript afin de bénéficier des fonctionnalités du site</div></noscript>
   </body>
 </html>
 

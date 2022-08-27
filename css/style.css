@@ -13,6 +13,13 @@ body {
     font-weight: 400; 
 }
 
+.logo:focus-visible,
+#h1_index:focus-visible,
+.photographer_section article a:focus-visible{
+    outline: none;
+    border: 3px solid #D3573C;
+}
+
 header {
     display: flex;
     flex-direction: row;
