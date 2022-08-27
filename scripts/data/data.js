@@ -35,9 +35,3 @@ export function getMedias(data, photographerId) {
   console.log('médias du photographe', media);
   return media;
 }
-
-export function updateTotalLikes(numberToAdd) {
-  const totalDOM = document.querySelector('.totalLikesTitle');
-  const newTotal = parseInt(totalDOM.textContent, 10) + numberToAdd;
-  totalDOM.textContent = newTotal;
-}

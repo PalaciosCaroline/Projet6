@@ -1,5 +1,10 @@
-import { updateTotalLikes } from '../data/data.js';
 import { displayModal } from '../utils/contactForm.js';
+
+function updateTotalLikes(numberToAdd) {
+  const totalDOM = document.querySelector('.totalLikesTitle');
+  const newTotal = parseInt(totalDOM.textContent, 10) + numberToAdd;
+  totalDOM.textContent = newTotal;
+}
 
 export default function PageMediaFactory(photograph, data) {
   const pictureVideo = `../assets/${data.photographerId}/${data.video}`;
@@ -42,7 +47,6 @@ export default function PageMediaFactory(photograph, data) {
     const a = document.createElement('a');
     divmedia.appendChild(a);
     a.rel = 'lightbox';
-    // a.ariaLabel = data.title;
     a.className = 'link_card';
     a.ariaRoleDescription = 'lien vers l\'affichage en grand';
     a.title = data.title;
@@ -62,7 +66,6 @@ export default function PageMediaFactory(photograph, data) {
       const imgphoto = document.createElement('video');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute('src', pictureVideo);
-      // imgphoto.setAttribute('controls', 'false');
       a.appendChild(imgphoto);
     }
     const divtext = document.createElement('div');
@@ -91,16 +94,14 @@ export default function PageMediaFactory(photograph, data) {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) + 1;
         btnLikes.dataset.liked = true;
         heart.classList.remove('effectSmall');
-        heart.ariaRoleDescription = 'like ajouté';
-        btnLikes.ariaLabel = `${data.likes + 1}likes`;
+        btnLikes.ariaLabel = `like ajouté, ${data.likes + 1} likes`;
         heart.className = 'fas fa-heart heart';
         heart.classList.add('effectBig');
         updateTotalLikes(+1);
       } else {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) - 1;
         heart.classList.remove('effectBig');
-        heart.ariaRoleDescription = 'like retiré';
-        btnLikes.ariaLabel = `${data.likes}likes`;
+        btnLikes.ariaLabel = `like retiré, ${data.likes} likes`;
         heart.className = 'far fa-heart heart';
         heart.classList.add('effectSmall');
         btnLikes.dataset.liked = false;
@@ -118,15 +119,19 @@ export default function PageMediaFactory(photograph, data) {
     const divlike = document.createElement('div');
     TotalLikessum.classList.add('cardLikes');
     const totalLiketitle = document.createElement('span');
+    totalLiketitle.ariaRoleDescription = 'nombre total';
     totalLiketitle.classList.add('totalLikesTitle');
+    totalLiketitle.tabIndex = 0;
     totalLiketitle.textContent = totallikes;
+    totalLiketitle.ariaRoleDescription = 'likes';
     const heart2 = document.createElement('img');
     heart2.setAttribute('src', '../assets/icons/heartblack.png');
-    heart2.alt = 'likes';
+    heart2.alt = 'likes totals';
     heart2.tabIndex = 0;
-    heart2.ariaRoleDescription = `${totallikes}likes, tarif du photographe${photograph.price}€ par jour`;
     const pricejour = document.createElement('span');
+    // pricejour.ariaRoleDescription = 'tarif du photographe';
     pricejour.textContent = `${photograph.price}€ / jour`;
+    pricejour.tabIndex = 0;
     TotalLikessum.appendChild(divlike);
     divlike.appendChild(totalLiketitle);
     divlike.appendChild(heart2);

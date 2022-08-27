@@ -31,12 +31,8 @@ async function initPage() {
   // boxmedia with popularity default choice
   sortingMedia(photographer, media);
   // boxmedia if choice another selection of sorting
-  const select = document.querySelector('select');
-
+  // const select = document.querySelector('select');
   const selector = document.querySelector('.custom-select');
-  // const dropDown = document.querySelector('dropDown');
-  // select.addEventListener('change', () => sortingMedia(photographer, media));
-
   setupSelector(selector);
   selector.addEventListener('change', (e) => {
     sortingMedia(photographer, media);

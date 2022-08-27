@@ -5,7 +5,8 @@ background-color: #b64848;
 color: #fff;
 }
 
-.header_page a:focus-visible{
+.header_page a:focus-visible,
+.photograph-header h1:focus-visible {
     outline: none;
     border: 3px solid #D3573C;
 }
