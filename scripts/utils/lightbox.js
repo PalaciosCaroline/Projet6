@@ -131,23 +131,26 @@ export default class Lightbox {
     dom.setAttribute('id', 'lightbox');
     dom.innerHTML = `
     <div id="lightbox" type='modal' role=”dialog" class="dialog">
-      <nav>
-          <button class="lightbox_close" aria-label="ferme la boite dialog">
-              <i class="fa-solid fa-xmark"></i>
-          </button>
-          <button class="lightbox_next" aria-label="image suivante" tabIndex=1>
-              <i class="fas fa-chevron-right"></i>
-          </button>
-          <button class="lightbox_previous" aria-label="image précédante">
-              <i class="fas fa-chevron-left"></i>
-          </button>
-      </nav>
-      <div class="lightbox_container">
-          <div class="box_media_lightbox" tabIndex=1>
-          </div>
-          <div class="box_text">  
-              <h3>${title}</h3>
-          </div>
+      <div class="lightbox_position">
+        <div class="top_lightbox"></div>
+        <nav>
+            <button class="lightbox_close" aria-label="ferme la boite dialog">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button class="lightbox_next" aria-label="image suivante" tabIndex=1>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="lightbox_previous" aria-label="image précédante">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </nav>
+        <div class="lightbox_container">
+            <div class="box_media_lightbox" tabIndex=1>
+            </div>
+            <div class="box_text">  
+                <h3>${title}</h3>
+            </div>
+        </div>
       </div>
     </div>`;
     dom
