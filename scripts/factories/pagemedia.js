@@ -21,6 +21,8 @@ export default function PageMediaFactory(photograph, data) {
     const h2 = document.createElement('h2');
     h2.textContent = `${photograph.city}, ${photograph.country}`;
     h2.classList.add('photograph_city');
+    h2.tabIndex = 0;
+    h2.ariaRoleDescription = `tarif du photographe ${photograph.price}€ par jour`;
     const legende = document.createElement('p');
     legende.textContent = photograph.tagline;
     const divPortrait = document.createElement('div');
