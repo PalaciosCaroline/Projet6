@@ -1,3 +1,5 @@
+import { enableBodyScroll, disableBodyScroll } from './body_scroll_lock.js';
+
 /*
  *@property {HTMLElement} element
  *@property {string[]} gallery path to media of ligthbox
@@ -35,6 +37,7 @@ export default class Lightbox {
     this.titles = titles;
     this.onKeyup = this.onKeyup.bind(this);
     document.body.appendChild(this.element);
+    disableBodyScroll(this.element);
     document.addEventListener('keyup', this.onKeyup);
   }
 
@@ -77,6 +80,7 @@ export default class Lightbox {
   close(e) {
     e.preventDefault();
     this.element.classList.add('hidden');
+    enableBodyScroll(this.element);
     this.element.remove();
     document.removeEventListener('keyup', this.onkeyup);
   }
@@ -132,7 +136,6 @@ export default class Lightbox {
     dom.innerHTML = `
     <div id="lightbox" type='modal' role=”dialog" class="dialog">
       <div class="lightbox_position">
-        <div class="top_lightbox"></div>
         <nav>
             <button class="lightbox_close" aria-label="ferme la boite dialog">
                 <i class="fa-solid fa-xmark"></i>
