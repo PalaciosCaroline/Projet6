@@ -133,7 +133,6 @@ export default function PageMediaFactory(photograph, data) {
     const pricejour = document.createElement('span');
     // pricejour.ariaRoleDescription = 'tarif du photographe';
     pricejour.textContent = `${photograph.price}€ / jour`;
-    pricejour.tabIndex = 0;
     TotalLikessum.appendChild(divlike);
     divlike.appendChild(totalLiketitle);
     divlike.appendChild(heart2);
