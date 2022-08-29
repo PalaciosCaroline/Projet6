@@ -50,6 +50,7 @@ export default function PageMediaFactory(photograph, data) {
     divmedia.appendChild(a);
     a.rel = 'lightbox';
     a.className = 'link_card';
+    a.ariaLabel = data.description;
     a.ariaRoleDescription = 'lien vers l\'affichage en grand';
     a.title = data.title;
     a.setAttribute('id', `${data.title}`);
@@ -59,6 +60,7 @@ export default function PageMediaFactory(photograph, data) {
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute('src', pictureImg);
       imgphoto.alt = data.title;
+      imgphoto.ariaLabel = data.description;
       a.appendChild(imgphoto);
     } else if (data.video) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.video}`);
@@ -67,6 +69,7 @@ export default function PageMediaFactory(photograph, data) {
       iconVideo.className = 'fa-regular fa-circle-play iconVideo';
       const imgphoto = document.createElement('video');
       imgphoto.classList.add('cardImg');
+      imgphoto.ariaLabel = data.description;
       imgphoto.setAttribute('src', pictureVideo);
       a.appendChild(imgphoto);
     }
@@ -97,6 +100,7 @@ export default function PageMediaFactory(photograph, data) {
         btnLikes.dataset.liked = true;
         heart.classList.remove('effectSmall');
         btnLikes.ariaLabel = `like ajouté, ${data.likes + 1} likes`;
+        btnLikes.ariaRoleDescription = 'retirer un like à l\'oeuvre';
         heart.className = 'fas fa-heart heart';
         heart.classList.add('effectBig');
         updateTotalLikes(+1);
@@ -104,6 +108,7 @@ export default function PageMediaFactory(photograph, data) {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) - 1;
         heart.classList.remove('effectBig');
         btnLikes.ariaLabel = `like retiré, ${data.likes} likes`;
+        btnLikes.ariaRoleDescription = 'donner un like à l\'oeuvre';
         heart.className = 'far fa-heart heart';
         heart.classList.add('effectSmall');
         btnLikes.dataset.liked = false;

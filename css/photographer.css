@@ -6,7 +6,8 @@ color: #fff;
 }
 
 .header_page a:focus-visible,
-.photograph-header h1:focus-visible {
+.photograph-header h1:focus-visible,
+.photograph-header h2:focus-visible {
     outline: none;
     border: 3px solid #D3573C;
 }
@@ -26,7 +27,12 @@ color: #fff;
     color: #D3573C;
     font-size: 4rem;
     margin-bottom:20px;
-    margin-top: 0;
+    font-weight: 400;
+    margin: 0;
+}
+
+.photograph-header h2{
+    margin-top: 10px;
 }
 
 .photograph-header .photograph_city  {
@@ -449,13 +455,18 @@ color: #000000;
 }
 
 #boxmedia .card a:focus-visible {
-    border: 8px solid #D3573C;
+    border: 6px solid #D3573C;
+    outline: none;
+    border-radius: 10px;
+}
+
+#boxmedia .card a{
+    /* background-color: #cd5959;
+    background-color: #d88876; */
     display: block;
     box-sizing: border-box; 
     height: 100%;
     width: 100%; 
-    outline: none;
-    border-radius: 10px;
 }
  
 @media screen and (max-width: 1080px) {
@@ -498,7 +509,7 @@ color: #000000;
 }
 
 #boxmedia .card_media {
-    width :98%; 
+    width :100%; 
     height: 300px;
     overflow: hidden;
     border-radius: 10px;
@@ -506,16 +517,19 @@ color: #000000;
 }
 
 #boxmedia .card .cardImg {
-    width :100%;
-    height: 100%; 
+    width :98%;
+    height: 98%; 
     object-fit: cover;  
     object-position: center 30%; 
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
-#boxmedia .card video {
-    width :100%;
-    height: 100%;
-    object-fit: cover;
+#boxmedia .card a:hover .cardImg {
+    height: 96%;
+    width: 96%; 
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+    transform: translateX(5px);
 }
 
 .iconVideo{

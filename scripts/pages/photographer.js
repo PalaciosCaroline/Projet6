@@ -30,7 +30,7 @@ async function initPage() {
   getSelectMedia();
   // boxmedia with popularity default choice
   sortingMedia(photographer, media);
-  // boxmedia if choice another selection of sorting
+  // boxmedia if change choice of sorting
   // const select = document.querySelector('select');
   const selector = document.querySelector('.custom-select');
   setupSelector(selector);

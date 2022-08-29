@@ -7,7 +7,6 @@ export function getSelectMedia() {
   document.body.appendChild(filterMedia);
   filterMedia.parentNode.insertBefore(boxmedia, filterMedia.nextSibling);
   filterMedia.innerHTML = `
-
     <form  class="form_sorting"> 
       <div class="div_select">
           <label class="custom-select">Trier par
@@ -133,7 +132,6 @@ export function colorHoverSort() {
 
 function accessSort() {
   const selector = document.querySelector('.custom-select');
-  // const dropDown = document.querySelector('ul');
   colorHoverSort();
   selector.addEventListener('change', () => colorHoverSort());
 }
