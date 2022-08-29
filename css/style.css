@@ -55,9 +55,6 @@ header {
 .photographer_section {
     display : flex;
     flex-wrap: wrap; 
-    /* display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30%, 360px)); 
-    gap: 50px 30px;     */
     margin-top: 100px;  
     justify-content: space-between;
 }
@@ -75,8 +72,6 @@ header {
 @media screen and (max-width: 990px){
     .photographer_section {
         margin: 70px 7% 0 7%;
-        /* grid-template-columns: repeat(auto-fit, minmax(45%, 360px));
-        gap: 30px 20px;  */
     } 
     .photographer_section article {
         width: 45%;

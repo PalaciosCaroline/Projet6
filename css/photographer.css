@@ -454,15 +454,15 @@ color: #000000;
     box-sizing: border-box;
 }
 
-#boxmedia .card a:focus-visible {
-    border: 6px solid #D3573C;
+#boxmedia .card a:focus-visible .cardImg{
+    border: 8px solid #D3573C;
     outline: none;
-    border-radius: 10px;
+    height: 95%;
+    width: 95%; 
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
 }
 
 #boxmedia .card a{
-    /* background-color: #cd5959;
-    background-color: #d88876; */
     display: block;
     box-sizing: border-box; 
     height: 100%;
@@ -529,7 +529,7 @@ color: #000000;
     height: 96%;
     width: 96%; 
     box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
-    transform: translateX(5px);
+    transform: translateY(5px);
 }
 
 .iconVideo{
