@@ -683,7 +683,7 @@ color: #000000;
     background-color: #fff;
     border : none;
     top : 19%;
-    width: 9%;
+    width: 8.5%;
     position:fixed;
     z-index:11;
     cursor : pointer;
@@ -787,7 +787,7 @@ color: #D3573C;
 .lightbox_position{
 position: absolute;
 top:50px;
-height: calc(100vh - 50);
+height: 93vh;
 margin : 0 14% 0 14%;
 }
 
