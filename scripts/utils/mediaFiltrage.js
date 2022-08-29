@@ -63,6 +63,9 @@ export function sortingMedia(photographer, media) {
 
 function sortMenuDrop(e) {
   e.preventDefault();
+  if(document.querySelector('ul') !== null){
+  return;
+  }
   const selector = document.querySelector('.custom-select');
   const select = selector.children[0];
   const dropDown = document.createElement('ul');
@@ -113,9 +116,12 @@ function styleNoHoverSort(item1, item2) {
 }
 
 export function colorHoverSort() {
+  console.log("colorHoverSort");
   const dropDown = document.querySelector('ul');
   const select = document.querySelector('.div_select select');
   const listLi = document.querySelectorAll('li');
+  console.log(select.value);
+  console.log(listLi);
   if (select.value === 'popularity' && dropDown !== null) {
     styleHoverSort(listLi[0]);
     styleNoHoverSort(listLi[1], listLi[2]);
@@ -133,7 +139,8 @@ export function colorHoverSort() {
 function accessSort() {
   const selector = document.querySelector('.custom-select');
   colorHoverSort();
-  selector.addEventListener('change', () => colorHoverSort());
+  selector.addEventListener('change', () => {
+    colorHoverSort()});
 }
 
 export function setupSelector(selector) {

@@ -383,7 +383,6 @@ color: #000000;
     position:absolute;
     top:calc(-52px + 38%);
     left: calc(112px + 4%);
-    /* left: calc(212px + 4%); */
     letter-spacing : 1px;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.5);  
     z-index: 99;

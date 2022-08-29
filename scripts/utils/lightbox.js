@@ -83,6 +83,9 @@ export default class Lightbox {
 
   close(e) {
     e.preventDefault();
+    const allimgs = document.querySelectorAll('img');
+    const selectedImage = Array.from(allimgs).find((elt) => elt.src.includes(this.url.split('../')[1]));
+    selectedImage.closest('a').focus();
     this.element.classList.add('hidden');
     enableBodyScroll(this.element);
     this.element.remove();
