@@ -20,6 +20,18 @@ export default class Lightbox {
     links.forEach((link) => link.addEventListener('keypress', (e) => {
       e.preventDefault();
       if (e.key === 'Enter' || e.key === ' ') {
+        const lightbox = document.querySelector('#lightbox');
+        if ((e.key === 'Enter' || e.key === ' ') && lightbox !== null) {
+          const video = lightbox.querySelector('video');
+          if (video.paused) {
+            e.preventDefault();
+            video.play();
+          } else {
+            video.pause();
+            e.preventDefault();
+          }
+          return;
+        }
         // eslint-disable-next-line no-new
         new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), e.currentTarget.getAttribute('arias'), gallery, titles, ariaLinks);
       }
@@ -37,9 +49,11 @@ export default class Lightbox {
     this.titles = titles;
     this.ariaLinks = ariaLinks;
     this.onKeyup = this.onKeyup.bind(this);
+    this.onKeydown = this.onKeydown.bind(this);
     document.body.appendChild(this.element);
     disableBodyScroll(this.element);
     document.addEventListener('keyup', this.onKeyup);
+    this.element.addEventListener('keydown', this.onKeydown);
   }
 
   loadImage(url, title, arias) {
@@ -131,6 +145,22 @@ export default class Lightbox {
     }
   }
 
+ 
+  onKeydown(e) {
+    if (e.key === 'Enter' && this.url.includes('mp4')) {
+      e.preventDefault();
+      const lightbox = document.querySelector('#lightbox');
+      const video = lightbox.querySelector('video');
+      if (video.paused) {
+        e.preventDefault();
+        video.play();
+      } else {
+        video.pause();
+        e.preventDefault();
+      }
+    }
+  }
+
   /*
    *@param {string} url  URL of img
    *@param {string} title of url
@@ -171,19 +201,22 @@ export default class Lightbox {
     dom
       .querySelector('.lightbox_previous')
       .addEventListener('click', this.previous.bind(this));
-    dom
-      .querySelector('#lightbox')
-      .addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && this.url.includes('mp4')) {
-          const lightbox = document.querySelector('#lightbox');
-          const video = lightbox.querySelector('video');
-          if (video.paused) {
-            video.play();
-          } else {
-            video.pause();
-          }
-        }
-      });
+    // dom
+    //   .querySelector('#lightbox')
+    //   .addEventListener('keydown', (e) => {
+    //     if (e.key === 'Enter' && this.url.includes('mp4')) {
+    //       e.preventDefault();
+    //       const lightbox = document.querySelector('#lightbox');
+    //       const video = lightbox.querySelector('video');
+    //       if (video.paused) {
+    //         video.play();
+    //       } else {
+    //         video.pause();
+    //       }
+    //     }
+    //   });
     return dom;
   }
 }
+
+
