@@ -711,7 +711,8 @@ color: #000000;
 cursor : pointer;
 }
 
-#lightbox button:hover i {
+#lightbox button:hover i,
+#lightbox button:focus i {
 transform : scale(1.2);
 color: #D3573C;
 }
@@ -746,7 +747,7 @@ color: #D3573C;
 }
 
 @keyframes slideEffect {
-    0%{transform: translate(100%, -100%)}
+    0%{transform: translate(75%, -100%)}
     100% {transform:  translate(0, 0)}
 } 
 

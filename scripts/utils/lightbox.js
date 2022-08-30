@@ -57,7 +57,6 @@ export default class Lightbox {
       // image.ariaLabel = this.title + this.arias;
       image.alt = this.title + this.arias;
       image.src = url;
-      // image.ariaLabel = this.arias;
       image.tabIndex = 1;
       image.focus();
     } else if (url.includes('mp4')) {
@@ -74,7 +73,7 @@ export default class Lightbox {
       video.focus();
     }
     h3.textContent = title;
-    h3.tabIndex = 1;
+    // h3.tabIndex = 1;
   }
 
   /* close the lightbox
@@ -83,7 +82,7 @@ export default class Lightbox {
 
   close(e) {
     e.preventDefault();
-    const allimgs = document.querySelectorAll('img');
+    const allimgs = document.querySelectorAll('img, video');
     const selectedImage = Array.from(allimgs).find((elt) => elt.src.includes(this.url.split('../')[1]));
     selectedImage.closest('a').focus();
     this.element.classList.add('hidden');
@@ -155,7 +154,7 @@ export default class Lightbox {
             </button>
         </nav>
         <div class="lightbox_container">
-            <div class="box_media_lightbox" tabIndex=1>
+            <div class="box_media_lightbox">
             </div>
             <div class="box_text">  
                 <h3>${title}</h3>
@@ -172,6 +171,19 @@ export default class Lightbox {
     dom
       .querySelector('.lightbox_previous')
       .addEventListener('click', this.previous.bind(this));
+    dom
+      .querySelector('#lightbox')
+      .addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && this.url.includes('mp4')) {
+          const lightbox = document.querySelector('#lightbox');
+          const video = lightbox.querySelector('video');
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }
+      });
     return dom;
   }
 }
