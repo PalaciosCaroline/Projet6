@@ -201,20 +201,6 @@ export default class Lightbox {
     dom
       .querySelector('.lightbox_previous')
       .addEventListener('click', this.previous.bind(this));
-    // dom
-    //   .querySelector('#lightbox')
-    //   .addEventListener('keydown', (e) => {
-    //     if (e.key === 'Enter' && this.url.includes('mp4')) {
-    //       e.preventDefault();
-    //       const lightbox = document.querySelector('#lightbox');
-    //       const video = lightbox.querySelector('video');
-    //       if (video.paused) {
-    //         video.play();
-    //       } else {
-    //         video.pause();
-    //       }
-    //     }
-    //   });
     return dom;
   }
 }
