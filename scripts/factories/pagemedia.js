@@ -49,7 +49,7 @@ export default function PageMediaFactory(photograph, data) {
     divmedia.appendChild(a);
     a.className = 'link_card';
     a.rel = 'lightbox';
-    a.title = `${data.title}.${data.description}.vers l\'affichage en grand`;
+    a.title = `${data.title}.${data.description}.vers l'affichage en grand`;
     a.setAttribute('id', `${data.title}`);
     if (data.image) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.image}`);
@@ -65,7 +65,6 @@ export default function PageMediaFactory(photograph, data) {
       iconVideo.className = 'fa-regular fa-circle-play iconVideo';
       const imgphoto = document.createElement('video');
       imgphoto.classList.add('cardImg');
-      // imgphoto.ariaLabel = data.description;
       imgphoto.setAttribute('src', pictureVideo);
       a.appendChild(imgphoto);
     }
@@ -73,7 +72,6 @@ export default function PageMediaFactory(photograph, data) {
     divtext.classList.add('card_text');
     const titlemedia = document.createElement('h3');
     titlemedia.textContent = data.title;
-    titlemedia.ariaHidden = true;
     const btnLikes = document.createElement('button');
     btnLikes.classList.add('btnLikes');
     const btnLiketitle = document.createElement('span');

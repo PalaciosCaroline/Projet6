@@ -1,3 +1,4 @@
+import { enableBodyScroll, disableBodyScroll } from './body_scroll_lock.js';
 /*
  *@property {HTMLElement} element
  *@property {string[]} gallery path to media of ligthbox
@@ -27,6 +28,7 @@ export default class Lightbox {
     this.titles = titles;
     this.onKeyup = this.onKeyup.bind(this);
     document.body.appendChild(this.element);
+    disableBodyScroll(this.element);
     document.addEventListener('keyup', this.onKeyup);
   }
 
@@ -71,6 +73,7 @@ export default class Lightbox {
     const selectedImage = Array.from(allimgs).find((elt) => elt.src.includes(this.url.split('../')[1]));
     selectedImage.closest('a').focus();
     this.element.classList.add('hidden');
+    enableBodyScroll(this.element);
     this.element.remove();
     document.removeEventListener('keyup', this.onkeyup);
   }
