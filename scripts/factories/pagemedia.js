@@ -49,7 +49,7 @@ export default function PageMediaFactory(photograph, data) {
     divmedia.appendChild(a);
     a.className = 'link_card';
     a.rel = 'lightbox';
-    a.title = `${data.title}/'lien vers l\'affichage en grand/${data.description}`;
+    a.title = `${data.title}.${data.description}.vers l\'affichage en grand`;
     a.setAttribute('id', `${data.title}`);
     if (data.image) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.image}`);

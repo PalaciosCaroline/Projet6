@@ -70,13 +70,11 @@ export function displayModal() {
   formContact.style.display = 'block';
   h2.focus();
   messageSend.classList.add('hidden');
-  // add all the elements inside modal which you want to make focusable
+  // keep focus in the modal
   const focusableElements = 'button, input, textarea, [tabindex]:not([tabindex="-1"])';
-  const modalForm = document.querySelector('#modalForm'); // select the modal by it's id
-  // get first element to be focused inside modal
+  const modalForm = document.querySelector('#modalForm');
   const firstFocusableElement = modalForm.querySelectorAll(focusableElements)[0];
   const focusableContent = modalForm.querySelectorAll(focusableElements);
-  // get last element to be focused inside modal
   const lastFocusableElement = focusableContent[focusableContent.length - 1];
   document.addEventListener('keydown', (e) => {
     const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
@@ -88,14 +86,9 @@ export function displayModal() {
         lastFocusableElement.focus(); // add focus for the last focusable element
         e.preventDefault();
       }
-    } else { // if tab key is pressed
-    // if focused => to last focusable elt then focus first focusable
-      // eslint-disable-next-line no-lonely-if
-      if (document.activeElement === lastFocusableElement) {
-        // add focus for the first focusable element
-        firstFocusableElement.focus();
-        e.preventDefault();
-      }
+    } else if (document.activeElement === lastFocusableElement) {
+      firstFocusableElement.focus();
+      e.preventDefault();
     }
   });
   firstFocusableElement.focus();

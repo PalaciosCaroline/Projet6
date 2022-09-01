@@ -12,6 +12,14 @@ color: #fff;
     border: 3px solid #D3573C;
 }
 
+.modal header img,
+a,
+button,
+.custom-select .selector-options li,
+.custom-select select {
+    cursor: pointer;
+}
+
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -69,7 +77,6 @@ box-sizing: border-box;
         justify-content: space-between;
         flex-wrap: wrap;
         align-items: flex-start;
-        /* flex-direction: column; */
     }
 
     .photograph-header h1 {
@@ -91,7 +98,6 @@ box-sizing: border-box;
     } 
 
     .contact_button {
-        /* align-self: flex-end;  */
         margin-left : 0;
     }
     .photograph-header h1{
@@ -129,7 +135,6 @@ box-sizing: border-box;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
-    cursor: pointer;
     outline: none;
 }
 
@@ -196,10 +201,6 @@ box-sizing: border-box;
     align-items: baseline;
     width: 100%;
     margin-top: 0;
-}
-
-.modal header img {
-    cursor: pointer;
 }
  
 @media screen and (max-width: 700px) {
@@ -324,7 +325,6 @@ box-sizing: border-box;
     font-size: 1.2rem;
     padding: 5px 20px 5px 25px;
     margin-top: 5px;
-    cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -395,7 +395,6 @@ color: #000000;
     display: flex;
     align-items: center;
     padding: 0 15px 0 27px;
-    cursor: pointer;
     transition: background 0.3s ease;
   }
 
@@ -693,7 +692,6 @@ color: #000000;
     width: 8.5%;
     position:fixed;
     z-index:11;
-    cursor : pointer;
     height: 60%;
 }
 
@@ -712,7 +710,6 @@ color: #000000;
     width: 8vw;
     border : none;
     font-size: 3.3rem;
-    cursor : pointer;
 }
 
 #lightbox button:hover {

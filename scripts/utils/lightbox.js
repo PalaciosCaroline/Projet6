@@ -33,8 +33,8 @@ export default class Lightbox {
   loadImage(url, title) {
     this.url = url;
     this.title = title;
-    const h3Title = this.title.split('/')[0];
-    const description = this.title.split('/')[2];
+    const h3Title = this.title.split('.')[0];
+    const description = this.title.split('.')[1];
     const boxMedia = this.element.querySelector('.box_media_lightbox');
     const h3 = this.element.querySelector('h3');
     boxMedia.innerHTML = '';
@@ -65,7 +65,6 @@ export default class Lightbox {
   /* close the lightbox
    *@param {Mouseevent|keyBoardEvent} e
    */
-
   close(e) {
     e.preventDefault();
     const allimgs = document.querySelectorAll('img, video');

@@ -99,7 +99,7 @@ function sortMenuDrop(e) {
     }
   });
 }
-
+// style of li in dropdown select sort
 function styleHoverSort(item) {
   item.style.color = '#000000';
   item.style.backgroundColor = '#DB8876';
@@ -136,7 +136,7 @@ function accessSort() {
     colorHoverSort();
   });
 }
-
+// constructor of visual select list
 export function setupSelector(selector) {
   selector.addEventListener('mousedown', (e) => sortMenuDrop(e));
   selector.addEventListener('keydown', (e) => {
