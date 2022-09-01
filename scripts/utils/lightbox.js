@@ -75,7 +75,7 @@ export default class Lightbox {
     this.element.classList.add('hidden');
     enableBodyScroll(this.element);
     this.element.remove();
-    document.removeEventListener('keyup', this.onkeyup);
+    document.removeEventListener('keyup', this.onKeyup);
   }
 
   /* go to the next
@@ -105,6 +105,7 @@ export default class Lightbox {
   /*
    *@param {KeyBoardEvent} e
    */
+
   onKeyup(e) {
     if (e.key === 'Escape') {
       this.close(e);
