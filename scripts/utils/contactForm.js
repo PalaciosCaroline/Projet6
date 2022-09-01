@@ -7,7 +7,6 @@ const entries = document.querySelectorAll('.entry');
 const header = document.querySelector('#contact_modal > .modal > header');
 const messageSend = document.getElementById('message_send');
 const btnclose = header.querySelector('img');
-// const btnSubmit = document.getElementById('btnContactSubmit');
 
 function logUserInformations() {
   console.log('Données fournies par l\'utilisateur: ');

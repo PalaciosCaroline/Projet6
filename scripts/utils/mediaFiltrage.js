@@ -59,12 +59,10 @@ export function sortingMedia(photographer, media) {
   }
 }
 
-// const selector = document.querySelector('.custom-select');
-
 function sortMenuDrop(e) {
   e.preventDefault();
-  if(document.querySelector('ul') !== null){
-  return;
+  if (document.querySelector('ul') !== null) {
+    return;
   }
   const selector = document.querySelector('.custom-select');
   const select = selector.children[0];
@@ -75,7 +73,7 @@ function sortMenuDrop(e) {
     const dropDownOption = document.createElement('li');
     dropDownOption.className = 'optionLi';
     dropDownOption.textContent = option.textContent;
-
+    // change sort with mouseEvent
     dropDownOption.addEventListener('mousedown', (event) => {
       event.stopPropagation();
       select.value = option.value;
@@ -84,10 +82,8 @@ function sortMenuDrop(e) {
       selector.dispatchEvent(new Event('change'));
       dropDown.remove();
     });
-
     dropDown.appendChild(dropDownOption);
   });
-
   selector.appendChild(dropDown);
 
   // handle click out
@@ -96,7 +92,7 @@ function sortMenuDrop(e) {
       dropDown.remove();
     }
   });
-
+  // tab out
   document.addEventListener('keyup', () => {
     if (dropDown !== null && document.activeElement !== select) {
       dropDown.remove();
@@ -116,12 +112,9 @@ function styleNoHoverSort(item1, item2) {
 }
 
 export function colorHoverSort() {
-  console.log("colorHoverSort");
   const dropDown = document.querySelector('ul');
   const select = document.querySelector('.div_select select');
   const listLi = document.querySelectorAll('li');
-  console.log(select.value);
-  console.log(listLi);
   if (select.value === 'popularity' && dropDown !== null) {
     styleHoverSort(listLi[0]);
     styleNoHoverSort(listLi[1], listLi[2]);
@@ -140,12 +133,12 @@ function accessSort() {
   const selector = document.querySelector('.custom-select');
   colorHoverSort();
   selector.addEventListener('change', () => {
-    colorHoverSort()});
+    colorHoverSort();
+  });
 }
 
 export function setupSelector(selector) {
   selector.addEventListener('mousedown', (e) => sortMenuDrop(e));
-
   selector.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       sortMenuDrop(e);
@@ -153,32 +146,3 @@ export function setupSelector(selector) {
     }
   });
 }
-
-// dechet
-// const dropDown = document.querySelector('ul');
-//       const select = document.querySelector('.div_select select');
-//       if (dropDown !== null && document.activeElement === select){
-//         document.addEventListener('keyup', (e) => {if (e.key === 'Enter') {
-//           dropDown.remove();
-//         }})
-//       }
-
-// function stop(e) {
-//   const dropDown = document.querySelector('ul');
-//   const select = document.querySelector('.div_select select');
-// if (e.key === 'Enter' && dropDown !== null && document.activeElement === select) {
-//   dropDown.remove();
-// }}
-
-// function closeSort() {
-//   const ulElt = document.querySelector('.selector-options');
-//   document.addEventListener('keypress', (e) => {
-//     const dropDown = document.querySelector('ul');
-/*     if (e.key === 'Enter' && dropDown !== null
-* && (dropDown[0].style.color == '#000000'
-* || dropDown[1].style.color == '#000000' || dropDown[2].style.color == '#000000' )) * {
-*/
-//       dropDown.remove();
-//     }
-//   });
-// }

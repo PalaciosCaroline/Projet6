@@ -10,11 +10,11 @@ import PageMediaFactory from '../factories/pagemedia.js';
 import Lightbox from '../utils/lightbox.js';
 import { getUserModalDOM } from '../utils/contactForm.js';
 
-// header photograph
+// header photographer
 export default async function displayDataPageHeader(photographer, data) {
   const mediaModel = PageMediaFactory(photographer, data);
   const getUserHeaderDOM = mediaModel.getUserHeaderDOM();
-  // modal contact
+  // modal contact_form
   getUserModalDOM(photographer);
 }
 
@@ -31,7 +31,6 @@ async function initPage() {
   // boxmedia with popularity default choice
   sortingMedia(photographer, media);
   // boxmedia if change choice of sorting
-  // const select = document.querySelector('select');
   const selector = document.querySelector('.custom-select');
   setupSelector(selector);
   selector.addEventListener('change', (e) => {
@@ -43,10 +42,3 @@ async function initPage() {
 }
 
 initPage();
-
-// function stop(e) {
-//   const dropDown = document.querySelector('ul');
-//   const select = document.querySelector('.div_select select');
-// if (e.key === 'Enter' && dropDown !== null && document.activeElement === select) {
-//   dropDown.remove();
-// }}

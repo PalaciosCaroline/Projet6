@@ -634,6 +634,14 @@ color: #000000;
     font-weight: 600;
 }
 
+.cardLikes:focus-visible {
+    outline: 6px solid #901C1C;
+}
+
+.media:focus-visible {
+    outline: 3px solid #000000;
+}
+
 .cardLikes,.cardLikes div {
     display : flex;
     justify-content: space-around;

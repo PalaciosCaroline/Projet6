@@ -1,4 +1,3 @@
-import { enableBodyScroll, disableBodyScroll } from './body_scroll_lock.js';
 /*
  *@property {HTMLElement} element
  *@property {string[]} gallery path to media of ligthbox
@@ -9,32 +8,11 @@ export default class Lightbox {
   static initLightbox() {
     const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'));
     const gallery = links.map((link) => link.getAttribute('href'));
-    const ariaLinks = links.map((link) => link.getAttribute('aria-label'));
     const titles = links.map((link) => link.getAttribute('title'));
     links.forEach((link) => link.addEventListener('click', (e) => {
       e.preventDefault();
       // eslint-disable-next-line no-new
-      new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), e.currentTarget.getAttribute('arias'), gallery, titles, ariaLinks);
-    }));
-
-    links.forEach((link) => link.addEventListener('keypress', (e) => {
-      e.preventDefault();
-      if (e.key === 'Enter' || e.key === ' ') {
-        const lightbox = document.querySelector('#lightbox');
-        if ((e.key === 'Enter' || e.key === ' ') && lightbox !== null) {
-          const video = lightbox.querySelector('video');
-          if (video.paused) {
-            e.preventDefault();
-            video.play();
-          } else {
-            video.pause();
-            e.preventDefault();
-          }
-          return;
-        }
-        // eslint-disable-next-line no-new
-        new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), e.currentTarget.getAttribute('arias'), gallery, titles, ariaLinks);
-      }
+      new Lightbox(e.currentTarget.getAttribute('href'), e.currentTarget.getAttribute('title'), gallery, titles);
     }));
   }
 
@@ -42,24 +20,21 @@ export default class Lightbox {
    *@param {string} url  URL of media
    *@return {string[]} gallery path to media of ligthbox
    */
-  constructor(url, title, arias, gallery, titles, ariaLinks) {
+  constructor(url, title, gallery, titles) {
     this.element = this.buildDOM(title);
-    this.loadImage(url, title, arias);
+    this.loadImage(url, title);
     this.gallery = gallery;
     this.titles = titles;
-    this.ariaLinks = ariaLinks;
     this.onKeyup = this.onKeyup.bind(this);
-    this.onKeydown = this.onKeydown.bind(this);
     document.body.appendChild(this.element);
-    disableBodyScroll(this.element);
     document.addEventListener('keyup', this.onKeyup);
-    this.element.addEventListener('keydown', this.onKeydown);
   }
 
-  loadImage(url, title, arias) {
+  loadImage(url, title) {
     this.url = url;
     this.title = title;
-    this.arias = arias;
+    const h3Title = this.title.split('/')[0];
+    const description = this.title.split('/')[2];
     const boxMedia = this.element.querySelector('.box_media_lightbox');
     const h3 = this.element.querySelector('h3');
     boxMedia.innerHTML = '';
@@ -68,26 +43,23 @@ export default class Lightbox {
       const image = new Image();
       boxMedia.appendChild(image);
       image.classList.add('media');
-      // image.ariaLabel = this.title + this.arias;
-      image.alt = this.title + this.arias;
+      image.alt = h3Title + description;
       image.src = url;
       image.tabIndex = 1;
       image.focus();
     } else if (url.includes('mp4')) {
       const video = document.createElement('video');
       boxMedia.appendChild(video);
-      video.alt = this.title + arias;
-      // video.ariaLabel = this.title + arias;
-      // video.ariaLabel = this.title;
+      video.classList.add('media');
       video.setAttribute('controls', true);
       video.setAttribute('autoplay', true);
       video.classList.add('videomedia');
       video.src = url;
+      video.title = h3Title + description;
       video.tabIndex = 1;
       video.focus();
     }
-    h3.textContent = title;
-    // h3.tabIndex = 1;
+    h3.textContent = h3Title;
   }
 
   /* close the lightbox
@@ -100,7 +72,6 @@ export default class Lightbox {
     const selectedImage = Array.from(allimgs).find((elt) => elt.src.includes(this.url.split('../')[1]));
     selectedImage.closest('a').focus();
     this.element.classList.add('hidden');
-    enableBodyScroll(this.element);
     this.element.remove();
     document.removeEventListener('keyup', this.onkeyup);
   }
@@ -114,7 +85,7 @@ export default class Lightbox {
     if (i === this.gallery.length - 1) {
       i = -1;
     }
-    this.loadImage(this.gallery[i + 1], this.titles[i + 1], this.ariaLinks[i + 1]);
+    this.loadImage(this.gallery[i + 1], this.titles[i + 1]);
   }
 
   /* go to the previous
@@ -126,13 +97,12 @@ export default class Lightbox {
     if (i === 0) {
       i = this.gallery.length;
     }
-    this.loadImage(this.gallery[i - 1], this.titles[i - 1], this.ariaLinks[i - 1]);
+    this.loadImage(this.gallery[i - 1], this.titles[i - 1]);
   }
 
   /*
    *@param {KeyBoardEvent} e
    */
-
   onKeyup(e) {
     if (e.key === 'Escape') {
       this.close(e);
@@ -145,32 +115,16 @@ export default class Lightbox {
     }
   }
 
- 
-  onKeydown(e) {
-    if (e.key === 'Enter' && this.url.includes('mp4')) {
-      e.preventDefault();
-      const lightbox = document.querySelector('#lightbox');
-      const video = lightbox.querySelector('video');
-      if (video.paused) {
-        e.preventDefault();
-        video.play();
-      } else {
-        video.pause();
-        e.preventDefault();
-      }
-    }
-  }
-
   /*
    *@param {string} url  URL of img
    *@param {string} title of url
    *@return {HTMLElement}
    */
-  buildDOM(title) {
+  buildDOM() {
     const dom = document.createElement('div');
     dom.setAttribute('id', 'lightbox');
     dom.innerHTML = `
-    <div id="lightbox" type='modal' role=”dialog" class="dialog">
+    <div id="lightbox" type='modal' role=”dialog" class="dialog" aria-label="Utiliser les flêches de direction pour changer l'oeuvre et échappe pour fermer la modale">
       <div class="lightbox_position">
         <nav>
             <button class="lightbox_close" aria-label="ferme la boite dialog">
@@ -187,7 +141,7 @@ export default class Lightbox {
             <div class="box_media_lightbox">
             </div>
             <div class="box_text">  
-                <h3>${title}</h3>
+                <h3></h3>
             </div>
         </div>
       </div>
@@ -204,5 +158,3 @@ export default class Lightbox {
     return dom;
   }
 }
-
-

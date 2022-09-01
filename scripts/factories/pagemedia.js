@@ -22,7 +22,6 @@ export default function PageMediaFactory(photograph, data) {
     h2.textContent = `${photograph.city}, ${photograph.country}`;
     h2.classList.add('photograph_city');
     h2.tabIndex = 0;
-    h2.ariaRoleDescription = `tarif du photographe ${photograph.price}€ par jour`;
     const legende = document.createElement('p');
     legende.textContent = photograph.tagline;
     const divPortrait = document.createElement('div');
@@ -48,19 +47,16 @@ export default function PageMediaFactory(photograph, data) {
     article.appendChild(divmedia);
     const a = document.createElement('a');
     divmedia.appendChild(a);
-    a.rel = 'lightbox';
     a.className = 'link_card';
-    a.ariaLabel = data.description;
-    a.ariaRoleDescription = 'lien vers l\'affichage en grand';
-    a.title = data.title;
+    a.rel = 'lightbox';
+    a.title = `${data.title}/'lien vers l\'affichage en grand/${data.description}`;
     a.setAttribute('id', `${data.title}`);
     if (data.image) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.image}`);
       const imgphoto = document.createElement('img');
       imgphoto.classList.add('cardImg');
       imgphoto.setAttribute('src', pictureImg);
-      imgphoto.alt = data.title;
-      imgphoto.ariaLabel = data.description;
+      imgphoto.alt = '';
       a.appendChild(imgphoto);
     } else if (data.video) {
       a.setAttribute('href', `../assets/${data.photographerId}/${data.video}`);
@@ -69,7 +65,7 @@ export default function PageMediaFactory(photograph, data) {
       iconVideo.className = 'fa-regular fa-circle-play iconVideo';
       const imgphoto = document.createElement('video');
       imgphoto.classList.add('cardImg');
-      imgphoto.ariaLabel = data.description;
+      // imgphoto.ariaLabel = data.description;
       imgphoto.setAttribute('src', pictureVideo);
       a.appendChild(imgphoto);
     }
@@ -80,9 +76,10 @@ export default function PageMediaFactory(photograph, data) {
     titlemedia.ariaHidden = true;
     const btnLikes = document.createElement('button');
     btnLikes.classList.add('btnLikes');
-    btnLikes.ariaLabel = `${data.likes}likes`;
-    btnLikes.ariaRoleDescription = 'donner un like à l\'oeuvre';
     const btnLiketitle = document.createElement('span');
+    const btnAccess = document.createElement('span');
+    btnAccess.classList.add('sr-only');
+    btnAccess.textContent = 'likes, donner un like à l\'oeuvre';
     btnLiketitle.classList.add('likestitle');
     btnLiketitle.textContent = data.likes;
     const heart = document.createElement('i');
@@ -93,22 +90,21 @@ export default function PageMediaFactory(photograph, data) {
     divtext.appendChild(btnLikes);
     btnLikes.appendChild(btnLiketitle);
     btnLikes.appendChild(heart);
+    btnLikes.appendChild(btnAccess);
 
     btnLikes.addEventListener('click', () => {
       if (btnLikes.dataset.liked !== 'true') {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) + 1;
         btnLikes.dataset.liked = true;
         heart.classList.remove('effectSmall');
-        btnLikes.ariaLabel = `like ajouté, ${data.likes + 1} likes`;
-        btnLikes.ariaRoleDescription = 'retirer un like à l\'oeuvre';
+        btnAccess.textContent = 'likes, like ajoutés,retirer un like à l\'oeuvre';
         heart.className = 'fas fa-heart heart';
         heart.classList.add('effectBig');
         updateTotalLikes(+1);
       } else {
         btnLiketitle.textContent = parseInt(btnLiketitle.textContent, 10) - 1;
         heart.classList.remove('effectBig');
-        btnLikes.ariaLabel = `like retiré, ${data.likes} likes`;
-        btnLikes.ariaRoleDescription = 'donner un like à l\'oeuvre';
+        btnAccess.textContent = 'likes, donner un like à l\'oeuvre';
         heart.className = 'far fa-heart heart';
         heart.classList.add('effectSmall');
         btnLikes.dataset.liked = false;
@@ -123,24 +119,26 @@ export default function PageMediaFactory(photograph, data) {
       .map((item) => item.likes)
       .reduce((prev, curr) => prev + curr, 0);
     const TotalLikessum = document.createElement('article');
+    TotalLikessum.tabIndex = 0;
     const divlike = document.createElement('div');
     TotalLikessum.classList.add('cardLikes');
     const totalLiketitle = document.createElement('span');
     totalLiketitle.ariaRoleDescription = 'nombre total';
     totalLiketitle.classList.add('totalLikesTitle');
-    totalLiketitle.tabIndex = 0;
     totalLiketitle.textContent = totallikes;
     totalLiketitle.ariaRoleDescription = 'likes';
     const heart2 = document.createElement('img');
     heart2.setAttribute('src', '../assets/icons/heartblack.png');
     heart2.alt = 'likes totals';
-    heart2.tabIndex = 0;
     const pricejour = document.createElement('span');
-    // pricejour.ariaRoleDescription = 'tarif du photographe';
     pricejour.textContent = `${photograph.price}€ / jour`;
+    const btnLikeTarifAccess = document.createElement('span');
+    btnLikeTarifAccess.classList.add('sr-only');
+    btnLikeTarifAccess.textContent = 'tarif du photographe';
     TotalLikessum.appendChild(divlike);
     divlike.appendChild(totalLiketitle);
     divlike.appendChild(heart2);
+    divlike.appendChild(btnLikeTarifAccess);
     TotalLikessum.appendChild(pricejour);
     return TotalLikessum;
   }
