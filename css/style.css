@@ -6,6 +6,11 @@ body {
     overflow-anchor: none;
 }
 
+header{
+    position: relative;
+}
+
+
 #h1_index,
 .photographer_section article h2,
 .photographer_section article h3,
@@ -14,6 +19,55 @@ body {
     font-weight: 400; 
 }
 
+.link_CV6{
+    position: absolute;
+    right: 43%;
+    border: 2px solid #b6604f;
+    border-radius: 20px;
+    display: block;
+    margin:15px auto 0;
+    width: 220px;
+    align-self: center;
+    background: linear-gradient(to left,rgba(217, 75, 47, 1) 0%,rgba(210, 42, 9, 1) 100%);
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    text-decoration: none;
+    /* background: linear-gradient(to left,rgba(214,131,114,0.9) 0%,rgba(214,131,114,0.8) 100%); */
+    text-align: center;
+}
+   
+.link_CV6:hover{
+    background: linear-gradient(to left,rgba(182, 35, 5, 1) 0%,rgba(159, 36, 11, 1) 100%);
+    transform: translatey(1px); 
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.link_CV6 span {
+    padding: 8px 10px 10px 8px;
+    display: block;
+    border-radius: 20px;
+    line-height: 30px;
+    background-position: center;
+    background-size: cover;
+    color: #fff;
+    border: 2px solid #b6604f;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+        font-weight: 800;
+        font-size: 1.4rem;
+} 
+
+@media screen and (max-width: 900px){
+    .link_CV6{
+        right:  15px;
+        top:50px;
+    }
+
+}
+
+#btn_projetPhoto{
+    right:  15px;
+    top:-15px;
+    
+}
 .logo:focus-visible,
 #h1_index:focus-visible,
 .photographer_section article a:focus-visible{
@@ -23,12 +77,13 @@ body {
 
 header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     height: 90px;
     margin: 30px 7% 10px 7%;
+
 }
+
 
 
 #h1_index {
@@ -51,6 +106,13 @@ header {
     .photographer_section .logo {
         margin: 20px 0 20px 0;
     }
+    .logo {
+       width: 100px;
+    }
+
+    #h1_index{
+        font-size: 1.4rem;
+    }
 }
 
 .photographer_section {
@@ -58,6 +120,7 @@ header {
     flex-wrap: wrap; 
     margin-top: 100px;  
     justify-content: space-between;
+    margin: 70px 7% 0 7%;
 }
 
 .photographer_section article {
@@ -75,18 +138,11 @@ header {
         margin: 70px 7% 0 7%;
     } 
     .photographer_section article {
-        width: 45%;
+        width: 47%;
     }
 } 
 
-@media screen and (max-width: 640px){
-    .photographer_section {
-        flex-direction: column;
-    }
-    .photographer_section article {
-        width: 80%;
-    }
-}   
+
 
 .photographer_section article h2 {
     color: #D3573C;
@@ -129,3 +185,11 @@ header {
     margin :0;
 }
 
+@media screen and (max-width: 640px){
+    #box_photographerFlex{
+        flex-direction: column;
+    }
+    #box_photographerFlex article {
+        width: 100%;
+    }
+}   
