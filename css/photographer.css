@@ -833,3 +833,37 @@
     }
   }
   
+  @media screen and (max-width: 700px) {
+    .modal #modalContactTitle {
+      font-size: 2.4rem;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .modal #modalContactTitle {
+      font-size: 2.2rem;
+    }
+  }
+  
+  @media screen and (max-width: 700px) {
+    .modal form input,.modal form label,
+    .modal .form_textarea {
+      font-size: 1.8rem;
+      width: 95%;
+    }
+    .modal form input{
+      height : 40px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .modal form input,.modal form label ,
+    .form_textarea {
+      font-size: 1.6rem;
+    }
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+    .modal header img{
+      width:30px;
+    }
+  }
